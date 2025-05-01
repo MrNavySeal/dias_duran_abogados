@@ -1,0 +1,57 @@
+$(".product-slider-cat").owlCarousel({
+    autoplay:true,
+    autoplayTimeout:5000,
+    autoplayHoverPause:true,
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:2
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:4
+        }
+    }
+});
+
+$(".product-slider-cat-1").owlCarousel({
+    autoplay:true,
+    autoplayTimeout:5000,
+    autoplayHoverPause:true,
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:2
+        },
+        1000:{
+            items:3
+        }
+    }
+});
+$(".product-slider-cat-2").owlCarousel({
+    autoplay:true,
+    autoplayTimeout:5000,
+    autoplayHoverPause:true,
+    loop:true,
+    margin:10,
+    nav:true,
+    dots:false,
+    responsive:{
+        0:{
+            items:1
+        },600:{
+            items:3
+        },
+        1000:{
+            items:3
+        },1600:{
+            items:4
+        }
+    }
+});

@@ -1,0 +1,38 @@
+@media screen and (max-width: 1400px) {
+
+}
+@media screen and (max-width: 768px){
+    .no-more-tables{
+        
+    }
+    .no-more-tables tbody,.no-more-tables tr,.no-more-tables td{
+        display: block;
+    }
+    .no-more-tables thead tr{
+        position: absolute;
+        top: -99999px;
+        left: -99999px;
+    }
+    .no-more-tables td{
+        position: relative;
+        text-wrap: wrap;
+        display: flex;
+        text-align: left !important;
+        justify-content: space-between;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .no-more-tables td::before{
+        content: attr(data-title);
+        font-weight: bold;
+    }
+}
+@media screen and (max-width: 576px){
+    .orientation{
+        width: 150px;
+        height: 150px;
+        img{
+            height: 100px;
+        }
+    }
+}
