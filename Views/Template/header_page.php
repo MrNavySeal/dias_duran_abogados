@@ -50,23 +50,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1407018373490206');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1407018373490206&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,36 +81,16 @@ src="https://www.facebook.com/tr?id=1407018373490206&ev=PageView&noscript=1"
     <!------------------------------Plugins--------------------------------->
     <link href="<?= media();?>/plugins/datepicker/jquery-ui.min.css" rel="stylesheet">
     <link href="<?=media();?>/plugins/fontawesome/font-awesome.min.css">
-    <link rel="stylesheet" href="<?=media();?>/plugins/owlcarousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="<?=media();?>/plugins/owlcarousel/owl.theme.default.min.css">
-    <link rel="stylesheet" href="<?=media();?>/plugins/datatables/datatables.min.css">
+    <script src="<?= media();?>/plugins/tinymce/tinymce.min.js"></script>
+    <link href="<?= media();?>/plugins/element-plus/element-plus.css" rel="stylesheet">
     <!------------------------------------Styles--------------------------->
     <link rel="stylesheet" href="<?=media()?>/template/Assets/css/normalize.css">
     <link rel="stylesheet" href="<?=media()."/template/Assets/css/style.css?v=".rand()?>">
-    <script src="<?= media();?>/plugins/tinymce/tinymce.min.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8MPBNE6BYH"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-8MPBNE6BYH');
-    </script>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MRN4742X');</script>
-    <!-- End Google Tag Manager -->
-
+    <style> [v-cloak]{display : none;} </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MRN4742X"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+<div id="app" v-cloak>
+
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
@@ -140,10 +103,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </div>
 </div>
+    <!--
     <div id="divLoading">
         <div></div>
         <span>Cargando...</span>
-    </div>
+    </div>-->
     <header class="container">
         <div class="logo">
             <img src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>">

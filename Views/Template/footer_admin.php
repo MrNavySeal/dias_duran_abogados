@@ -35,6 +35,7 @@
         <script src="<?= media();?>/plugins/datatables/datatables.min.js"></script>
         <script src="<?= media();?>/plugins/datatables/jszip.min.js"></script>
         <script src="<?= media();?>/plugins/vue/vue.js"></script>
+        <script src="<?= media();?>/plugins/element-plus/element-plus.js"></script>
         <!------------------------------My functions--------------------------------->
 
         <script>

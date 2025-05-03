@@ -122,7 +122,7 @@ for ($i=0; $i < count($social) ; $i++) {
         </div>
     </div>
 </footer>
-    
+</div>
     <!------------------------------Frameworks--------------------------------->
     <script src="<?= media();?>/frameworks/jquery/jquery.js"></script>
     <script src="<?= media(); ?>/frameworks/bootstrap/popper.min.js?n=1"></script>
@@ -132,18 +132,11 @@ for ($i=0; $i < count($social) ; $i++) {
     <!------------------------------Plugins--------------------------------->
     <script src="<?= media();?>/plugins/fontawesome/fontawesome.js"></script>
     <script src="<?= media();?>/plugins/sweetalert/sweetalert.js"></script>
-    <script src="<?= media();?>/plugins/owlcarousel/owl.carousel.min.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
     <script src="<?= media();?>/plugins/datepicker/jquery-ui.min.js"></script>
-    <script src="<?= media();?>/plugins/sheetjs/sheetjs.js"></script>
-    <script src="<?= media();?>/plugins/print/print.min.js"></script>
-    <!--<script src="<?= media();?>/plugins/datatables/pdfmake.min.js"></script>
-    <script src="<?= media();?>/plugins/datatables/vfs_fonts.min.js"></script>-->
-    <script src="<?= media();?>/plugins/datatables/datatables.min.js"></script>
-    <script src="<?= media();?>/plugins/datatables/jszip.min.js"></script>
+    <script src="<?= media();?>/plugins/vue/vue.js"></script>
+    <script src="<?= media();?>/plugins/element-plus/element-plus.js"></script>
+    
     <!------------------------------My functions--------------------------------->
     <script>
         const base_url = "<?= base_url(); ?>";

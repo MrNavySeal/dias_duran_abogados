@@ -43,12 +43,14 @@
         <script src="<?= media();?>/plugins/tinymce/tinymce.min.js"></script>
         <link href="<?= media();?>/plugins/datepicker/jquery-ui.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<?=media();?>/plugins/datatables/datatables.min.css">
+        <link href="<?= media();?>/plugins/element-plus/element-plus.css" rel="stylesheet">
         <!------------------------------My styles--------------------------------->
         <link rel="stylesheet" href="<?=media()."/css/style.css?v=".rand()?>">
         <link rel="stylesheet" href="<?=media()."/css/marco.css?v=".rand()?>">
+        <style> [v-cloak]{display : none;} </style>
     </head>
     <body>
-        <div class="position-relative bg-white d-flex p-0" id="app">
+        <div class="position-relative bg-white d-flex p-0" id="app" v-cloak>
              <!-- Spinner Start -->
             <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
                 <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
