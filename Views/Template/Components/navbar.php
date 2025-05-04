@@ -1,38 +1,51 @@
-<nav class="new-navbar container">
-    <div class="new-navbar-logo">
-        <img src="<?=media()."/images/uploads/".$data['company']['logo']?>" alt="<?=$data['company']['name']?>"/>
+<header class="p-0 bg-color-2 d-flex justify-content-between ">
+    <div class="container">
+        <nav class="new-navbar ">
+            <div class="new-navbar-logo">
+                <img src="<?=media()."/images/uploads/".$data['company']['logo']?>" alt="<?=$data['company']['name']?>"/>
+            </div>
+            <el-menu
+            :default-active="activeIndex"
+            class="el-menu"
+            mode="horizontal"
+            :ellipsis="false"
+            @select="handleSelect"
+            >
+            <el-menu-item index="1">Inicio</el-menu-item>
+                <el-menu-item index="2">Nosotros</el-menu-item>
+                <el-sub-menu index="3">
+                    <template #title>Servicios</template>
+                    <el-menu-item index="3-1">item one</el-menu-item>
+                    <el-menu-item index="3-2">item two</el-menu-item>
+                    <el-menu-item index="3-3">item three</el-menu-item>
+                </el-sub-menu>
+                <el-menu-item index="4">Blog</el-menu-item>
+                <el-menu-item index="5" class="me-4">Contacto</el-menu-item>
+            </el-menu>
+            <el-menu
+            :default-active="activeIndex"
+            class="el-menu"
+            mode="horizontal"
+            :ellipsis="false"
+            @select="handleSelect"
+            >
+                <el-menu-item index="6" id="btnSearch"><i class="fas fa-search"></i></el-menu-item>
+                <el-menu-item index="7" id="btnCart">
+                    <span id="qtyCart"><?=$qtyCart?></span>
+                    <i class="fas fa-shopping-cart"></i>
+                </el-menu-item>
+                <?php if(isset($_SESSION['login'])){ ?>
+                <el-sub-menu index="8">
+                    <template #title><i class="fas fa-user"></i></template>
+                    <el-menu-item index="8-1" onClick="window.location.href='<?=base_url()?>/usuarios/perfil'">Perfil</el-menu-item>
+                    <el-menu-item index="8-2" id="logout">Cerrar sesión</el-menu-item>
+                </el-sub-menu>
+                <?php }else {?>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <el-button onclick="openLoginModal();" class="btn btn-bg-1" type="primary">Iniciar sesión</el-button>
+                    </div>
+                <?php }?>
+            </el-menu>
+        </nav>
     </div>
-    <el-menu
-    :default-active="activeIndex"
-    class="el-menu"
-    mode="horizontal"
-    :ellipsis="false"
-    @select="handleSelect"
-    >
-    <el-menu-item index="1">Inicio</el-menu-item>
-        <el-menu-item index="2">Nosotros</el-menu-item>
-        <el-sub-menu index="3">
-            <template #title>Servicios</template>
-            <el-menu-item index="3-1">item one</el-menu-item>
-            <el-menu-item index="3-2">item two</el-menu-item>
-            <el-menu-item index="3-3">item three</el-menu-item>
-        </el-sub-menu>
-        <el-menu-item index="4">Blog</el-menu-item>
-        <el-menu-item index="5" class="me-4">Contacto</el-menu-item>
-    </el-menu>
-    <el-menu
-    :default-active="activeIndex"
-    class="el-menu"
-    mode="horizontal"
-    :ellipsis="false"
-    @select="handleSelect"
-    >
-        <el-menu-item index="6"><i class="fas fa-search"></i></el-menu-item>
-        <el-menu-item index="7"><i class="fas fa-shopping-cart"></i></el-menu-item>
-        <el-sub-menu index="8">
-            <template #title><i class="fas fa-user"></i></template>
-            <el-menu-item index="8-1">Perfil</el-menu-item>
-            <el-menu-item index="8-2">Cerrar sesión</el-menu-item>
-        </el-sub-menu>
-    </el-menu>
-</nav>
+</header>

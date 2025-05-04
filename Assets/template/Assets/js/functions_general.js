@@ -16,109 +16,7 @@ for (let i = 0; i < mobile.length; i++) {
 }
 */
 
-let loading = document.querySelector(".loading");
-/***************************Nav Events****************************** */
-const btnSearch = document.querySelector("#btnSearch");
-const closeSearch = document.querySelector("#closeSearch");
-const search = document.querySelector(".search");
-const cartbar = document.querySelector(".cartbar");
-const closeCart = document.querySelector("#closeCart");
-const btnCart = document.querySelector("#btnCart");
-const cartMask = document.querySelector(".cartbar--mask");
-const navBar = document.querySelector(".navmobile");
-const navMask = document.querySelector(".navmobile--mask");
-const btnNav = document.querySelector("#btnNav");
-const closeNav = document.querySelector("#closeNav");
-const toastLive = document.getElementById('liveToast');
-/********************************Search******************************** */
-btnSearch.addEventListener("click",function(){
-    search.classList.add("active");
-    document.querySelector("body").style.overflow="hidden";
-});
-closeSearch.addEventListener("click",function(){
-    search.classList.remove("active");
-    document.querySelector("body").style.overflow="auto";
-});
 
-/********************************Aside cart******************************** */
-btnCart.addEventListener("click",function(){
-    cartbar.classList.add("active");
-    document.querySelector("body").style.overflow="hidden";
-});
-closeCart.addEventListener("click",function(){
-    cartbar.classList.remove("active");
-    document.querySelector("body").style.overflow="auto";
-});
-cartMask.addEventListener("click",function(){
-    cartbar.classList.remove("active");
-    document.querySelector("body").style.overflow="auto";
-})
-
-/********************************Aside nav******************************** */
-btnNav.addEventListener("click",function(){
-    navBar.classList.add("active");
-    //document.querySelector("#mainNav").classList.remove("d-none");
-    document.querySelector("#navProfile").classList.add("d-none");
-    document.querySelector("#filterNav").classList.remove("d-none");
-    document.querySelector("body").style.overflow="hidden";
-});
-closeNav.addEventListener("click",function(){
-    navBar.classList.remove("active");
-    document.querySelector("body").style.overflow="auto";
-});
-navMask.addEventListener("click",function(){
-    navBar.classList.remove("active");
-    document.querySelector("body").style.overflow="auto";
-});
-
-
-document.addEventListener("DOMContentLoaded",function(){
-    setTimeout(() => {
-        loading.classList.add('hidden');
-        setTimeout(() => {
-            loading.remove();
-        }, 500);
-    }, 1500);
-});
-
-btnCart.addEventListener("click",function(){
-    request(base_url+"/carrito/currentCart","","get").then(function(objData){
-        //document.querySelector("#qtyCart").innerHTML=objData.qty;
-        if(objData.items!=""){
-            document.querySelector("#btnsCartBar").classList.remove("d-none");
-            document.querySelector("#qtyCartbar").innerHTML=objData.qty;
-            document.querySelector(".cartlist--items").innerHTML = objData.items;
-            document.querySelector("#totalCart").innerHTML = objData.total;
-            delProduct(document.querySelectorAll(".delItem"));
-            let btnCheckoutCart = document.querySelector(".btnCheckoutCart");
-            btnCheckoutCart.addEventListener("click",function(){
-                if(objData.status){
-                    window.location.href=base_url+"/pago";
-                }else{
-                    openLoginModal();
-                }
-            });
-        }else{
-            document.querySelector("#btnsCartBar").classList.add("d-none");
-        }
-    })
-});
-
-if(document.querySelector("#logout")){
-    let logout = document.querySelector("#logout");
-    logout.addEventListener("click",function(e){
-        let url = base_url+"/logout";
-        request(url,"","get").then(function(objData){
-            window.location.reload(false);
-        });
-    });
-}
-if(document.querySelector("#myAccount")){
-    let myAccount = document.querySelector("#myAccount");
-    myAccount.addEventListener("click",function(e){
-        openLoginModal();
-    });
-}
 
 /***************************General Shop Events****************************** */
 //Scroll top
@@ -130,134 +28,113 @@ if(document.querySelector("#myAccount")){
     }
 });*/
 
-window.addEventListener("load",function(){
-    if(document.querySelector("#modalPoup")){
-        request(base_url+"/tienda/statusCouponSuscriber","","get").then(function(data){
-            let discount = data.discount;
-            if(data.status && !checkPopup()){
-                setTimeout(function(){
-                    let modal="";
-                    let modalPopup = document.querySelector("#modalPoup");
-                    let timer;
-                    modal= `
-                            <div class="modal fade" id="modalSuscribe">
-                                <div class="modal-dialog modal-dialog-centered ">
-                                    <div class="modal-content">
-                                        <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="container mb-3 p-4 pe-5 ps-5">
-                                            <form id="formModalSuscribe" class="mb-3">
-                                                <h2 class="t-p">${COMPANY}</h2>
-                                                <h2 class="fs-5">Suscríbete a nuestro boletín y recibe un cupón de descuento de ${discount}%</h2>
-                                                <p>Reciba información actualizada sobre novedades, ofertas especiales y nuestras promociones</p>
-                                                <div class="mb-3">
-                                                    <input type="email" class="form-control" id="txtEmailModalSuscribe" name="txtEmailSuscribe" placeholder="Tu correo" required>
-                                                </div>
-                                                <div class="alert alert-danger d-none" id="alertModalSuscribe" role="alert"></div>
-                                                <button type="submit" class="btn btn-bg-1" id="btnModalSuscribe">Suscribirse</button>
-                                            </form>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="delPopup">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    No volver a mostrar esta ventana emergente
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            `;
-                    modalPopup.innerHTML = modal;
-                    let modalView = new bootstrap.Modal(document.querySelector("#modalSuscribe"));
-                    modalView.show();
-                    document.querySelector("#modalSuscribe").addEventListener("hidden.bs.modal",function(){
-                        window.clearTimeout(timer);
-                        modalView.hide();
-                        modalPopup.innerHTML = "";
-                        let key =COMPANY+"popup"; 
-                        localStorage.setItem(key,false);
-                    });
-                     let formModalSuscribe = document.querySelector("#formModalSuscribe");
-                     formModalSuscribe.addEventListener("submit",function(e){
-                        e.preventDefault();
-                        let btn = document.querySelector("#btnModalSuscribe");
-                        let strEmail = document.querySelector("#txtEmailModalSuscribe").value;
-                        let formData = new FormData(formModalSuscribe);
-                        let alert = document.querySelector("#alertModalSuscribe");
-                        if(strEmail ==""){
-                            alert.classList.remove("d-none");
-                            alert.innerHTML = "Por favor, completa el campo";
-                            return false;
-                        }
-                        if(!fntEmailValidate(strEmail)){
-                            alert.classList.remove("d-none");
-                            alert.innerHTML = "El correo es invalido";
-                            return false;
-                        }
-                        btn.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;    
-                        btn.setAttribute("disabled","");
-                        
-                        request(base_url+"/tienda/setSuscriber",formData,"post").then(function(objData){
-                            btn.innerHTML="Suscribirse";    
-                            btn.removeAttribute("disabled");
-                            if(objData.status){
-                                window.clearTimeout(timer);
-                                modalView.hide();
-                                modalPopup.innerHTML = "";
-                                let key =COMPANY+"popup"; 
-                                localStorage.setItem(key,false);
-                            }else{
-                                alert.classList.remove("d-none");
-                                alert.innerHTML = objData.msg;
-                            }
-                        });
-                        
-                     });
-                },1000);
+document.addEventListener("DOMContentLoaded",function(){
+    let loading = document.querySelector(".loading");
+    setTimeout(() => {
+        loading.classList.add('hidden');
+        setTimeout(() => {
+            loading.remove();
+        }, 500);
+    }, 1500);
+    /***************************Nav Events****************************** */
+    const btnSearch = document.querySelector("#btnSearch");
+    const closeSearch = document.querySelector("#closeSearch");
+    const search = document.querySelector(".search");
+    const cartbar = document.querySelector(".cartbar");
+    const closeCart = document.querySelector("#closeCart");
+    const btnCart = document.querySelector("#btnCart");
+    const cartMask = document.querySelector(".cartbar--mask");
+    const navBar = document.querySelector(".navmobile");
+    const navMask = document.querySelector(".navmobile--mask");
+    const btnNav = document.querySelector("#btnNav");
+    const closeNav = document.querySelector("#closeNav");
+    const toastLive = document.getElementById('liveToast');
+    /********************************Search******************************** */
+    btnSearch.addEventListener("click",function(){
+        search.classList.add("active");
+        document.querySelector("body").style.overflow="hidden";
+    });
+    closeSearch.addEventListener("click",function(){
+        search.classList.remove("active");
+        document.querySelector("body").style.overflow="auto";
+    });
+    search.addEventListener("click",function(e){
+        if(e.target.classList.contains("active")){
+            search.classList.remove("active");
+        }
+        document.querySelector("body").style.overflow="auto";
+    })
+
+    /********************************Aside cart******************************** */
+    btnCart.addEventListener("click",function(){
+        cartbar.classList.add("active");
+        document.querySelector("body").style.overflow="hidden";
+    });
+    closeCart.addEventListener("click",function(){
+        cartbar.classList.remove("active");
+        document.querySelector("body").style.overflow="auto";
+    });
+    cartMask.addEventListener("click",function(){
+        cartbar.classList.remove("active");
+        document.querySelector("body").style.overflow="auto";
+    })
+
+    /********************************Aside nav******************************** */
+    btnNav.addEventListener("click",function(){
+        navBar.classList.add("active");
+        //document.querySelector("#mainNav").classList.remove("d-none");
+        document.querySelector("#navProfile").classList.add("d-none");
+        document.querySelector("#filterNav").classList.remove("d-none");
+        document.querySelector("body").style.overflow="hidden";
+    });
+    closeNav.addEventListener("click",function(){
+        navBar.classList.remove("active");
+        document.querySelector("body").style.overflow="auto";
+    });
+    navMask.addEventListener("click",function(){
+        navBar.classList.remove("active");
+        document.querySelector("body").style.overflow="auto";
+    });
+
+    btnCart.addEventListener("click",function(){
+        request(base_url+"/carrito/currentCart","","get").then(function(objData){
+            //document.querySelector("#qtyCart").innerHTML=objData.qty;
+            if(objData.items!=""){
+                document.querySelector("#btnsCartBar").classList.remove("d-none");
+                document.querySelector("#qtyCartbar").innerHTML=objData.qty;
+                document.querySelector(".cartlist--items").innerHTML = objData.items;
+                document.querySelector("#totalCart").innerHTML = objData.total;
+                delProduct(document.querySelectorAll(".delItem"));
+                let btnCheckoutCart = document.querySelector(".btnCheckoutCart");
+                btnCheckoutCart.addEventListener("click",function(){
+                    if(objData.status){
+                        window.location.href=base_url+"/pago";
+                    }else{
+                        openLoginModal();
+                    }
+                });
+            }else{
+                document.querySelector("#btnsCartBar").classList.add("d-none");
             }
+        })
+    });
+
+    if(document.querySelector("#logout")){
+        let logout = document.querySelector("#logout");
+        logout.addEventListener("click",function(e){
+            let url = base_url+"/logout";
+            request(url,"","get").then(function(objData){
+                window.location.reload(false);
+            });
         });
-        
+    }
+    if(document.querySelector("#myAccount")){
+        let myAccount = document.querySelector("#myAccount");
+        myAccount.addEventListener("click",function(e){
+            openLoginModal();
+        });
     }
 });
-
-if(document.querySelector("#formSuscriber")){
-    let formSuscribe = document.querySelector("#formSuscriber");
-    formSuscribe.addEventListener("submit",function(e){
-    e.preventDefault();
-    let btn = document.querySelector("#btnSuscribe");
-    let strEmail = document.querySelector("#txtEmailSuscribe").value;
-    let formData = new FormData(formSuscribe);
-    let alert = document.querySelector("#alertSuscribe");
-    if(strEmail ==""){
-        alert.classList.remove("d-none");
-        alert.innerHTML = "Por favor, completa el campo";
-        return false;
-    }
-    if(!fntEmailValidate(strEmail)){
-        alert.classList.remove("d-none");
-        alert.innerHTML = "El correo es invalido";
-        return false;
-    }
-    btn.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;    
-    btn.setAttribute("disabled","");
-    
-    request(base_url+"/tienda/setSuscriber",formData,"post").then(function(objData){
-        btn.innerHTML=`<i class="fas fa-paper-plane"></i>`;    
-        btn.removeAttribute("disabled");
-        if(objData.status){
-            alert.classList.add("d-none");
-            formSuscribe.reset();
-            let key =COMPANY+"popup"; 
-            localStorage.setItem(key,false);
-        }else{
-            alert.classList.remove("d-none");
-            alert.innerHTML = objData.msg;
-        }
-    });
-    
-    });
-}
 /***************************Essentials Functions****************************** */
 function openLoginModal(){
     let modalItem = document.querySelector("#modalLogin");
@@ -505,84 +382,6 @@ function openLoginModal(){
         });
     });
 }
-function quickModal(element){
-    let idProduct = element.getAttribute("data-id");
-    let formData = new FormData();
-    formData.append("idProduct",idProduct);
-    element.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
-    element.setAttribute("disabled","");
-    request(base_url+"/tienda/getProduct",formData,"post").then(function(objData){
-        element.innerHTML="Vista rápida";
-        element.removeAttribute("disabled");
-        if(objData.status){
-            let data = objData.data;
-            document.querySelector("#modalItem").innerHTML = objData.script;
-            let modalView = new bootstrap.Modal(document.querySelector("#modalElement"));
-            modalView.show();
-
-            document.querySelector('meta[property="og:title"]').setAttribute("content", data.name);
-            document.querySelector('meta[property="og:url"]').setAttribute("content", data.url);
-            document.querySelector('meta[property="og:image"]').setAttribute("content", data.img);
-            document.querySelector('meta[name="twitter:site"]').setAttribute("content", data.url);
-
-            document.querySelector("#modalElement").addEventListener("hidden.bs.modal",function(){
-                document.querySelector("#modalItem").innerHTML="";
-            });
-
-            let productImages = document.querySelectorAll(".product-image-item");
-            for (let i = 0; i < productImages.length; i++) {
-                let productImage = productImages[i];
-                productImage.addEventListener("click",function(e){
-                    for (let j = 0; j < productImages.length; j++) {
-                        productImages[j].classList.remove("active");
-                        
-                    }
-                    productImage.classList.add("active");
-                    let image = productImage.children[0].src;
-                    document.querySelector(".product-image img").src = image;
-                })
-            }
-            if(document.querySelector("#btnQqty")){
-                let btnQPlus = document.querySelector("#btnQIncrement");
-                let btnQMinus = document.querySelector("#btnQDecrement");
-                let intQQty = document.querySelector("#txtQQty");
-    
-                btnQPlus.addEventListener("click",function(){
-                    let stock = parseInt(data.stock);
-                    if(intQQty.value >= stock){
-                        intQQty.value = stock;
-                    }else{
-                        ++intQQty.value; 
-                    }
-                });
-                btnQMinus.addEventListener("click",function(){
-                    if(intQQty.value <=1){
-                        intQQty.value = 1;
-                    }else{
-                        --intQQty.value; 
-                    }
-                });
-                intQQty.addEventListener("input",function(){
-                    let stock = parseInt(data.stock);
-                    if(intQQty.value >= stock){
-                        intQQty.value = stock;
-                    }else if(intQQty.value <= 1){
-                        intQQty.value= 1;
-                    }
-                });
-            }
-            let btnPrev = document.querySelector(".slider-btn-left");
-            let btnNext = document.querySelector(".slider-btn-right");
-            let inner = document.querySelector(".product-image-inner");
-            btnPrev.addEventListener("click",function(){
-                inner.scrollBy(-100,0);
-            })
-            btnNext.addEventListener("click",function(){
-                inner.scrollBy(100,0);
-            });
-        }
-    });
-}
 function addCart(element){
 
     let idProduct = element.getAttribute("data-id");
@@ -714,3 +513,4 @@ function addWishList(element){
     }
     
 }
+

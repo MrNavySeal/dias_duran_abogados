@@ -4,15 +4,18 @@ $color3:#777777;
 $color4:#fff;
 $color5: #BFBDC1;
 
-$primary:#321fdb;
-$secondary:#9da5b1;
+$primary:#b68c5a;
+$secondary:#162542;
 $success: #2eb85c;
 $danger:#e55353;
 $warning:#f9b115;
 $info:#3399ff;
 $light:#ebedef;
-$dark:#4f5d73;
+$dark:#777777;
 $black:#000;
+.el-button--primary{
+
+}
 @mixin textColor($color:$color2){
     color:$color !important;
 }

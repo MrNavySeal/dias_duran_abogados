@@ -16,6 +16,7 @@
 @import "components/cart";
 @import "components/footer";
 @import "components/parts";
+@import "components/search";
 @import "components/nav";
 @import "components/item","components/mailbox", "components/form"; 
 @import "components/mediaqueries";
@@ -101,6 +102,15 @@ input[type=number]::-webkit-outer-spin-button {
         left:0;
         transform: translateY(-50%);
         z-index: 3;
+    }
+}
+.btn{
+    border: none;
+    transition: all 0.2s ease-in;
+    &:hover{
+        transition: all 0.2s ease-in;
+        @include textColor($color2);
+        @include bgColor($color4);
     }
 }
 .btn-check:focus+.btn, .btn:focus {
