@@ -21,6 +21,7 @@
             $data['banners'] = $this->getBanners();
             $data['page_name'] = "home";
             $data['app'] = "functions_home.js";
+            $data['company'] = getCompanyInfo();
             $data['categories'] = $this->getProductsCategories("15,25,21",24);
             $data['posts'] = $this->getArticlesT(3);
             $data['tipos'] = $this->selectTipos();

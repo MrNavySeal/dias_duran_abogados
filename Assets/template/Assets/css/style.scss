@@ -16,9 +16,12 @@
 @import "components/cart";
 @import "components/footer";
 @import "components/parts";
+@import "components/nav";
 @import "components/item","components/mailbox", "components/form"; 
 @import "components/mediaqueries";
-
+*{
+    font-family: Sans-serif;
+}
 .progress-bar{
     background-color: $color1;
 }

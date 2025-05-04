@@ -4,7 +4,7 @@
     $reviews = $comments['total'];
     $navCategories=getNavCat();
     $subLinks = navSubLinks();
-    $company = getCompanyInfo();
+    $company = $data['company'];
     $qtyCart = 0;
     $total = 0;
     $arrProducts = array();
@@ -13,7 +13,6 @@
     $urlWeb = base_url();
     $urlImg =media()."/images/uploads/".$company['logo'];
     $description =$company['description'];
-    //dep($data['article']);exit;
     if(!empty($data['product'])){
         $urlWeb = base_url()."/tienda/producto/".$data['product']['route'];
         $urlImg = $data['product']['image'][0]['url'];
@@ -45,7 +44,6 @@
     if($reviews>0){
         $notifyReview='<span class="badge badge-sm bg-danger ms-auto">'.$reviews.'</span>';
     }
-    //dep($arrProducts);exit;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,6 +79,7 @@
     <!------------------------------Plugins--------------------------------->
     <link href="<?= media();?>/plugins/datepicker/jquery-ui.min.css" rel="stylesheet">
     <link href="<?=media();?>/plugins/fontawesome/font-awesome.min.css">
+
     <script src="<?= media();?>/plugins/tinymce/tinymce.min.js"></script>
     <link href="<?= media();?>/plugins/element-plus/element-plus.css" rel="stylesheet">
     <!------------------------------------Styles--------------------------->
@@ -89,8 +88,12 @@
     <style> [v-cloak]{display : none;} </style>
 </head>
 <body>
+    <div class="loading">
+        <div class="loading-door loading-door-right"></div>
+        <div class="loading-door loading-door-left"></div>
+        <div class="loading-bar"></div>
+    </div>
 <div id="app" v-cloak>
-
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
@@ -103,15 +106,13 @@
         </div>
     </div>
 </div>
+    
     <!--
     <div id="divLoading">
         <div></div>
         <span>Cargando...</span>
     </div>-->
-    <header class="container">
-        <div class="logo">
-            <img src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>">
-        </div>
+    <header class="p-0 bg-color-2">
         <nav class="nav--bar">
             <div class="icon-mobile">
                 <a href="<?=base_url()?>">
@@ -201,6 +202,7 @@
                 <!--<li class="nav--icon" id="btnNav"><i class="fas fa-bars"></i></li>-->
             </ul>
         </nav>
+        <?php getComponent("navbar",$data)?>
     </header>
     <div class="search">
         <span id="closeSearch"><i class="fas fa-times"></i></span>

@@ -1,8 +1,9 @@
-$color1:#E05A10;
-$color2:#03071E;
-$color3:#6D6A75;
+$color1:#b68c5a;
+$color2:#162542;
+$color3:#777777;
 $color4:#fff;
 $color5: #BFBDC1;
+
 $primary:#321fdb;
 $secondary:#9da5b1;
 $success: #2eb85c;
@@ -11,10 +12,10 @@ $warning:#f9b115;
 $info:#3399ff;
 $light:#ebedef;
 $dark:#4f5d73;
-@mixin textColor($bg:$color4){
-    color:$bg;
+$black:#000;
+@mixin textColor($color:$color2){
+    color:$color !important;
 }
-@mixin bgColor($bg:$color4,$color:#03071E){
-    background-color: $bg;
-    color:$color;
+@mixin bgColor($bg:$color2){
+    background-color: $bg !important;
 }

@@ -1,4 +1,5 @@
 @import "mixin";
+/*
 #divLoading{
     position: fixed;
     width: 100%;
@@ -57,5 +58,78 @@
                 color:#424242;
             }
         }
+    }
+}*/
+.loading{
+    display: flex;
+    position: absolute;
+    top:0;
+    left: 0;
+    min-height: 100vh;
+    width: 100%;
+    z-index: 9999999;
+    
+    .loading-door{
+        @include bgColor($black);
+        position: absolute;
+        width: 50%;
+        height: 100%;
+    }
+    .loading-door-left {
+        top: 0;
+        left: 0;
+        width: 50%;
+        animation: slideLeft 0.5s ease forwards;
+        animation-delay: 1s; // Wait for loading bar to finish
+    }
+    
+    // Second door (slides right)
+    .loading-door-right {
+        top: 0;
+        right: 0;
+        width: 50%;
+        animation: slideRight 0.5s ease forwards;
+        animation-delay: 1s; // Wait for loading bar to finish
+    }
+    .loading-bar{
+        @include bgColor($color4);
+        position: absolute;
+        z-index: 1001;
+        height: 10px;
+        width: 2px;
+        left: 50%;
+        top: 50%;
+        transition: all 0.5s ease-in;
+        transform: translate(-50%,-50%);
+        animation: loadingAnimation 1s ease-in forwards;
+    }
+}
+@keyframes slideLeft {
+    to { width: 0%;height: 100%; display: none;}
+}
+
+@keyframes slideRight {
+    to { width: 0%;height: 100%; display: none;}
+}
+@keyframes loadingAnimation{
+    0%{
+        height: 10%;
+    }50%{
+        height: 50%;
+        width: 2px;
+    }60%{
+        width: 1px;
+        height: 70%;
+    }80%{
+        width: 0.5px;
+        height: 80%;
+    }90%{
+        width: 0.5px;
+        height: 100%;
+        opacity: 0;
+    }100%{
+        width: 0.5px;
+        height: 100%;
+        display: none;
     }
 }

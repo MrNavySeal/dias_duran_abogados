@@ -16,7 +16,7 @@ for (let i = 0; i < mobile.length; i++) {
 }
 */
 
-var loading = document.querySelector("#divLoading");
+let loading = document.querySelector(".loading");
 /***************************Nav Events****************************** */
 const btnSearch = document.querySelector("#btnSearch");
 const closeSearch = document.querySelector("#closeSearch");
@@ -73,7 +73,12 @@ navMask.addEventListener("click",function(){
 
 
 document.addEventListener("DOMContentLoaded",function(){
-    loading.classList.add("d-none");
+    setTimeout(() => {
+        loading.classList.add('hidden');
+        setTimeout(() => {
+            loading.remove();
+        }, 500);
+    }, 1500);
 });
 
 btnCart.addEventListener("click",function(){

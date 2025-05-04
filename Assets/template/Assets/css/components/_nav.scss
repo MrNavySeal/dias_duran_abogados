@@ -1,0 +1,69 @@
+@import "mixin";
+.new-navbar{
+    height: 5.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include bgColor($color2);
+    @include textColor($color4);
+    padding: 0;
+    margin: 0;
+}
+.new-navbar-logo{
+    height: 100%;
+    display: flex;
+    position: relative;
+    @include bgColor($color2);
+    @include textColor($color4);
+    img{
+        position: relative;
+        width: 300px;
+        object-fit: cover;
+        height: auto;
+    }
+}
+.el-menu--horizontal.el-menu{
+    border: none;
+}
+.el-menu{
+    height: 100%;
+    @include bgColor($color2);
+    @include textColor($color4);
+    .el-menu-item{
+        border: none;
+        font-size: 1em;
+        @include textColor($color4);
+        &:hover{
+            @include bgColor($color2);
+            @include textColor($color1);
+        }
+        
+    }
+    .el-menu-item.is-active{
+        @include bgColor($color2);
+        @include textColor($color1);
+        border: none;
+    }
+    .el-sub-menu{
+        @include bgColor($color2);
+        .el-sub-menu__title{
+            font-size: 1em;
+            @include textColor($color4);
+            &:hover{
+                @include bgColor($color2);
+                @include textColor($color1);
+            }
+        }
+    }
+}
+.el-menu.el-menu--popup{
+    @include bgColor($color4);
+    .el-menu-item{
+        font-size: 1.2em;
+        @include textColor($color2);
+        &:hover{
+            @include bgColor($color1);
+            @include textColor($color4);
+        }
+    }
+}

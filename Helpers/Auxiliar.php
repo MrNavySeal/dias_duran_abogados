@@ -131,4 +131,8 @@
         ';
         return $htmlPages;
     }
+    function getComponent(string $name, $data=null){
+        $file = "Views/Template/Components/{$name}.php";
+        require_once $file;        
+    }
 ?>
