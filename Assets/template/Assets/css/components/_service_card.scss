@@ -1,0 +1,23 @@
+@import "mixin";
+.new-service-card{
+    display: flex;
+    align-items: center;
+    .new-service-main{
+        &:first-of-type{
+            padding: 0.7rem;
+            border-radius: 50%;
+            @include bgColor($color1);
+            i{
+                @include textColor($color4);
+            }
+        }&:last-of-type{
+            .el-link{
+                justify-content: start;
+                @include textColor($color2);
+                &:hover{
+                    @include textColor($color1);
+                }
+            }
+        }
+    }
+}

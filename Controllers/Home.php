@@ -18,14 +18,20 @@
             $data['page_tag'] = $company['name'];
             $data['page_title'] = $company['name'];
             $data['productos'] = $this->getProductsT(8);
-            $data['banners'] = $this->getBanners();
             $data['page_name'] = "home";
             $data['app'] = "functions_home.js";
-            $data['company'] = getCompanyInfo();
+            $data['company'] = $company;
             $data['categories'] = $this->getProductsCategories("15,25,21",24);
             $data['posts'] = $this->getArticlesT(3);
             $data['tipos'] = $this->selectTipos();
             $this->views->getView($this,"home",$data);
+        }
+        public function getInitialData(){
+            $arrResponse = array(
+                "banners"=>$this->getBanners()
+            );
+            echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+            die();
         }
         public function getProductsCategories(string $categories,int $qty){
             $categories = $this->getCategoriesShowT($categories);

@@ -2,7 +2,7 @@
     background-color: $color1;
     color:$color4;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 0;
     &:hover{
         color:$color4
     }
@@ -11,13 +11,14 @@
         color:$color4;
     }
 }
-.btn-bg-2{
-    background-color: $color2;
-    color:$color4;
+.el-link.btn-bg-2{
+    background-color: $color1 !important;
+    color:$color4 !important;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 0;
     &:hover{
-        color:$color4
+        background-color:$color2 !important;
+        color:$color4 !important;
     }
     a{
         text-decoration: none;

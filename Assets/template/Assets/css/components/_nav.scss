@@ -1,4 +1,9 @@
 @import "mixin";
+.new-header{
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
 .new-navbar{
     height: 5.5rem;
     display: flex;
@@ -59,11 +64,19 @@
 .el-menu.el-menu--popup{
     @include bgColor($color4);
     .el-menu-item{
+        .el-link{
+            width: 100%;
+            justify-content: start;
+            @include textColor($color2);
+        }
         font-size: 1.2em;
         @include textColor($color2);
         &:hover{
             @include bgColor($color1);
             @include textColor($color4);
+            .el-link{
+                @include textColor($color4);
+            }
         }
     }
 }

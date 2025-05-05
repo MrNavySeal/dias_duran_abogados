@@ -33,6 +33,11 @@
             $this->con=new Mysql();
             $sql = "SELECT * FROM banners WHERE status = 1 ORDER BY id_banner DESC";       
             $request = $this->con->select_all($sql);
+            $total = count($request);
+            for ($i=0; $i < $total; $i++) { 
+                $strUrl = media()."/images/uploads/".$request[$i]['picture'];
+                $request[$i]['url'] = $strUrl;
+            }
             return $request;
         }
     }

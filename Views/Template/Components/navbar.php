@@ -1,4 +1,4 @@
-<header class="p-0 bg-color-2 d-flex justify-content-between ">
+<header class="new-header p-0 bg-color-2 d-flex justify-content-between">
     <div class="container">
         <nav class="new-navbar ">
             <div class="new-navbar-logo">
@@ -37,7 +37,9 @@
                 <?php if(isset($_SESSION['login'])){ ?>
                 <el-sub-menu index="8">
                     <template #title><i class="fas fa-user"></i></template>
-                    <el-menu-item index="8-1" onClick="window.location.href='<?=base_url()?>/usuarios/perfil'">Perfil</el-menu-item>
+                    <el-menu-item index="8-1">
+                        <el-link :underline="false" href="<?=base_url()?>/usuarios/perfil" type="primary">Perfil</el-link>
+                    </el-menu-item>
                     <el-menu-item index="8-2" id="logout">Cerrar sesión</el-menu-item>
                 </el-sub-menu>
                 <?php }else {?>

@@ -1,23 +1,20 @@
-
-
-
 @import "components/mixin";
 @import "components/buttons";
-@import "components/cards";
 @import "components/utilities";
 @import "components/header";
 @import "components/login";
 @import "components/home";
 @import "components/loading";
-@import "components/frame";
-@import "components/about";
-@import "components/service";
 @import "components/shop";
 @import "components/cart";
 @import "components/footer";
 @import "components/parts";
 @import "components/search";
 @import "components/nav";
+@import "components/carousel";
+@import "components/service_card";
+@import "components/about";
+@import "components/card_product";
 @import "components/item","components/mailbox", "components/form"; 
 @import "components/mediaqueries";
 *{
@@ -105,6 +102,7 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 .btn{
+    border-radius: 0;
     border: none;
     transition: all 0.2s ease-in;
     &:hover{

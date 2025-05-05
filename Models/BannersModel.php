@@ -4,7 +4,7 @@
         private $strLink;
 		private $strName;
 		private $intStatus;
-
+        private $strPhoto;
         public function __construct(){
             parent::__construct();
         }
@@ -17,27 +17,18 @@
             $this->intStatus = $status;
 			$return = 0;
 
-			$sql = "SELECT * FROM banners WHERE 
-					name = '{$this->strName}'";
-			$request = $this->select_all($sql);
-
-			if(empty($request))
-			{ 
-				$query_insert  = "INSERT INTO banners(picture,status,link,name,button,description) 
-								  VALUES(?,?,?,?,?,?)";
-	        	$arrData = array(
-                    $this->strPhoto,
-                    $this->intStatus,
-                    $this->strLink,
-                    $this->strName,
-                    $button,
-                    $description
-        		);
-	        	$request_insert = $this->insert($query_insert,$arrData);
-	        	$return = $request_insert;
-			}else{
-				$return = "exist";
-			}
+            $query_insert  = "INSERT INTO banners(picture,status,link,name,button,description) 
+                              VALUES(?,?,?,?,?,?)";
+            $arrData = array(
+                $this->strPhoto,
+                $this->intStatus,
+                $this->strLink,
+                $this->strName,
+                $button,
+                $description
+            );
+            $request_insert = $this->insert($query_insert,$arrData);
+            $return = $request_insert;
 	        return $return;
 		}
         public function updateBanner(int $intIdBanner,string $photo, string $strName,int $status, string $strLink,string $button,string $description){
@@ -47,24 +38,16 @@
             $this->strPhoto = $photo;
             $this->intStatus = $status;
 
-			$sql = "SELECT * FROM banners WHERE name = '{$this->strName}' AND id_banner != $this->intIdBanner";
-			$request = $this->select_all($sql);
-
-			if(empty($request)){
-
-                $sql = "UPDATE banners SET picture=?,status=?,link=?,name=?, button=?,description=? WHERE id_banner = $this->intIdBanner";
-                $arrData = array(
-                    $this->strPhoto,
-                    $this->intStatus,
-                    $this->strLink,
-                    $this->strName,
-                    $button,
-                    $description
-                );
-				$request = $this->update($sql,$arrData);
-			}else{
-				$request = "exist";
-			}
+            $sql = "UPDATE banners SET picture=?,status=?,link=?,name=?, button=?,description=? WHERE id_banner = $this->intIdBanner";
+            $arrData = array(
+                $this->strPhoto,
+                $this->intStatus,
+                $this->strLink,
+                $this->strName,
+                $button,
+                $description
+            );
+            $request = $this->update($sql,$arrData);
 			return $request;
 		
 		}

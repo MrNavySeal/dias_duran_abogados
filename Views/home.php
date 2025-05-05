@@ -16,7 +16,6 @@
 
     $tipos = $data['tipos'];
     $productos = $data['productos'];
-    $banners = $data['banners'];
     $proCant = 4;
     $sliders = round(count($productos)/$proCant);
     $activeSlider = "active";
@@ -26,245 +25,117 @@
 ?>
     <div id="modalItem"></div>
     <div id="modalPoup"></div>
-    <div class="container">
-        <main>
-            <?php getComponent("slider",$data)?>
-        </main>
-        <section class="mt-5">
-            <h2 class="section--title fs-2">Enmarcaciones modernas sin salir de casa ¿Cómo funciona?</h2>
+    <main>
+        <?php getComponent("carousel",$data)?>
+        <section class="container mt-5 mb-5">
             <div class="row">
-                <div class="col-md-6 mb-3 d-flex align-items-center">
-                    <img src="<?=media()?>/images/uploads/cta2.jpg" class="d-block img-fluid" alt="Enmarcaciones en linea">
-                </div>
-                <div class="col-md-6 how-list mb-3 d-flex align-items-start flex-column">
-                    <ol>
-                        <li>
-                            <p>Elige el marco ideal</p>
-                            <p>Escoge el marco y estilo de enmarcación que más se adapte</p>
-                        </li>
-                        <li>
-                            <p>Personaliza tu marco</p>
-                            <p>Elige las molduras, colores y estilos de enmarcación</p>
-                        </li>
-                        <li>
-                            <p>Recibelo en tu puerta</p>
-                            <p>Envíos nacionales, recibelo en tu puerta o puedes recogerlo en nuestro local</p>
-                        </li>
-                    </ol>
-                    <a href="<?=base_url()?>/enmarcar" class="btn btn-bg-1 mt-3">Empieza a enmarcar ahora</a>
-                </div>
-            </div>
-            <!--
-            <div class="row mt-4">
-                <div class="col-md-4 mb-3">
-                    <div class="card--plus shadow">
-                        <i class="fas fa-certificate"></i>
-                        <h3>Trabajo de calidad</h3>
-                        <p>Nuestros materiales y mano de obra  te garantiza un producto de calidad que te hará volver.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card--plus shadow">
-                        <i class="fas fa-receipt"></i>
-                        <h3>Pagos seguros</h3>
-                        <p>Todas las transacciones están seguras y protegidas a través de la pasarela de mercadopago.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card--plus shadow">
-                        <i class="fas fa-dollar-sign"></i>
-                        <h3>Precios claros</h3>
-                        <p>El precio se basa en el tipo de enmarcación, tamaño, moldura y estilos.</p>
-                    </div>
-                </div>
-            </div>-->
-            <div class="row">
-                <div class="product-slider-cat-2 owl-carousel owl-theme">
-                    <?php
-                        for ($i=0; $i < count($tipos); $i++) { 
-                            $url = base_url()."/enmarcar/personalizar/".$tipos[$i]['route'];
-                            $img = media()."/images/uploads/".$tipos[$i]['image'];
-                    ?>
-                        <div class="card--product">
-                            <a href="<?=$url?>">
-                                <img class="img-fluid" src="<?=$img?>" alt="Cuadros decorativos <?=$tipo[$i]['name']?>">
-                            </a>
-                            <div class="card--product-info mt-3">
-                                <h2 class="enmarcar--title"><?=$tipos[$i]['name']?></h2>
-                                <p><?=$tipos[$i]['description']?></p>
+                <div class="col-md-3">
+                    <el-card class="position-relative">
+                        <div class="new-service-card mb-3">
+                            <div class="new-service-main me-2">
+                                <i class="fas fa-users-cog fs-2"></i>
                             </div>
-                            <?php
-                                if($tipos[$i]['button']!=""){
-                            ?>
-                            <div class="card--product-btns">
-                                <a href="<?=$url?>" class="btn btn-bg-1 w-100"><?=$tipos[$i]['button']?></a>
+                            <div class="new-service-main">
+                                <h4><el-link :underline="false" class="fs-5" href="<?=base_url()?>" type="primary">Equipo de élite</el-link></h4>
                             </div>
-                            <?php }?>
                         </div>
-                    <?php }?>
+                        <div class="new-service-description">
+                            <p>Equipo multidisciplinario de abogados y especialistas que brindan un enfoque integral.</p>
+                            <div class="d-flex justify-content-end">
+                                <el-link class="btn btn-bg-2 py-2 fs-5 px-3" :underline="false" href="#" type="primary"><i class="fas fa-chevron-right"></i></el-link>
+                            </div>
+                        </div>
+                    </el-card>
+                </div>
+                <div class="col-md-3">
+                    <el-card class="position-relative">
+                        <div class="new-service-card mb-3">
+                            <div class="new-service-main me-2">
+                                <i class="fas fa-user-shield fs-2"></i>
+                            </div>
+                            <div class="new-service-main">
+                                <h4><el-link :underline="false" class="fs-5" href="<?=base_url()?>" type="primary">Asesoría estratégica personalizada</el-link></h4>
+                            </div>
+                        </div>
+                        <div class="new-service-description">
+                            <p>Soluciones diseñadas a la medida, con enfoque práctico y orientado a resultados.</p>
+                            <div class="d-flex justify-content-end">
+                                <el-link class="btn btn-bg-2 py-2 fs-5 px-3" :underline="false" href="#" type="primary"><i class="fas fa-chevron-right"></i></el-link>
+                            </div>
+                        </div>
+                    </el-card>
+                </div>
+                <div class="col-md-3">
+                    <el-card class="position-relative">
+                        <div class="new-service-card mb-3">
+                            <div class="new-service-main me-2">
+                                <i class="fas fa-map-marked-alt fs-2"></i>
+                            </div>
+                            <div class="new-service-main">
+                                <h4><el-link :underline="false" class="fs-5" href="<?=base_url()?>" type="primary">Innovación y tecnología</el-link></h4>
+                            </div>
+                        </div>
+                        <div class="new-service-description">
+                            <p>Atención digital y representación a distancia para colombianos dentro y fuera del país.</p>
+                            <div class="d-flex justify-content-end">
+                                <el-link class="btn btn-bg-2 py-2 fs-5 px-3" :underline="false" href="#" type="primary"><i class="fas fa-chevron-right"></i></el-link>
+                            </div>
+                        </div>
+                    </el-card>
+                </div>
+                <div class="col-md-3">
+                    <el-card class="position-relative">
+                        <div class="new-service-card mb-3">
+                            <div class="new-service-main me-2">
+                                <i class="fas fa-poll-h fs-2"></i>
+                            </div>
+                            <div class="new-service-main">
+                                <h4><el-link :underline="false" class="fs-5" href="<?=base_url()?>" type="primary">Resultados comprobados</el-link></h4>
+                            </div>
+                        </div>
+                        <div class="new-service-description">
+                            <p>Trayectoria destacada en litigios, conciliaciones, y planificación jurídica y financiera.</p>
+                            <div class="d-flex justify-content-end">
+                                <el-link class="btn btn-bg-2 py-2 fs-5 px-3" :underline="false" href="#" type="primary"><i class="fas fa-chevron-right"></i></el-link>
+                            </div>
+                        </div>
+                    </el-card>
                 </div>
             </div>
         </section>
-        <section class="mt-5">
-            <h2 class="section--title fs-2">Nuestra tienda</h2>
-            <div class="row mb-3">
-                <h3>Lo más reciente</h3>
+        <section class="container mt-5 mb-5">
+            <div class="section-about">
                 <div class="row">
-                    <div class="product-slider-cat owl-carousel owl-theme mb-5" data-bs-ride="carousel">
-                        <?php
-                            for ($i=0; $i < count($productos); $i++) { 
-                                $id = openssl_encrypt($productos[$i]['idproduct'],METHOD,KEY);
-                                $resultDiscount = "";
-                                if($productos[$i]['discount'] > 0){
-                                    $resultDiscount = floor((1-($productos[$i]['discount']/$productos[$i]['price']))*100);
-                                }
-                                $discount = "";
-                                $reference = $productos[$i]['reference']!="" ? "REF: ".$productos[$i]['reference'] : "";
-                                $variant = $productos[$i]['product_type']? "Desde " : "";
-                                $price ='</span><span class="current">'.$variant.formatNum($productos[$i]['price']).'</span>';
-                                $favorite="";
-                                if($productos[$i]['favorite']== 0){
-                                    $favorite = '<button type="button" onclick="addWishList(this)" data-id="'.$id.'" class="btn btn-bg-3 btn-fav "><i class="far fa-heart "></i></button>';
-                                }else{
-                                    $favorite = '<button type="button" onclick="addWishList(this)" data-id="'.$id.'" class="btn btn-bg-3 btn-fav active"><i class="fas fa-heart text-danger "></i></button>';
-                                }
-                                if($productos[$i]['is_stock']){
-                                    if($productos[$i]['discount'] > 0 && $productos[$i]['stock'] > 0){
-                                        $discount = '<span class="discount">-'.$resultDiscount.'%</span>';
-                                        $price ='<span class="current sale me-2">'.$variant.formatNum($productos[$i]['discount'],false).'</span><span class="compare">'.formatNum($productos[$i]['price']).'</span>';
-                                    }else if($productos[$i]['stock'] <= 0){
-                                        $price = '<span class="current sale me-2">Agotado</span>';
-                                        $discount="";
-                                    }
-                                }else{
-                                    if($productos[$i]['discount']>0){
-                                        $discount = '<span class="discount">-'.$resultDiscount.'%</span>';
-                                        $price ='<span class="current sale me-2">'.$variant.formatNum($productos[$i]['discount'],false).'</span><span class="compare">'.formatNum($productos[$i]['price']).'</span>';
-                                    }
-                                }
-                        ?>
-                        <div class="card--product">
-                            <div class="card--product-img">
-                                <a href="<?=base_url()."/tienda/producto/".$productos[$i]['route']?>">
-                                    <?=$discount?>
-                                    <img src="<?=$productos[$i]['url']?>" alt="<?=$productos[$i]['category']." ".$productos[$i]['subcategory']?>">
-                                </a>
-                            </div>
-                            <div class="card--product-info">
-                                <h4><a href="<?=base_url()."/tienda/producto/".$productos[$i]['route']?>"><?=$productos[$i]['name']?></a></h4>
-                                <p class="text-center t-color-3 m-0 fs-6"><?=$reference?></p>
-                                <div class="card--price">
-                                    <?=$price?>
-                                </div>
-                                
-                            </div>
-                            <div class="card--product-btns">
-                                <div class="d-flex">
-                                    <?=$favorite?>
-                                    <?php if(!$productos[$i]['product_type'] && $productos[$i]['is_stock'] && $productos[$i]['stock'] > 0){?>
-                                    <button type="button" class="btn btn-bg-1" data-id="<?=$id?>" data-topic="2" onclick="addCart(this)"><i class="fas fa-shopping-cart"></i></button>
-                                    <?php }else if(!$productos[$i]['product_type'] && !$productos[$i]['is_stock']){?>
-                                    <button type="button" class="btn btn-bg-1" data-id="<?=$id?>" data-topic="2" onclick="addCart(this)"><i class="fas fa-shopping-cart"></i></button>
-                                    <?php }else if($productos[$i]['product_type']){?>
-                                    <a href="<?=base_url()."/tienda/producto/".$productos[$i]['route']?>" class="btn btn-bg-1 w-100"><i class="fas fa-exchange-alt"></i></a>
-                                    <?php }?>
-                                </div>
-                            </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="section-about-img">
+                            <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
                         </div>
-                        <?php } ?>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <h5 class="t-color-1 fw-bold fs-3 mb-4">Nosotros</h5>
+                        <h2 class="t-color-2 mb-5 fs-1 fw-bold">Asesoría y Consultoría Especializada en Soluciones Legales, Financieras y de Seguridad Social</h2>
+                        <p>Vilma Ladino, es una abogada y consultora especializada en brindar asesoría y consultoría integral a personas naturales y jurídicas en Colombia y en el exterior. Cuento con el respaldo de un equipo multidisciplinario que combina experiencia en las áreas legal, financiera y de seguridad social, para ofrecer estrategias sólidas y soluciones eficientes orientadas a la protección patrimonial, empresarial y laboral.</p>
+                        <el-link class="btn btn-bg-2 py-2 fs-5 px-3 mt-4" :underline="false" href="#" type="primary">Leer más</el-link>
                     </div>
                 </div>
             </div>
-            <?php
-                
-                for ($i=0; $i < count($categories) ; $i++) { 
-            ?>
-            <div class="row mb-5">
-                <h3 class="mb-3">
-                    <?=$categories[$i]['name']?>
-                </h3>
-                <div class="col-lg-4 col-md-12 ">
-                    <div class="card--category d-flex align-items-center">
-                        <div class="card--category-img">
-                            <a href="<?=base_url()."/tienda/categoria/".$categories[$i]['route']?>">
-                                <img src="<?=media()."/images/uploads/".$categories[$i]['picture']?>" alt="<?=$categories[$i]['name']?>">
-                            </a>
-                            <h3><a href="<?=base_url()."/tienda/categoria/".$categories[$i]['route']?>" class="text-white"><?=$categories[$i]['name']?></a></h3>
-                        </div>
+        </section>
+        <section class="container mt-5 mb-5">
+            <div class="text-center">
+                <h5 class="t-color-1 fw-bold fs-3 mb-4">Nuestros servicios</h5>
+                <h2 class="t-color-2 mb-5 fs-1 fw-bold">Lo que te ofrecemos</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <?php getComponent("cardProducts")?>
                     </div>
-                </div>
-                <div class="col-lg-8 col-md-12">
-                    <?php
-                        $productos =$categories[$i]['products'];
-                    ?>
-                    <div class="row">
-                        <div class="product-slider-cat-1 owl-carousel owl-theme">
-                            <?php
-                                for ($j=0; $j < count($productos); $j++) { 
-                                    $id = openssl_encrypt($productos[$j]['idproduct'],METHOD,KEY);
-                                    $discount = "";
-                                    $resultDiscount = "";
-                                    if($productos[$j]['discount'] > 0){
-                                        $resultDiscount = floor((1-($productos[$j]['discount']/$productos[$j]['price']))*100);
-                                    }
-                                    $reference = $productos[$j]['reference']!="" ? "REF: ".$productos[$j]['reference'] : "";
-                                    $variant = $productos[$j]['product_type'] ? "Desde " : "";
-                                    $price ='</span><span class="current">'.$variant.formatNum($productos[$j]['price']).'</span>';
-                                    $favorite="";
-                                    if($productos[$j]['favorite']== 0){
-                                        $favorite = '<button type="button" onclick="addWishList(this)" data-id="'.$id.'" class="btn btn-bg-3 btn-fav "><i class="far fa-heart "></i></button>';
-                                    }else{
-                                        $favorite = '<button type="button" onclick="addWishList(this)" data-id="'.$id.'" class="btn btn-bg-3 btn-fav active"><i class="fas fa-heart text-danger "></i></button>';
-                                    }
-                                    if($productos[$j]['is_stock']){
-                                        if($productos[$j]['discount'] > 0 && $productos[$j]['stock'] > 0){
-                                            $discount = '<span class="discount">-'.$resultDiscount.'%</span>';
-                                            $price ='<span class="current sale me-2">'.$variant.formatNum($productos[$j]['discount'],false).'</span><span class="compare">'.formatNum($productos[$j]['price']).'</span>';
-                                        }else if($productos[$j]['stock'] <= 0){
-                                            $price = '<span class="current sale me-2">Agotado</span>';
-                                            $discount="";
-                                        }
-                                    }else{
-                                        if($productos[$j]['discount'] > 0){
-                                            $discount = '<span class="discount">-'.$resultDiscount.'%</span>';
-                                            $price ='<span class="current sale me-2">'.$variant.formatNum($productos[$j]['discount'],false).'</span><span class="compare">'.formatNum($productos[$j]['price']).'</span>';
-                                        }
-                                    }
-                            ?>
-                            <div class="card--product">
-                                <div class="card--product-img">
-                                    <a href="<?=base_url()."/tienda/producto/".$productos[$j]['route']?>">
-                                        <?=$discount?>
-                                        <img src="<?=$productos[$j]['url']?>" alt="<?=$productos[$j]['category']." ".$productos[$j]['subcategory']?>">
-                                    </a>
-                                </div>
-                                <div class="card--product-info">
-                                    <h4><a href="<?=base_url()."/tienda/producto/".$productos[$j]['route']?>"><?=$productos[$j]['name']?></a></h4>
-                                    <p class="text-center t-color-3 m-0 fs-6"><?=$reference?></p>
-                                    <div class="card--price">
-                                        <?=$price?>
-                                    </div>
-                                    
-                                </div>
-                                <div class="card--product-btns">
-                                    <div class="d-flex">
-                                        <?=$favorite?>
-                                        <?php if(!$productos[$j]['product_type'] && $productos[$j]['is_stock'] && $productos[$j]['stock'] > 0){?>
-                                        <button type="button" class="btn btn-bg-1" data-id="<?=$id?>" data-topic="2" onclick="addCart(this)"><i class="fas fa-shopping-cart"></i></button>
-                                        <?php }else if(!$productos[$j]['product_type'] && !$productos[$j]['is_stock']){?>
-                                        <button type="button" class="btn btn-bg-1" data-id="<?=$id?>" data-topic="2" onclick="addCart(this)"><i class="fas fa-shopping-cart"></i></button>
-                                        <?php }else if($productos[$j]['product_type']){?>
-                                        <a href="<?=base_url()."/tienda/producto/".$productos[$j]['route']?>" class="btn btn-bg-1 w-100"><i class="fas fa-exchange-alt"></i></a>
-                                        <?php }?>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php } ?>
-                        </div>
+                    <div class="col-md-4">
+                        <?php getComponent("cardProducts")?>
+                    </div>
+                    <div class="col-md-4">
+                        <?php getComponent("cardProducts")?>
                     </div>
                 </div>
             </div>
-            <?php }?>
         </section>
         <?php if(!empty($posts)){?>
         <section class="mt-5">
@@ -290,7 +161,7 @@
             </div>
         </section>
         <?php }?>
-    </div>
+    </main>
 <?php
     footerPage($data);
 ?>
