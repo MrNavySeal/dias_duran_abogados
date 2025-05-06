@@ -134,6 +134,35 @@
                     <div class="col-md-4">
                         <?php getComponent("cardProducts")?>
                     </div>
+                    <div class="col-md-4">
+                        <?php getComponent("cardProducts")?>
+                    </div>
+                    <div class="col-md-4">
+                        <?php getComponent("cardProducts")?>
+                    </div>
+                    <div class="col-md-4">
+                        <?php getComponent("cardProducts")?>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container mt-5 mb-5">
+            <?php getComponent("contactForm"); ?>
+        </section>
+        <section class="container mt-5 mb-5">
+            <div class="text-center">
+                <h5 class="t-color-1 fw-bold fs-3 mb-4 ">Nuestros equipo</h5>
+                <h2 class="t-color-2 mb-5 fs-1 fw-bold ">Nuestro equipo de expertos</h2>
+                <div class="carousel-team owl-carousel owl-theme mb-5" data-bs-ride="carousel">
+                    <div class="team-card ">
+                        <div class="team-img">
+                            <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
+                        </div>
+                        <div class="team-info shadow-sm p-3">
+                            <h4 class="t-color-2 fw-bold">Vilma Ladino</h4>
+                            <span class="t-color-1 fw-bold">Abogada</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

@@ -15,10 +15,20 @@
 @import "components/service_card";
 @import "components/about";
 @import "components/card_product";
+@import "components/contact";
+@import "components/team";
 @import "components/item","components/mailbox", "components/form"; 
 @import "components/mediaqueries";
 *{
-    font-family: Sans-serif;
+    font-family: "Baskervville", serif;
+}
+.el-input__wrapper{
+    height: calc(2.5em + .75rem + 2px);
+}
+.el-input__wrapper,.el-input__wrapper.is_focus,.el-textarea__inner{
+    border-radius: 0;
+    border: none !important;
+    box-shadow:none !important;
 }
 .progress-bar{
     background-color: $color1;

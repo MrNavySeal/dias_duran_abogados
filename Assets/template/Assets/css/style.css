@@ -1739,8 +1739,42 @@ footer .logo img {
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
-  height: 200px;
+  max-height: 200px;
 }
+
+.contact-form {
+  height: 700px;
+}
+
+.contact-form-img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.team-card {
+  position: relative;
+  margin-bottom: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.team-img {
+  height: 330px;
+  overflow: hidden;
+}
+.team-img img {
+  width: 100%;
+}
+
+.team-info {
+  position: relative;
+  width: 80%;
+  background-color: #fff;
+  bottom: 30px;
+}
+
 .item {
   position: relative;
 }
@@ -2019,7 +2053,17 @@ footer .logo img {
   }
 }
 * {
-  font-family: Sans-serif;
+  font-family: "Baskervville", serif;
+}
+
+.el-input__wrapper {
+  height: calc(2.5em + 0.75rem + 2px);
+}
+
+.el-input__wrapper, .el-input__wrapper.is_focus, .el-textarea__inner {
+  border-radius: 0;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .progress-bar {

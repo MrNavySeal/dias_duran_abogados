@@ -1,17 +1,9 @@
-@import "variable";
-.contact-info{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px 0 10px 0;
+@import "mixin";
+.contact-form{
+    height: 700px;
 }
-.contact-item{
-    border: 1px solid $second-color;
-    text-align: center;
-    height: 200px;
+.contact-form-img{
+    object-fit: cover;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 30px 20px;
-    align-items: center;
+    height: 100%;
 }

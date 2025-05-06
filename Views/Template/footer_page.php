@@ -127,12 +127,10 @@ for ($i=0; $i < count($social) ; $i++) {
     <script src="<?= media();?>/frameworks/jquery/jquery.js"></script>
     <script src="<?= media(); ?>/frameworks/bootstrap/popper.min.js?n=1"></script>
     <script src="<?= media(); ?>/frameworks/bootstrap/bootstrap.min.js?n=1"></script>
-    
-    
     <!------------------------------Plugins--------------------------------->
     <script src="<?= media();?>/plugins/fontawesome/fontawesome.js"></script>
     <script src="<?= media();?>/plugins/sweetalert/sweetalert.js"></script>
-
+    <script src="<?= media();?>/plugins/owlcarousel/owl.carousel.min.js"></script>
     <script src="<?= media();?>/plugins/datepicker/jquery-ui.min.js"></script>
     <script src="<?= media();?>/plugins/vue/vue.js"></script>
     <script src="<?= media();?>/plugins/element-plus/element-plus.js"></script>

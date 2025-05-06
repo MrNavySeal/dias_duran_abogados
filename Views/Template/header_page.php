@@ -79,10 +79,14 @@
     <!------------------------------Plugins--------------------------------->
     <link href="<?= media();?>/plugins/datepicker/jquery-ui.min.css" rel="stylesheet">
     <link href="<?=media();?>/plugins/fontawesome/font-awesome.min.css">
-
+    <link rel="stylesheet" href="<?=media();?>/plugins/owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?=media();?>/plugins/owlcarousel/owl.theme.default.min.css">
     <script src="<?= media();?>/plugins/tinymce/tinymce.min.js"></script>
     <link href="<?= media();?>/plugins/element-plus/element-plus.css" rel="stylesheet">
     <!------------------------------------Styles--------------------------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?=media()?>/template/Assets/css/normalize.css">
     <link rel="stylesheet" href="<?=media()."/template/Assets/css/style.css?v=".rand()?>">
     <style> [v-cloak]{display : none;} </style>
