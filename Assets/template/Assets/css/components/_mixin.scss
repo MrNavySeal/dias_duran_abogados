@@ -13,6 +13,7 @@ $info:#3399ff;
 $light:#ebedef;
 $dark:#777777;
 $black:#000;
+$font-size-base:1rem;
 @mixin textColor($color:$color2){
     color:$color !important;
 }

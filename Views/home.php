@@ -26,7 +26,20 @@
     <div id="modalItem"></div>
     <div id="modalPoup"></div>
     <main>
-        <?php getComponent("carousel",$data)?>
+        <div class="block text-center">
+            <el-carousel >
+                <el-carousel-item v-for="(data,index) in arrBanners":key="index">
+                    <img :src="data.url" class="d-block w-100" :alt="data.name">
+                    <div class="carousel-item-container">
+                        <div class="carousel-item-content">
+                            <h2 class="fs-4 mb-3 t-color-4">{{ data.name }}</h2>
+                            <h3 class="fs-11 mb-3 t-color-4 fw-bold">{{ data.description}}</h3>
+                            <el-link class="btn btn-bg-1 p-2 fs-5" :underline="false" :href="data.link" type="primary">{{ data.button }}</el-link>
+                        </div>
+                    </div>
+                </el-carousel-item>
+            </el-carousel>
+        </div>
         <section class="container mt-5 mb-5">
             <div class="row">
                 <div class="col-md-3">
@@ -113,7 +126,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <h5 class="t-color-1 fw-bold fs-3 mb-4">Nosotros</h5>
-                        <h2 class="t-color-2 mb-5 fs-1 fw-bold">Asesoría y Consultoría Especializada en Soluciones Legales, Financieras y de Seguridad Social</h2>
+                        <h2 class="t-color-2 mb-5 fs-11 fw-bold">Asesoría y Consultoría Especializada en Soluciones Legales</h2>
                         <p>Vilma Ladino, es una abogada y consultora especializada en brindar asesoría y consultoría integral a personas naturales y jurídicas en Colombia y en el exterior. Cuento con el respaldo de un equipo multidisciplinario que combina experiencia en las áreas legal, financiera y de seguridad social, para ofrecer estrategias sólidas y soluciones eficientes orientadas a la protección patrimonial, empresarial y laboral.</p>
                         <el-link class="btn btn-bg-2 py-2 fs-5 px-3 mt-4" :underline="false" href="#" type="primary">Leer más</el-link>
                     </div>
@@ -123,7 +136,7 @@
         <section class="container mt-5 mb-5">
             <div class="text-center">
                 <h5 class="t-color-1 fw-bold fs-3 mb-4">Nuestros servicios</h5>
-                <h2 class="t-color-2 mb-5 fs-1 fw-bold">Lo que te ofrecemos</h2>
+                <h2 class="t-color-2 mb-5 fs-11 fw-bold">Lo que te ofrecemos</h2>
                 <div class="row">
                     <div class="col-md-4">
                         <?php getComponent("cardProducts")?>
@@ -152,15 +165,48 @@
         <section class="container mt-5 mb-5">
             <div class="text-center">
                 <h5 class="t-color-1 fw-bold fs-3 mb-4 ">Nuestros equipo</h5>
-                <h2 class="t-color-2 mb-5 fs-1 fw-bold ">Nuestro equipo de expertos</h2>
+                <h2 class="t-color-2 mb-5 fs-11 fw-bold ">Nuestro equipo de expertos</h2>
                 <div class="carousel-team owl-carousel owl-theme mb-5" data-bs-ride="carousel">
                     <div class="team-card ">
                         <div class="team-img">
                             <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
                         </div>
                         <div class="team-info shadow-sm p-3">
-                            <h4 class="t-color-2 fw-bold">Vilma Ladino</h4>
+                            <el-link :underline="false" href="#" type="primary"><h4 class="t-color-2 fw-bold">Vilma Ladino</h4></el-link>
                             <span class="t-color-1 fw-bold">Abogada</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="mt-5 mb-5 bg-color-2">
+            <div class="text-center">
+                <div class="testimonial">
+                    <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
+                    <div class="testimonial-container">
+                        <div class="testimonial-content container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="carousel-testimonial owl-carousel owl-theme" data-bs-ride="carousel">
+                                        <div class="testimonial-info">
+                                            <div class="testimonial-img">
+                                                <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
+                                            </div>
+                                            <div class="testimonial-description">
+                                                <h6 class="t-color-2 fs-3 fw-bold">Vilma Ladino</h6>
+                                                <span class="t-color-1 fw-bold">Abogada</span>
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe hic quo quaerat obcaecati quasi iste odio quibusdam, cupiditate suscipit veritatis atque quisquam impedit doloremque maxime nisi commodi, nobis veniam! Sunt.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="testimonial-titles">
+                                        <h5 class="t-color-1 fw-bold fs-3 text-start ">Testimonios</h5>
+                                        <h2 class="t-color-4 mb-5 fs-11 fw-bold text-start">Lo que dicen nuestros clientes de nosotros</h2>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

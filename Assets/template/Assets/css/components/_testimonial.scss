@@ -1,0 +1,71 @@
+@import "mixin";
+.testimonial{
+    position: relative;
+    overflow: hidden;
+    img{
+        width: 100%;
+    }
+    max-height: 600px;
+    .testimonial-container{
+        display: flex;
+        align-items: center;
+        background-color: #162542d7;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        .testimonial-content{
+            .testimonial-info{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                background-color: $color4;
+                padding: 1rem;
+                .testimonial-titles{
+                    height: 100%;
+                }
+                .testimonial-img{
+                    border: 1px solid transparent;
+                    img{
+                        border-radius: 50%;
+                        width: 80px;
+                        height: 80px;
+                    }
+                }
+                .testimonial-description{
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+.carousel-testimonial{
+    border: 30px solid #31436646;
+}
+.team-card{
+    position: relative;
+    margin-bottom: 30px;
+    margin-left:10px;
+    margin-right:10px;
+    &:hover{
+        h4{
+            color:$color1 !important;
+            transition: all 0.3s ease;
+        }
+    }
+}
+.team-img{
+    height: 330px;
+    overflow: hidden;
+    img{
+        width: 100%;
+    }
+}
+.team-info{
+    position: relative;
+    width: 80%;   
+    background-color: $color4;
+    bottom:30px;
+}
