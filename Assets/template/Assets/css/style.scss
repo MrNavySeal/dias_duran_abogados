@@ -18,10 +18,11 @@
 @import "components/contact";
 @import "components/team";
 @import "components/testimonial";
+@import "components/blog_card";
 @import "components/item","components/mailbox", "components/form"; 
 @import "components/mediaqueries";
 *{
-    font-family: "Baskervville", serif;
+    font-family: "Open Sans", serif;
 }
 .el-input__wrapper{
     height: calc(2.5em + .75rem + 2px);

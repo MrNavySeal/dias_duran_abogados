@@ -1854,6 +1854,35 @@ footer .logo img {
   bottom: 30px;
 }
 
+.blog-card h3 {
+  color: #162542;
+  transition: all 0.2s ease-in;
+}
+.blog-card:hover h3 {
+  color: #b68c5a;
+  transition: all 0.2s ease-in;
+}
+
+.blog-img {
+  height: 350px;
+  overflow: hidden;
+}
+.blog-img img {
+  width: 100%;
+}
+
+.blog-detail {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.blog-detail img {
+  border-radius: 50%;
+  width: 50px !important;
+  height: 50px !important;
+}
+
 .item {
   position: relative;
 }
@@ -2132,7 +2161,7 @@ footer .logo img {
   }
 }
 * {
-  font-family: "Baskervville", serif;
+  font-family: "Open Sans", serif;
 }
 
 .el-input__wrapper {

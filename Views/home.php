@@ -116,6 +116,7 @@
                 </div>
             </div>
         </section>
+        <!-- Nosotros -->
         <section class="container mt-5 mb-5">
             <div class="section-about">
                 <div class="row">
@@ -133,6 +134,7 @@
                 </div>
             </div>
         </section>
+        <!-- Servicios -->
         <section class="container mt-5 mb-5">
             <div class="text-center">
                 <h5 class="t-color-1 fw-bold fs-3 mb-4">Nuestros servicios</h5>
@@ -159,9 +161,11 @@
                 </div>
             </div>
         </section>
+        <!-- Contacto -->
         <section class="container mt-5 mb-5">
             <?php getComponent("contactForm"); ?>
         </section>
+        <!-- Equipo -->
         <section class="container mt-5 mb-5">
             <div class="text-center">
                 <h5 class="t-color-1 fw-bold fs-3 mb-4 ">Nuestros equipo</h5>
@@ -179,6 +183,7 @@
                 </div>
             </div>
         </section>
+        <!-- Testimonios -->
         <section class="mt-5 mb-5 bg-color-2">
             <div class="text-center">
                 <div class="testimonial">
@@ -212,30 +217,29 @@
                 </div>
             </div>
         </section>
-        <?php if(!empty($posts)){?>
-        <section class="mt-5">
-            <h2 class="section--title">Últimos artículos publicados</h2>
-            <div class="row">
-                <?php for ($i=0; $i < count($posts) ; $i++) {
-                    $img=media()."/images/uploads/category.jpg";
-                    if($posts[$i]['picture'] !=""){
-                        $img=media()."/images/uploads/".$posts[$i]['picture']; 
-                    }
-                ?>
-                <div class="col-md-4 mb-3">
-                    <div class="card" style="width: 100%; height:100%;">
-                        <img src="<?=$img?>" alt="<?=$posts[$i]['name']?>">
-                        <div class="card-body">
-                        <h5 class="card-title"><a class="t-color-2 link-hover-none" href="<?=base_url()."/blog/articulo/".$posts[$i]['route']?>"><?=$posts[$i]['name']?></a></h5>
-                            <p class="card-text"><?=$posts[$i]['shortdescription']?></p>
-                            <a href="<?=base_url()."/blog/articulo/".$posts[$i]['route']?>" class="btn btn-bg-2">Ver más</a>
+        <!-- Blog -->
+        <section class="mt-5 mb-5 container">
+            <div class="text-center">
+                <h5 class="t-color-1 fw-bold fs-3 mb-4 ">Nuestro blog</h5>
+                <h2 class="t-color-2 mb-5 fs-11 fw-bold ">Noticias más recientes</h2>
+                <div class="carousel-blog owl-carousel owl-theme mb-5" data-bs-ride="carousel">
+                    <div class="blog-card px-2">
+                        <div class="blog-img my-2">
+                            <el-link :underline="false" href="#" type="primary"><img src="<?=media()?>/images/uploads/about_img.jpg" alt=""></el-link>
+                        </div>
+                        <div class="blog-info">
+                            <el-link :underline="false" href="#" type="primary"><h3>Habrá justicia para ti si eres inocente</h3></el-link>
+                            <ul class="blog-detail fs-5 mt-3">
+                                <li><img src="<?=media()?>/images/uploads/about_img.jpg" alt=""></li>
+                                <li class="me-2 ms-2 t-color-2"><h4>Vilma ladino</h4></li>
+                                <li class="me-2 ms-2 t-color-3">|</li>
+                                <li class="t-color-1">Oct 12, 2025</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <?php }?>
             </div>
         </section>
-        <?php }?>
     </main>
 <?php
     footerPage($data);
