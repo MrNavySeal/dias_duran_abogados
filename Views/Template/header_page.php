@@ -182,70 +182,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="navmobile-link accordion" id="accordionCategory">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-categories">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseCategories" aria-expanded="false" aria-controls="flush-collapseCategories">
-                            <strong class="fs-5">Tienda</strong>
-                        </button>
-                        </h2>
-                        <div id="flush-collapseCategories" class="accordion-collapse collapse show" aria-labelledby="flush-categories" data-bs-parent="#accordionFlushCategories">
-                        <div class="accordion-body">
-                            <div class="accordion accordion-flush" id="accordionFlushCategorie">
-                                <?php
-                                    for ($i=0; $i < count($navCategories) ; $i++) { 
-                                        $routeC = base_url()."/tienda/categoria/".$navCategories[$i]['route'];
-                                ?>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-categorie<?=$i?>">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseCategorie<?=$i?>" aria-expanded="false" aria-controls="flush-collapseCategorie<?=$i?>">
-                                    </button>
-                                    <a href="<?=$routeC?>" class="text-decoration-none"><?=$navCategories[$i]['name']?></a>
-                                    </h2>
-                                    <div id="flush-collapseCategorie<?=$i?>" class="accordion-collapse collapse" aria-labelledby="flush-categorie<?=$i?>" data-bs-parent="#accordionFlushCategorie<?=$i?>">
-                                    <div class="accordion-body">
-                                        <ul class="list-group">
-                                            <?php
-                                                for ($j=0; $j < count($navCategories[$i]['subcategories']) ; $j++) { 
-                                                    $navSubCategories = $navCategories[$i]['subcategories'][$j];
-                                                    if($navSubCategories['total'] >0){
-                                                        $routeS = base_url()."/tienda/categoria/".$navCategories[$i]['route']."/".$navSubCategories['route'];
-                                                ?>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                            <a href="<?=$routeS?>"><?=$navSubCategories['name']?></a>
-                                                            <span class="badge bg-color-2 rounded-pill"><?=$navSubCategories['total']?></span>
-                                                        </li>
-                                            <?php } }?>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                </div>
-                                <?php }?>
-                                <li class="navmobile-link"><a href="<?=base_url()?>/tienda">Ver todo</a></li>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                </div>
                 <li class="navmobile-link"><a href="<?=base_url()?>/blog"><strong class="fs-5">Blog</strong></a></li>
             </ul>
         </div>
-    </div>
-    <div class="mobileOptions container">
-        <ul>
-            <li><a class="text-black" href="<?="https://wa.me/".$company['phonecode'].$company['phone']?>" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
-            <li><a class="text-black" href="<?=base_url()?>"><i class="fas fa-home"></i></a></li>
-            <li class="c-p" id="btnNav"><i class="fas fa-exchange-alt filter"></i></li>
-            <?php
-                if(isset($_SESSION['login'])){
-            ?>
-            <li><a class="text-black" href="<?=base_url()?>/favoritos"><i class="fas fa-heart"></i></a></li>
-            <li><a class="text-black" href="<?=base_url()?>/usuarios/perfil"><i class="fas fa-user c-p" id="btnProfile"></i></a></li>
-            <?php }else{ ?>
-            <li onclick="openLoginModal();" class="c-p"><i class="fas fa-heart"></i></li>
-            <li onclick="openLoginModal();" class="c-p"><i class="fas fa-user"></i></li>
-            <?php }?>
-        </ul>
     </div>
     <!--<a href="#" class="back--top d-none"><i class="fas fa-backward"></i></a><a id="btnWhatsapp" href="<?="https://wa.me/".$company['phonecode'].$company['phone']?>" target="_blank"><i class="fab fa-whatsapp"></i></a>-->
     <div id="modalLogin"></div>

@@ -6,7 +6,7 @@
             </div>
             <el-menu
             :default-active="activeIndex"
-            class="el-menu"
+            class="el-menu new-navbar-links"
             mode="horizontal"
             :ellipsis="false"
             @select="handleSelect"

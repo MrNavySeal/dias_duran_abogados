@@ -16,14 +16,14 @@ for ($i=0; $i < count($social) ; $i++) {
 
 ?>
 
-<footer>
-    <div class="row m-0 mt-3">
-        <div class="col-lg-4 p-5">
+<footer class="bg-color-2 container mt-4">
+    <div class="row m-0">
+        <div class="col-lg-4 p-5 t-color-4">
             <div class="logo">
                 <img src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>">
             </div>
             <p><?=$company['description']?></p>
-            <p class="fw-bold fs-4">Síguenos</p>
+            <p class="fw-bold fs-4 ">Síguenos</p>
             <ul class="social social--dark">
                 <?=$links?>
             </ul>
@@ -54,56 +54,42 @@ for ($i=0; $i < count($social) ; $i++) {
                     <div class="col-md-3">
                         <div class="footer--data">
                             <div class="footer--title">
-                                <h3>Información
-                                    <span class="title--decoration">
-                                        <span></span><span></span><span></span><span></span><span></span>
-                                    </span>
-                                </h3>
+                                <h3>Enlaces</h3>
                             </div>
                             <ul>
-                                <li><a href="<?=base_url()?>/enmarcar">Enmarcar aquí</a></li>
-                                <li><a href="<?=base_url()?>/tienda">Tienda</a></li>
-                                <li><a href="<?=base_url()?>/nosotros">¿Quienes somos?</a></li>
-                                <li><a href="<?=base_url()?>/servicios">Servicios</a></li>
-                                <li><a href="<?=base_url()?>/contacto">Contacto</a></li>
+                                <li><el-link :underline="false" href="#" type="primary">Inicio</el-link></li>
+                                <li><el-link :underline="false" href="#" type="primary">Nosotros</el-link></li>
+                                <li><el-link :underline="false" href="#" type="primary">Servicios</el-link></li>
+                                <li><el-link :underline="false" href="#" type="primary">Nuestro equipo</el-link></li>
+                                <li><el-link :underline="false" href="#" type="primary">Blog</el-link></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="footer--data">
+                            <div class="footer--title">
+                                <h3>Servicios</h3>
+                            </div>
+                            <ul>
+                                <li><el-link :underline="false" href="#" type="primary">Derecho Tributario y Planeación Fiscal</el-link></li>
+                                <li><el-link :underline="false" href="#" type="primary">Derecho Tributario y Planeación Fiscal</el-link></li>
+                                <li><el-link :underline="false" href="#" type="primary">Derecho Tributario y Planeación Fiscal</el-link></li>
+                                <li><el-link :underline="false" href="#" type="primary">Derecho Tributario y Planeación Fiscal</el-link></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="footer--data">
                             <div class="footer--title">
-                                <h3>Métodos de pago
-                                    <span class="title--decoration">
-                                        <span></span><span></span><span></span><span></span><span></span>
-                                    </span>
-                                </h3>
+                                <h3>Métodos de pago</h3>
                             </div>
                             <ul>
                                 <li>Todas las tarjetas débito y crédito</li>
                                 <li>Transferencia bancaria</li>
-                                <li>Mercadopago</li>
+                                <li>Paypal</li>
                             </ul>
                         </div>
                     </div>
-                    <?php if(!empty($discount)){ ?>
-                    <div class="col-md-5">
-                        <div class="footer--data">
-                            <div class="footer--title">
-                                <h3>Suscríbete
-                                    <span class="title--decoration">
-                                        <span></span><span></span><span></span><span></span><span></span>
-                                    </span>
-                                </h3>
-                            </div>
-                            <p>Suscríbete a nuestro boletín y recibe un cupón de descuento de <?=$discount['discount']?>% <br><br>Reciba información actualizada sobre novedades, ofertas especiales y nuestras promociones</p>
-                            <div class="alert alert-danger d-none" id="alertSuscribe" role="alert"></div>
-                            <form action="" class="footer--subscribe" id="formSuscriber">
-                                <input type="email" id="txtEmailSuscribe" name="txtEmailSuscribe" placeholder="Tu correo">
-                                <button type="submit" class="btn" id="btnSuscribe"><i class="fas fa-paper-plane"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                    <?php }?>
                 </div>
             </div>
         </div>

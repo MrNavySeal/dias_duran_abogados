@@ -1,4 +1,4 @@
-<el-card class="card-product">
+<el-card class="card-product my-3">
     <div class="card-product-img">
         <img src="<?=media()?>/images/uploads/service_product.jpg" alt="">
     </div>

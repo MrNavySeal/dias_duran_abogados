@@ -5,40 +5,38 @@
     img{
         width: 100%;
     }
-    max-height: 600px;
-    .testimonial-container{
-        display: flex;
-        align-items: center;
-        background-color: #162542d7;
-        position: absolute;
-        left: 0;
-        top: 0;
+    height: 600px;
+}
+.testimonial-container{
+    display: flex;
+    align-items: center;
+    background-color: #162542d7;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+.testimonial-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: $color4;
+    padding: 1rem;
+    .testimonial-titles{
         height: 100%;
-        width: 100%;
-        .testimonial-content{
-            .testimonial-info{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                background-color: $color4;
-                padding: 1rem;
-                .testimonial-titles{
-                    height: 100%;
-                }
-                .testimonial-img{
-                    border: 1px solid transparent;
-                    img{
-                        border-radius: 50%;
-                        width: 80px;
-                        height: 80px;
-                    }
-                }
-                .testimonial-description{
-                    text-align: center;
-                }
-            }
+    }
+    .testimonial-img{
+        border: 1px solid transparent;
+        img{
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
         }
+    }
+    .testimonial-description{
+        text-align: center;
     }
 }
 .carousel-testimonial{

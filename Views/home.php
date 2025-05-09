@@ -29,7 +29,7 @@
         <div class="block text-center">
             <el-carousel >
                 <el-carousel-item v-for="(data,index) in arrBanners":key="index">
-                    <img :src="data.url" class="d-block w-100" :alt="data.name">
+                    <img :src="data.url" class="carousel-cover" :alt="data.name">
                     <div class="carousel-item-container">
                         <div class="carousel-item-content">
                             <h2 class="fs-4 mb-3 t-color-4">{{ data.name }}</h2>
@@ -42,7 +42,7 @@
         </div>
         <section class="container mt-5 mb-5">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 my-2">
                     <el-card class="position-relative">
                         <div class="new-service-card mb-3">
                             <div class="new-service-main me-2">
@@ -60,7 +60,7 @@
                         </div>
                     </el-card>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 my-2">
                     <el-card class="position-relative">
                         <div class="new-service-card mb-3">
                             <div class="new-service-main me-2">
@@ -78,7 +78,7 @@
                         </div>
                     </el-card>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 my-2">
                     <el-card class="position-relative">
                         <div class="new-service-card mb-3">
                             <div class="new-service-main me-2">
@@ -96,7 +96,7 @@
                         </div>
                     </el-card>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 my-2">
                     <el-card class="position-relative">
                         <div class="new-service-card mb-3">
                             <div class="new-service-main me-2">
@@ -125,7 +125,7 @@
                             <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-3 section-about-content">
                         <h5 class="t-color-1 fw-bold fs-3 mb-4">Nosotros</h5>
                         <h2 class="t-color-2 mb-5 fs-11 fw-bold">Asesoría y Consultoría Especializada en Soluciones Legales</h2>
                         <p>Vilma Ladino, es una abogada y consultora especializada en brindar asesoría y consultoría integral a personas naturales y jurídicas en Colombia y en el exterior. Cuento con el respaldo de un equipo multidisciplinario que combina experiencia en las áreas legal, financiera y de seguridad social, para ofrecer estrategias sólidas y soluciones eficientes orientadas a la protección patrimonial, empresarial y laboral.</p>
@@ -135,7 +135,7 @@
             </div>
         </section>
         <!-- Servicios -->
-        <section class="container mt-5 mb-5">
+        <section class="container mt-5 mb-5 section-service">
             <div class="text-center">
                 <h5 class="t-color-1 fw-bold fs-3 mb-4">Nuestros servicios</h5>
                 <h2 class="t-color-2 mb-5 fs-11 fw-bold">Lo que te ofrecemos</h2>
@@ -166,7 +166,7 @@
             <?php getComponent("contactForm"); ?>
         </section>
         <!-- Equipo -->
-        <section class="container mt-5 mb-5">
+        <section class="container mt-5 mb-5 section-team">
             <div class="text-center">
                 <h5 class="t-color-1 fw-bold fs-3 mb-4 ">Nuestros equipo</h5>
                 <h2 class="t-color-2 mb-5 fs-11 fw-bold ">Nuestro equipo de expertos</h2>
@@ -185,12 +185,18 @@
         </section>
         <!-- Testimonios -->
         <section class="mt-5 mb-5 bg-color-2">
-            <div class="text-center">
+            <div>
                 <div class="testimonial">
                     <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
                     <div class="testimonial-container">
                         <div class="testimonial-content container">
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="testimonial-titles">
+                                        <h5 class="t-color-1 fw-bold fs-3">Testimonios</h5>
+                                        <h2 class="t-color-4 mb-5 fs-11 fw-bold">Lo que dicen nuestros clientes de nosotros</h2>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="carousel-testimonial owl-carousel owl-theme" data-bs-ride="carousel">
                                         <div class="testimonial-info">
@@ -205,12 +211,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="testimonial-titles">
-                                        <h5 class="t-color-1 fw-bold fs-3 text-start ">Testimonios</h5>
-                                        <h2 class="t-color-4 mb-5 fs-11 fw-bold text-start">Lo que dicen nuestros clientes de nosotros</h2>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -218,7 +218,7 @@
             </div>
         </section>
         <!-- Blog -->
-        <section class="mt-5 mb-5 container">
+        <section class="mt-5 mb-5 container section-blog">
             <div class="text-center">
                 <h5 class="t-color-1 fw-bold fs-3 mb-4 ">Nuestro blog</h5>
                 <h2 class="t-color-2 mb-5 fs-11 fw-bold ">Noticias más recientes</h2>
@@ -244,4 +244,3 @@
 <?php
     footerPage($data);
 ?>
-    
