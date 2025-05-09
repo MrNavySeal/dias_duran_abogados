@@ -3,7 +3,6 @@
 @import "components/utilities";
 @import "components/header";
 @import "components/login";
-@import "components/home";
 @import "components/loading";
 @import "components/shop";
 @import "components/cart";
@@ -31,6 +30,10 @@
     border-radius: 0;
     border: none !important;
     box-shadow:none !important;
+}
+.el-menu--horizontal>.el-menu-item.is-active{
+    border: none;
+    color:$color1 !important;
 }
 .progress-bar{
     background-color: $color1;

@@ -1,8 +1,14 @@
 @import "mixin";
+#btnNav{
+    display: none;
+}
+#closeNav{
+    cursor: pointer;
+}
 .new-header{
     position: sticky;
     top: 0;
-    z-index: 9999;
+    z-index: 30;
 }
 .new-navbar-links{
     display: flex;
@@ -37,30 +43,30 @@
     height: 100%;
     @include bgColor($color2);
     @include textColor($color4);
-    .el-menu-item{
-        border: none;
+}
+.el-menu-item{
+    border: none;
+    font-size: 1em;
+    @include textColor($color4);
+    &:hover{
+        @include bgColor($color2);
+        @include textColor($color1);
+    }
+    
+}
+.el-menu-item.is-active{
+    @include bgColor($color2);
+    @include textColor($color1);
+    border: none;
+}
+.el-sub-menu{
+    @include bgColor($color2);
+    .el-sub-menu__title{
         font-size: 1em;
         @include textColor($color4);
         &:hover{
             @include bgColor($color2);
             @include textColor($color1);
-        }
-        
-    }
-    .el-menu-item.is-active{
-        @include bgColor($color2);
-        @include textColor($color1);
-        border: none;
-    }
-    .el-sub-menu{
-        @include bgColor($color2);
-        .el-sub-menu__title{
-            font-size: 1em;
-            @include textColor($color4);
-            &:hover{
-                @include bgColor($color2);
-                @include textColor($color1);
-            }
         }
     }
 }

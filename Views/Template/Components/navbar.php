@@ -35,19 +35,25 @@
                     <i class="fas fa-shopping-cart"></i>
                 </el-menu-item>
                 <?php if(isset($_SESSION['login'])){ ?>
-                <el-sub-menu index="8">
+                <el-sub-menu index="8" class="new-header-item-login">
                     <template #title><i class="fas fa-user"></i></template>
                     <el-menu-item index="8-1">
                         <el-link :underline="false" href="<?=base_url()?>/usuarios/perfil" type="primary">Perfil</el-link>
                     </el-menu-item>
-                    <el-menu-item index="8-2" id="logout">Cerrar sesión</el-menu-item>
+                    <el-menu-item index="8-2" onclick="logout()">Cerrar sesión</el-menu-item>
                 </el-sub-menu>
                 <?php }else {?>
-                    <div class="d-flex align-items-center justify-content-center">
+                    <div class="d-flex align-items-center justify-content-center new-header-item-login">
                         <el-button onclick="openLoginModal();" class="btn btn-bg-1" type="primary">Iniciar sesión</el-button>
                     </div>
                 <?php }?>
+                <el-menu-item index="9" id="btnNav">
+                    <i class="fas fa-bars"></i>
+                </el-menu-item>
             </el-menu>
         </nav>
     </div>
+    <?php getComponent("search",$data)?>
+    <?php getComponent("cartBar",$data)?>
+    <?php getComponent("navMobile",$data)?>
 </header>

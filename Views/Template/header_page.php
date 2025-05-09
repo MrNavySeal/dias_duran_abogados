@@ -1,14 +1,6 @@
 <?php
-    $notification = emailNotification(); 
-    $comments = commentNotification();
-    $reviews = $comments['total'];
     $navCategories=getNavCat();
-    $subLinks = navSubLinks();
     $company = $data['company'];
-    $qtyCart = 0;
-    $total = 0;
-    $arrProducts = array();
-    
     $title = $company['name'];
     $urlWeb = base_url();
     $urlImg =media()."/images/uploads/".$company['logo'];
@@ -25,24 +17,6 @@
         }
         $title = $data['article']['name'];
         $description = $data['article']['shortdescription'];
-    }
-    if(isset($_SESSION['arrCart']) && !empty($_SESSION['arrCart'])){
-        $arrProducts = $_SESSION['arrCart'];
-        foreach ($arrProducts as $product) {
-            $qtyCart += $product['qty'];
-            $total+=$product['price']*$product['qty']; 
-        }
-    }
-    $emails = "";
-    
-    if($notification>0){
-        $emails = '<span class="badge badge-sm bg-danger ms-auto">'.$notification.'</span>';
-    }else{
-        $emails = "";
-    }
-    $notifyReview = "";
-    if($reviews>0){
-        $notifyReview='<span class="badge badge-sm bg-danger ms-auto">'.$reviews.'</span>';
     }
 ?>
 <!DOCTYPE html>
@@ -111,81 +85,6 @@
     </div>
 </div>
     <?php getComponent("navbar",$data)?>
-    <div class="search">
-        <span id="closeSearch"><i class="fas fa-times"></i></span>
-        <form action="<?=base_url()?>/tienda/buscar" method="GET">
-            <input type="search" name="b" id="" placeholder="Buscar...">
-            <button type="submit" class="btn"><i class="fas fa-search"></i></button>
-        </form>
-    </div>
-    <div class="cartbar">
-        <div class="cartbar--mask"></div>
-        <div class="cartbar--elements">
-            <div class="cartbar--header">
-                <div class="cartbar--title">
-                    Mi carrito <span id="qtyCartbar"><?=$qtyCart?></span>
-                </div>
-                <span id="closeCart"><i class="fas fa-times"></i></span>
-            </div>
-            <div class="cartbar--inner">
-                <ul class="cartlist--items"></ul>
-            </div>
-            <div class="cartbar--info">
-                <div class="info--total">
-                    <span>Total</span>
-                    <span id="totalCart"><?=formatNum($total)?></span>
-                </div>
-                <div id="btnsCartBar" class="d-none">
-                    <a href="<?=base_url()?>/carrito" class="btn btn-bg-2 d-block w-100 mb-3"> Ver carrito</a>
-                    <button type="button" class="btn d-block btn-bg-1 btnCheckoutCart w-100"> Pagar</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="navmobile">
-        <div class="navmobile--mask"></div>
-        <div class="navmobile--elements">
-            <div class="navmobile--header">
-                <div class="navmobile--title">
-                    <p class="t-color-2 fw-bold"href="<?=base_url()?>">Buho's <span class="t-color-1">Marquetería</span> <span>&</span> <span class="t-color-1">Galería</span></p>
-                </div>
-                <span id="closeNav" class="t-color-2"><i class="fas fa-times"></i></span>
-            </div>
-            <ul class="navmobile-links d-none" id="navProfile">                      
-                <?php
-                    if(!isset($_SESSION['login'])){
-                ?>
-                <li class="navmobile-link" onclick="openLoginModal();"><a href="#">Iniciar sesión</a></li>
-                <?php }?>
-            </ul>
-            <ul class="navmobile-links d-none" id="filterNav">
-                <div class="navmobile-link accordion" id="accordionFraming">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingFraming">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFraming" aria-expanded="true" aria-controls="collapseFraming">
-                            <strong class="fs-5">Enmarcar aquí</strong>
-                        </button>
-                        </h2>
-                        <div id="collapseFraming" class="accordion-collapse collapse show" aria-labelledby="headingFraming" data-bs-parent="#accordionFraming">
-                            <div class="accordion-body">
-                                <ul>
-                                    <?php 
-                                    for ($i=0; $i < count($subLinks['framing']); $i++) { 
-                                        $link = $subLinks['framing'][$i];
-                                        if($i <= 8){
-                                    ?>
-                                    <li class="navmobile-link"><a href="<?=base_url()."/enmarcar/personalizar/".$link['route']?>"><?=$link['name']?></a></li>
-                                    <?php } }?>
-                                    <li class="navmobile-link"><a href="<?=base_url()?>/enmarcar">Ver todo</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <li class="navmobile-link"><a href="<?=base_url()?>/blog"><strong class="fs-5">Blog</strong></a></li>
-            </ul>
-        </div>
-    </div>
     <!--<a href="#" class="back--top d-none"><i class="fas fa-backward"></i></a><a id="btnWhatsapp" href="<?="https://wa.me/".$company['phonecode'].$company['phone']?>" target="_blank"><i class="fab fa-whatsapp"></i></a>-->
     <div id="modalLogin"></div>
     

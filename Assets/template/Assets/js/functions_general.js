@@ -119,15 +119,6 @@ document.addEventListener("DOMContentLoaded",function(){
         })
     });
 
-    if(document.querySelector("#logout")){
-        let logout = document.querySelector("#logout");
-        logout.addEventListener("click",function(e){
-            let url = base_url+"/logout";
-            request(url,"","get").then(function(objData){
-                window.location.reload(false);
-            });
-        });
-    }
     if(document.querySelector("#myAccount")){
         let myAccount = document.querySelector("#myAccount");
         myAccount.addEventListener("click",function(e){
@@ -136,6 +127,10 @@ document.addEventListener("DOMContentLoaded",function(){
     }
 });
 /***************************Essentials Functions****************************** */
+function logout(){
+    let url = base_url+"/logout";
+    request(url,"","get").then(function(objData){ window.location.reload(false);});
+}
 function openLoginModal(){
     let modalItem = document.querySelector("#modalLogin");
     let modal= `

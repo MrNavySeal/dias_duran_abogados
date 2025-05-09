@@ -42,7 +42,7 @@
         </div>
         <section class="container mt-5 mb-5">
             <div class="row">
-                <div class="col-md-3 my-2">
+                <div class="col-xl-3 col-lg-6 col-sm-12 my-2">
                     <el-card class="position-relative">
                         <div class="new-service-card mb-3">
                             <div class="new-service-main me-2">
@@ -60,7 +60,7 @@
                         </div>
                     </el-card>
                 </div>
-                <div class="col-md-3 my-2">
+                <div class="col-xl-3 col-lg-6 col-sm-12 my-2">
                     <el-card class="position-relative">
                         <div class="new-service-card mb-3">
                             <div class="new-service-main me-2">
@@ -78,7 +78,7 @@
                         </div>
                     </el-card>
                 </div>
-                <div class="col-md-3 my-2">
+                <div class="col-xl-3 col-lg-6 col-sm-12 my-2">
                     <el-card class="position-relative">
                         <div class="new-service-card mb-3">
                             <div class="new-service-main me-2">
@@ -96,7 +96,7 @@
                         </div>
                     </el-card>
                 </div>
-                <div class="col-md-3 my-2">
+                <div class="col-xl-3 col-lg-6 col-sm-12 my-2">
                     <el-card class="position-relative">
                         <div class="new-service-card mb-3">
                             <div class="new-service-main me-2">
@@ -140,22 +140,22 @@
                 <h5 class="t-color-1 fw-bold fs-3 mb-4">Nuestros servicios</h5>
                 <h2 class="t-color-2 mb-5 fs-11 fw-bold">Lo que te ofrecemos</h2>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-xl-4 col-lg-6 col-sm-12">
                         <?php getComponent("cardProducts")?>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-xl-4 col-lg-6 col-sm-12">
                         <?php getComponent("cardProducts")?>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-xl-4 col-lg-6 col-sm-12">
                         <?php getComponent("cardProducts")?>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-xl-4 col-lg-6 col-sm-12">
                         <?php getComponent("cardProducts")?>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-xl-4 col-lg-6 col-sm-12">
                         <?php getComponent("cardProducts")?>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-xl-4 col-lg-6 col-sm-12">
                         <?php getComponent("cardProducts")?>
                     </div>
                 </div>

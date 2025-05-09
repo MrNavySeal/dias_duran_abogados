@@ -106,8 +106,17 @@
     color:$color4;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 15px 30px;
     margin-bottom: 30px;
+    height: 5.5rem;
+}
+.navmobile--title{
+    img{
+        width: 200px;
+        height: 100px;
+        object-fit: cover;
+    }
 }
 .cartbar--header{
     background-color: $color2; 
@@ -216,14 +225,9 @@
 #closeCart{
     cursor: pointer;
 }
-#closeNav{
-    cursor: pointer;
-}
+
 .delItem{
     cursor: pointer;
-}
-#btnNav{
-    display: none;
 }
 .cartbar.active{
     .cartbar--mask{
