@@ -19,7 +19,6 @@ const App = {
       getInitialData: async function(){
         const response = await fetch(base_url+"/Home/getInitialData");
         const objData = await response.json();
-        console.log(objData);
         this.arrBanners = objData.banners;
       }
     }

@@ -11,16 +11,16 @@
             :ellipsis="false"
             @select="handleSelect"
             >
-            <el-menu-item index="1">Inicio</el-menu-item>
-                <el-menu-item index="2">Nosotros</el-menu-item>
+            <el-menu-item index="1"><el-link :underline="false" href="<?=base_url()?>" type="primary">Inicio</el-link></el-menu-item>
+                <el-menu-item index="2"><el-link :underline="false" href="<?=base_url()?>/nosotros" type="primary">Nosotros</el-link></el-menu-item>
                 <el-sub-menu index="3">
                     <template #title>Servicios</template>
-                    <el-menu-item index="3-1">item one</el-menu-item>
+                    <el-menu-item index="3-1">Item one</el-menu-item>
                     <el-menu-item index="3-2">item two</el-menu-item>
                     <el-menu-item index="3-3">item three</el-menu-item>
                 </el-sub-menu>
-                <el-menu-item index="4">Blog</el-menu-item>
-                <el-menu-item index="5" class="me-4">Contacto</el-menu-item>
+                <el-menu-item index="4"><el-link :underline="false" href="<?=base_url()?>/blog" type="primary">Blog</el-link></el-menu-item>
+                <el-menu-item index="5" class="me-4"><el-link :underline="false" href="<?=base_url()?>/contacto" type="primary">Contacto</el-link></el-menu-item>
             </el-menu>
             <el-menu
             :default-active="activeIndex"

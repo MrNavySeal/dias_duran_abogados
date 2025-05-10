@@ -1189,6 +1189,9 @@ footer .logo img {
   font-size: 1em;
   color: #fff !important;
 }
+.el-menu-item .el-link {
+  font-size: 1em !important;
+}
 .el-menu-item:hover {
   background-color: #162542 !important;
   color: #b68c5a !important;
@@ -1444,6 +1447,41 @@ footer .logo img {
   border-radius: 50%;
   width: 50px !important;
   height: 50px !important;
+}
+
+.page-cover {
+  height: 350px;
+  position: relative;
+}
+.page-cover img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.page-cover-content {
+  position: absolute;
+  background-color: rgba(22, 37, 66, 0.8431372549);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.page-cover-content ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  font-weight: bold;
+}
+.page-cover-content ul li .el-link {
+  font-weight: bold;
+  color: #fff;
+  font-size: 1em;
 }
 
 .item {

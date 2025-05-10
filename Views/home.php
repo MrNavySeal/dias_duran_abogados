@@ -162,61 +162,11 @@
             </div>
         </section>
         <!-- Contacto -->
-        <section class="container mt-5 mb-5">
-            <?php getComponent("contactForm"); ?>
-        </section>
+        <?php getComponent("contactForm"); ?>
         <!-- Equipo -->
-        <section class="container mt-5 mb-5 section-team">
-            <div class="text-center">
-                <h5 class="t-color-1 fw-bold fs-3 mb-4 ">Nuestros equipo</h5>
-                <h2 class="t-color-2 mb-5 fs-11 fw-bold ">Nuestro equipo de expertos</h2>
-                <div class="carousel-team owl-carousel owl-theme mb-5" data-bs-ride="carousel">
-                    <div class="team-card ">
-                        <div class="team-img">
-                            <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
-                        </div>
-                        <div class="team-info shadow-sm p-3">
-                            <el-link :underline="false" href="#" type="primary"><h4 class="t-color-2 fw-bold">Vilma Ladino</h4></el-link>
-                            <span class="t-color-1 fw-bold">Abogada</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <?php getComponent("team")?>
         <!-- Testimonios -->
-        <section class="mt-5 mb-5 bg-color-2">
-            <div>
-                <div class="testimonial">
-                    <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
-                    <div class="testimonial-container">
-                        <div class="testimonial-content container">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="testimonial-titles">
-                                        <h5 class="t-color-1 fw-bold fs-3">Testimonios</h5>
-                                        <h2 class="t-color-4 mb-5 fs-11 fw-bold">Lo que dicen nuestros clientes de nosotros</h2>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="carousel-testimonial owl-carousel owl-theme" data-bs-ride="carousel">
-                                        <div class="testimonial-info">
-                                            <div class="testimonial-img">
-                                                <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
-                                            </div>
-                                            <div class="testimonial-description">
-                                                <h6 class="t-color-2 fs-3 fw-bold">Vilma Ladino</h6>
-                                                <span class="t-color-1 fw-bold">Abogada</span>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe hic quo quaerat obcaecati quasi iste odio quibusdam, cupiditate suscipit veritatis atque quisquam impedit doloremque maxime nisi commodi, nobis veniam! Sunt.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <?php getComponent("testimonial")?>
         <!-- Blog -->
         <section class="mt-5 mb-5 container section-blog">
             <div class="text-center">

@@ -47,6 +47,9 @@
 .el-menu-item{
     border: none;
     font-size: 1em;
+    .el-link{
+       font-size: 1em !important; 
+    }
     @include textColor($color4);
     &:hover{
         @include bgColor($color2);
