@@ -18,8 +18,8 @@
             $data['page_tag'] = $company['name'];
             $data['page_title'] = $company['name'];
             $data['productos'] = $this->getProductsT(8);
-            $data['page_name'] = "home";
-            $data['app'] = "functions_home.js";
+            $data['page_name'] = "inicio";
+            $data['app'] = "functions_inicio.js";
             $data['company'] = $company;
             $data['categories'] = $this->getProductsCategories("15,25,21",24);
             $data['posts'] = $this->getArticlesT(3);

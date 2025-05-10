@@ -222,6 +222,23 @@
         }
     }
 }
+#btnCart{
+    position: relative;
+    div{
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        font-size: 10px;
+        border-radius: 50%;
+        top: 20px;
+        right: 10px;
+        background-color: $color1;
+        color: $color4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
 #closeCart{
     cursor: pointer;
 }

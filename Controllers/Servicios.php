@@ -1,33 +1,27 @@
 <?php
-    require_once("Models/PaginaTrait.php");
     class Servicios extends Controllers{
-        use PaginaTrait;
         public function __construct(){
             session_start();
             parent::__construct();
             sessionCookie();
         }
-        public function servicios(){
+        public function areas(){
             $company=getCompanyInfo();
-            $data['services'] = $this->selectServices();
+            $data['company'] = $company;
             $data['page_tag'] = $company['name'];
-            $data['page_name'] = "servicios";
-            $data['page_title'] ="Servicios | ".$company['name'];
-            $this->views->getView($this,"servicios",$data); 
+            $data['page_name'] = "Áreas de Asesoría";
+            $data['page_title'] ="Áreas de Asesoría | ".$company['name'];
+            $data['app'] = "functions_servicios.js";
+            $this->views->getView($this,"areas",$data); 
         }
-        public function servicio($params){
+        public function area(){
             $company=getCompanyInfo();
-            $params = strClean($params);
-            $data['service'] = $this->selectService($params);
-            if(!empty($data['service'])){
-                $data['page_tag'] = $company['name'];
-                $data['page_name'] = "servicio";
-                $data['page_title'] =$data['service']['name']." | ".$company['name'];
-                $this->views->getView($this,"servicio",$data); 
-            }else{
-                header("location: ".base_url()."/error");
-                die();
-            }
+            $data['company'] = $company;
+            $data['page_tag'] = $company['name'];
+            $data['page_name'] = "Áreas de Asesoría";
+            $data['page_title'] ="Áreas de Asesoría | ".$company['name'];
+            $data['app'] = "functions_servicios.js";
+            $this->views->getView($this,"area",$data); 
         }
     }
 ?>

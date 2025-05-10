@@ -10,8 +10,8 @@
             $data['company'] = $company;
             $data['page_tag'] = $company['name'];
             $data['page_name'] = "Nosotros";
-            $data['app'] = "functions_about.js";
-            $data['page_title'] =$data['page']['name']." | ".$company['name'];
+            $data['app'] = "functions_nosotros.js";
+            $data['page_title'] ="Nosotros | ".$company['name'];
             $this->views->getView($this,"nosotros",$data); 
         }
     }

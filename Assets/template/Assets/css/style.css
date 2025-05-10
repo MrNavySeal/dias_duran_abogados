@@ -562,6 +562,24 @@
   outline: none;
 }
 
+#btnCart {
+  position: relative;
+}
+#btnCart div {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  font-size: 10px;
+  border-radius: 50%;
+  top: 20px;
+  right: 10px;
+  background-color: #b68c5a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #closeCart {
   cursor: pointer;
 }
@@ -1651,6 +1669,10 @@ footer .logo img {
     display: flex;
   }
   .section-about-content h2, .section-service h2, .section-team h2, .section-blog h2 {
+    font-size: 3rem;
+  }
+  .page-cover-content h3 {
+    text-align: center;
     font-size: 3rem;
   }
   .testimonial-titles h2 {
