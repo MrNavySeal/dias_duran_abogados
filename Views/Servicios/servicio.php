@@ -12,8 +12,21 @@
                         <img src="<?=media()?>/images/uploads/service_product.jpg" alt="">
                     </div>
                     <div class="area-description">
-                        <h1>Derecho Tributario y Planeación Fiscal</h1>
+                        <h1>Optimización fiscal para personas y empresas</h1>
+                        <div class="fs-3 fw-bold my-2">$350.000</div>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet in delectus quasi repellendus harum commodi, voluptatibus nobis repudiandae assumenda ratione, consectetur quibusdam hic? Error, quidem libero. Reprehenderit illum ut voluptas.</p>
+                        <div>Área de asesoría: <strong>Derecho Tributario y Planeación Fiscal</strong></div>
+                        <div class="d-flex flex-wrap align-items-center my-4">
+                            <div>
+                                <el-date-picker
+                                    v-model="strFecha"
+                                    type="datetime"
+                                    placeholder="Seleccione fecha y hora"
+                                    format="DD/MM/YYYY HH:mm"
+                                />
+                            </div>
+                            <el-button onclick="" class="btn btn-bg-2" type="primary">Agendar</el-button>
+                        </div>
                         <div class="area-article">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum harum quasi impedit inventore exercitationem tempore nesciunt accusamus hic! Officia odit ea ad repellat voluptatum porro distinctio ab perferendis fugiat dolor.
                         </div>

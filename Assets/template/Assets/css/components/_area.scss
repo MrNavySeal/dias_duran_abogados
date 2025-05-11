@@ -1,0 +1,12 @@
+@import "mixin";
+.area-img{
+    height: 400px;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.area-description{
+    h1{color: $color2;}
+}

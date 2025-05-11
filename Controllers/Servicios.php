@@ -23,5 +23,14 @@
             $data['app'] = "functions_servicios.js";
             $this->views->getView($this,"area",$data); 
         }
+        public function servicio(){
+            $company=getCompanyInfo();
+            $data['company'] = $company;
+            $data['page_tag'] = $company['name'];
+            $data['page_name'] = "Optimización fiscal para personas y empresas";
+            $data['page_title'] ="Optimización fiscal para personas y empresas | ".$company['name'];
+            $data['app'] = "functions_servicios.js";
+            $this->views->getView($this,"servicio",$data); 
+        }
     }
 ?>

@@ -21,3 +21,18 @@
         }
     }
 }
+.service-card{
+    .service-img{
+        height: 250px;
+        overflow: hidden;
+        img{
+            width: 100%;
+        }
+    }
+    .service-info{
+        .el-link{
+            color:$color2;
+            
+        }
+    }
+}

@@ -1,0 +1,55 @@
+@import "mixin";
+.nav-aside{
+    position: sticky;
+    top: 5.6rem;
+    z-index: 29;
+}
+.el-menu--vertical{
+    .el-sub-menu__title,.el-sub-menu.is-active .el-sub-menu__title{
+        color: $color2 !important;
+        background-color: $color4 !important;
+        border: 0.1px solid $color5;
+        white-space:wrap !important;
+        line-height: normal;
+        .el-link{
+            color:$color2;
+        }
+        &:hover{
+            background-color: $color1 !important;
+            color: $color4 !important;
+            .el-link{
+                color:$color4;
+            }
+        }
+    }
+    .el-sub-menu .el-menu-item{
+        height: auto;
+        line-height: normal;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .el-menu{
+        background-color: $color4 !important;
+    }
+    .el-menu-item{
+        color: $color2 !important;
+        white-space:wrap !important;
+        font-weight: normal;
+        font-size: 0.9em;
+        .el-link{
+           color: $color2 !important; 
+        }
+        &:hover{
+            background-color: $color1 !important;
+            color: $color4 !important;
+            .el-link{
+                color: $color4 !important; 
+            }
+            
+        }
+    }
+    .el-menu-item.is-active{
+        color: $color4 !important;
+        background-color: $color1 !important;
+    }
+}
