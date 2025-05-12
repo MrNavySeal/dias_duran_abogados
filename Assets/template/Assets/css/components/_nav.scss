@@ -44,7 +44,7 @@
     @include bgColor($color2);
     @include textColor($color4);
 }
-.el-menu-item{
+.el-menu-item,.el-menu--horizontal>.el-menu-item{
     border: none;
     font-size: 1em;
     .el-link{
@@ -57,7 +57,7 @@
     }
     
 }
-.el-menu-item.is-active{
+.el-menu-item.is-active,.el-menu--horizontal>.el-menu-item.is-active{
     @include bgColor($color2);
     @include textColor($color1);
     border: none;

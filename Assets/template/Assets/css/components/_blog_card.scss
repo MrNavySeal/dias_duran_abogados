@@ -1,9 +1,25 @@
 @import "mixin";
+.blog-aside{
+    .el-input__wrapper{
+        background-color: $light;
+    }
+    ul{
+        li{
+            .el-link{
+                color:$color2;
+            }
+        }
+    }
+}
+.blog{
+    .blog-img{
+        height: 500px;
+    }
+}
 .blog-card{
-    h3{color:$color2;transition: all 0.2s ease-in;}
+    h3,h2{color:$color2;transition: all 0.2s ease-in;}
     &:hover{
-        
-        h3{color:$color1;transition: all 0.2s ease-in;}
+        h3,h2{color:$color1;transition: all 0.2s ease-in;}
     }
 }
 .blog-img{

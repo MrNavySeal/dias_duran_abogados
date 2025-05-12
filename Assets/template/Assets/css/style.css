@@ -84,23 +84,37 @@
 .social li {
   height: 40px;
   width: 40px;
-  border-radius: 10px;
-  border: 1px solid #fff;
+  border-radius: 50%;
+  border: 1px solid #ebedef;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.social li:hover {
+  background-color: #b68c5a;
+}
+.social li:hover i {
+  color: #fff;
+}
 .social li a {
   text-decoration: none;
-  color: #fff;
+  color: #162542;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 .social li a i {
   font-size: 20px;
 }
 
 .social--dark li {
-  border: 1px solid #162542;
-  background-color: #162542;
+  background-color: #b68c5a;
+  border: none;
+}
+.social--dark li i {
+  color: #fff;
 }
 
 .btn-qty-1 {
@@ -845,54 +859,6 @@
   background-color: rgba(0, 0, 0, 0.151);
 }
 
-.pagination {
-  margin: 10px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pagination-btn {
-  margin: 0 5px;
-  cursor: pointer;
-  padding: 5px 15px;
-  border: 1px solid #b68c5a;
-  border-radius: 50%;
-  color: #000;
-}
-.pagination-btn:hover {
-  background-color: #b68c5a;
-  color: #fff;
-}
-
-.pagination-pag ul {
-  padding: 0;
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-}
-.pagination-pag ul a {
-  text-decoration: none;
-  width: 40px;
-  text-align: center;
-  cursor: pointer;
-  margin: 0 5px;
-  padding: 5px 10px;
-  border: 1px solid #b68c5a;
-  border-radius: 50%;
-  color: #000;
-}
-.pagination-pag ul a:hover {
-  background-color: #b68c5a;
-  color: #fff;
-}
-.pagination-pag ul a.active {
-  background-color: #b68c5a;
-  color: #fff;
-}
-
 .table-cart tbody tr td {
   vertical-align: middle;
 }
@@ -1202,20 +1168,20 @@ footer .logo img {
   color: #fff !important;
 }
 
-.el-menu-item {
+.el-menu-item, .el-menu--horizontal > .el-menu-item {
   border: none;
   font-size: 1em;
   color: #fff !important;
 }
-.el-menu-item .el-link {
+.el-menu-item .el-link, .el-menu--horizontal > .el-menu-item .el-link {
   font-size: 1em !important;
 }
-.el-menu-item:hover {
+.el-menu-item:hover, .el-menu--horizontal > .el-menu-item:hover {
   background-color: #162542 !important;
   color: #b68c5a !important;
 }
 
-.el-menu-item.is-active {
+.el-menu-item.is-active, .el-menu--horizontal > .el-menu-item.is-active {
   background-color: #162542 !important;
   color: #b68c5a !important;
   border: none;
@@ -1449,11 +1415,22 @@ footer .logo img {
   bottom: 30px;
 }
 
-.blog-card h3 {
+.blog-aside .el-input__wrapper {
+  background-color: #ebedef;
+}
+.blog-aside ul li .el-link {
+  color: #162542;
+}
+
+.blog .blog-img {
+  height: 500px;
+}
+
+.blog-card h3, .blog-card h2 {
   color: #162542;
   transition: all 0.2s ease-in;
 }
-.blog-card:hover h3 {
+.blog-card:hover h3, .blog-card:hover h2 {
   color: #b68c5a;
   transition: all 0.2s ease-in;
 }
@@ -1576,6 +1553,32 @@ footer .logo img {
 
 .area-description h1 {
   color: #162542;
+}
+
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.pagination ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.pagination ul li {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+  background-color: #b68c5a;
+  color: #fff;
+  font-size: 1.2em;
+  padding: 10px;
+  margin: 0 5px;
 }
 
 .item {
@@ -1742,7 +1745,7 @@ footer .logo img {
     display: none !important;
   }
   #btnNav {
-    display: flex;
+    display: flex !important;
   }
   .section-about-content h2, .section-service h2, .section-team h2, .section-blog h2 {
     font-size: 3rem;
@@ -1799,6 +1802,9 @@ footer .logo img {
   }
 }
 @media screen and (max-width: 576px) {
+  .blog-img {
+    height: 350px !important;
+  }
   .section-about-content h2, .section-service h2, .section-team h2, .section-blog h2 {
     font-size: 2.5rem;
   }
@@ -1844,13 +1850,7 @@ footer .logo img {
 
 .el-input__wrapper, .el-input__wrapper.is_focus, .el-textarea__inner {
   border-radius: 0;
-  border: none !important;
   box-shadow: none !important;
-}
-
-.el-menu--horizontal > .el-menu-item.is-active {
-  border: none;
-  color: #b68c5a !important;
 }
 
 .progress-bar {

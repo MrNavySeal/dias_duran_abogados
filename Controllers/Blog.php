@@ -15,10 +15,12 @@
         /******************************Views************************************/
         public function blog(){
             $company=getCompanyInfo();
+            $data['company'] = $company;
             $data['page_tag'] = $company['name'];
             $data['page_title'] = "Blog | ".$company['name'];
             $data['page_name'] = "blog";
             $data['posts'] = $this->getArticlesT();
+            $data['app'] = "functions_blog.js";
             $this->views->getView($this,"blog",$data);
         }
         public function articulo($params){

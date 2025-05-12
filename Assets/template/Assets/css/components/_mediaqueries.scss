@@ -55,7 +55,7 @@
         display: none !important;
     }
     #btnNav{
-        display: flex;
+        display: flex !important;
     }
     .section-about-content,.section-service,.section-team,.section-blog{
         h2{
@@ -126,6 +126,9 @@
     
 }
 @media screen and (max-width: 576px){ 
+    .blog-img{
+        height: 350px !important;
+    }
     .section-about-content,.section-service,.section-team,.section-blog{
         h2{
             font-size: 2.5rem;
