@@ -17,6 +17,10 @@
             </div>
         </div>
     </div>
+    <!-- Diferencial -->
+    <?php getComponent("differentialSection")?>
+    <!-- Servicios -->
+    <?php getComponent("serviceSection")?>
     <!-- Testimonios -->
     <?php getComponent("testimonial")?>
     <!-- Equipo -->

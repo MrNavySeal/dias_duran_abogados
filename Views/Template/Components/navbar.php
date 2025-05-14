@@ -12,12 +12,8 @@
             :ellipsis="false"
             @select="handleSelect"
             >
-            <el-menu-item index="1"><el-link :underline="false" href="<?=base_url()?>" type="primary">Inicio</el-link></el-menu-item>
-                <el-sub-menu index="2">
-                    <template #title>Nosotros</template>
-                    <el-menu-item index="2-1"><el-link :underline="false" href="<?=base_url()?>/nosotros" type="primary">Quienes somos</el-link></el-menu-item>
-                    <el-menu-item index="2-2"><el-link :underline="false" href="<?=base_url()?>/nosotros/equipo" type="primary">Nuestro equipo</el-link></el-menu-item>
-                </el-sub-menu>
+                <el-menu-item index="1"><el-link :underline="false" href="<?=base_url()?>" type="primary">Inicio</el-link></el-menu-item>
+                <el-menu-item index="2"><el-link :underline="false" href="<?=base_url()?>/nosotros" type="primary">Quiénes somos</el-link></el-menu-item>
                 <el-sub-menu index="3">
                     <template #title>Servicios</template>
                     <el-menu-item index="3-2">item two</el-menu-item>
