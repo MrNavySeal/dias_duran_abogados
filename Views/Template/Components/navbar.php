@@ -21,7 +21,8 @@
                     <el-menu-item index="3-1"><el-link :underline="false" href="<?=base_url()?>/servicios/areas" type="primary">Ver todo</el-link></el-menu-item>
                 </el-sub-menu>
                 <el-menu-item index="4"><el-link :underline="false" href="<?=base_url()?>/blog" type="primary">Blog</el-link></el-menu-item>
-                <el-menu-item index="5" class="me-4"><el-link :underline="false" href="<?=base_url()?>/contacto" type="primary">Contacto</el-link></el-menu-item>
+                <el-menu-item index="5"><el-link :underline="false" href="<?=base_url()?>/contacto" type="primary">Contacto</el-link></el-menu-item>
+                <el-menu-item index="6" class="me-4"><el-link :underline="false" href="<?=base_url()?>/faq" type="primary">FAQ</el-link></el-menu-item>
             </el-menu>
             <el-menu
             :default-active="activeIndex"
@@ -30,7 +31,6 @@
             :ellipsis="false"
             @select="handleSelect"
             >
-                <el-menu-item index="6" id="btnSearch"><i class="fas fa-search"></i></el-menu-item>
                 <el-menu-item index="7" id="btnCart">
                     <div>
                         <span id="qtyCart"><?=$qtyCart?></span>
@@ -58,7 +58,6 @@
             </el-menu>
         </nav>
     </div>
-    <?php getComponent("search",$data)?>
     <?php getComponent("cartBar",$data)?>
     <?php getComponent("navMobile",$data)?>
 </header>
