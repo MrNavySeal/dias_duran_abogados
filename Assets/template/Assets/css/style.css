@@ -1426,6 +1426,21 @@ footer .logo img {
   height: 500px;
 }
 
+.blog-next {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.blog-next li .el-link {
+  color: #162542;
+}
+.blog-next li i {
+  font-size: 20px;
+  margin: 0 10px;
+}
+
 .blog-card h3, .blog-card h2 {
   color: #162542;
   transition: all 0.2s ease-in;

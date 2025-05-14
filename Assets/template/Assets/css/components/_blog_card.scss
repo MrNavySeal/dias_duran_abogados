@@ -16,6 +16,22 @@
         height: 500px;
     }
 }
+.blog-next{
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    li{
+        .el-link{
+            color: $color2;
+        }
+        i{
+            font-size: 20px;
+            margin: 0 10px;
+        }
+    }
+}
 .blog-card{
     h3,h2{color:$color2;transition: all 0.2s ease-in;}
     &:hover{

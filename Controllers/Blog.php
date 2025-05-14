@@ -23,23 +23,25 @@
             $data['app'] = "functions_blog.js";
             $this->views->getView($this,"blog",$data);
         }
-        public function articulo($params){
+        public function noticia($params){
+            $params = strClean($params);
+            //$data['article'] = $this->getArticlePageT($params);
+            $company=getCompanyInfo();
+            $data['company'] = $company;
+            $data['page_tag'] = $company['name'];
+            $data['page_name'] = "Noticia";
+            $data['page_title'] =$data['article']['name']." | ".$company['name'];
+            $data['app'] = "functions_blog.js";
+            //$data['posts'] = $this->getArticlesRandT($data['article']['idarticle'],3);
+            $this->views->getView($this,"noticia",$data);/*
             if($params!=""){
-                $params = strClean($params);
-                $data['article'] = $this->getArticlePageT($params);
                 if(!empty($data['article'])){
-                    $company=getCompanyInfo();
-                    $data['page_tag'] = $company['name'];
-                    $data['page_name'] = "artiulo";
-                    $data['page_title'] =$data['article']['name']." | ".$company['name'];
-                    $data['posts'] = $this->getArticlesRandT($data['article']['idarticle'],3);
-                    $this->views->getView($this,"articulo",$data);
                 }else{
                     header("location: ".base_url()."/error");
                 }
             }else{
                 header("location: ".base_url()."/error");
-            }
+            }*/
         }
         /******************************Methods************************************/
         public function setComment(){
