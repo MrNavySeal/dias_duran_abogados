@@ -1,7 +1,5 @@
 <?php
-    require_once("Models/CustomerTrait.php");
     class Contacto extends Controllers{
-        use CustomerTrait;
         public function __construct(){
             parent::__construct();
             session_start();
@@ -10,12 +8,14 @@
 
         public function contacto(){
             $company=getCompanyInfo();
+            $data['company']=$company;
             $data['page_tag'] = "Contacto | ".$company['name'];
 			$data['page_title'] = "Contacto | ".$company['name'];
 			$data['page_name'] = "contacto";
-            $data['app'] = "functions_contact.js";
+            $data['app'] = "functions_contacto.js";
             $this->views->getView($this,"contacto",$data);
         }
+        /*
         public function setContact(){
             if($_POST){
                 if(empty($_POST['txtContactName']) || empty($_POST['txtContactEmail']) || empty($_POST['txtContactMessage']) || empty($_POST['txtContactPhone'])){
@@ -51,6 +51,6 @@
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             }
             die();
-        }
+        }*/
     }
 ?>
