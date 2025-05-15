@@ -12,6 +12,21 @@
   color: #fff;
 }
 
+.btn.btn-bg-2 {
+  background-color: #b68c5a !important;
+  color: #fff !important;
+  text-decoration: none;
+  border-radius: 0;
+}
+.btn.btn-bg-2:hover {
+  background-color: #162542 !important;
+  color: #fff !important;
+}
+.btn.btn-bg-2 a {
+  text-decoration: none;
+  color: #fff;
+}
+
 .el-link.btn-bg-2, .el-button.btn-bg-2 {
   background-color: #b68c5a !important;
   color: #fff !important;

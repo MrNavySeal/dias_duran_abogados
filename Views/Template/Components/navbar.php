@@ -31,12 +31,6 @@
             :ellipsis="false"
             @select="handleSelect"
             >
-                <el-menu-item index="7" id="btnCart">
-                    <div>
-                        <span id="qtyCart"><?=$qtyCart?></span>
-                    </div>
-                    <i class="fas fa-shopping-cart"></i>
-                </el-menu-item>
                 <?php if(isset($_SESSION['login'])){ ?>
                 <el-sub-menu index="8" class="new-header-item-login">
                     <template #title><i class="fas fa-user"></i></template>
@@ -58,6 +52,5 @@
             </el-menu>
         </nav>
     </div>
-    <?php getComponent("cartBar",$data)?>
-    <?php getComponent("navMobile",$data)?>
+    <?php getComponent("navMobile",$data)?>h
 </header>

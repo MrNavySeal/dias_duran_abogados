@@ -84,8 +84,10 @@
         </div>
     </div>
 </div>
-    <?php getComponent("navbar",$data)?>
+    <?php 
+        getModal("modalLogin",$data);
+        getComponent("navbar",$data);
+    ?>
     <!--<a href="#" class="back--top d-none"><i class="fas fa-backward"></i></a><a id="btnWhatsapp" href="<?="https://wa.me/".$company['phonecode'].$company['phone']?>" target="_blank"><i class="fab fa-whatsapp"></i></a>-->
-    <div id="modalLogin"></div>
     
     

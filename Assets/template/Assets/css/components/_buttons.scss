@@ -11,6 +11,20 @@
         color:$color4;
     }
 }
+.btn.btn-bg-2{
+    background-color: $color1 !important;
+    color:$color4 !important;
+    text-decoration: none;
+    border-radius: 0;
+    &:hover{
+        background-color:$color2 !important;
+        color:$color4 !important;
+    }
+    a{
+        text-decoration: none;
+        color:$color4;
+    }
+}
 .el-link.btn-bg-2,.el-button.btn-bg-2{
     background-color: $color1 !important;
     color:$color4 !important;
