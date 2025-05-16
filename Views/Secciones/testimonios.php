@@ -1,6 +1,6 @@
 <?php 
     headerAdmin($data);
-    getModal("modalBanner");
+    getModal("modalTestimonial");
 ?>
 <div class="body flex-grow-1 px-3" id="<?=$data['page_name']?>">
     <h2 class="text-center"><?=$data['page_title']?></h2>
@@ -10,7 +10,7 @@
             <div class="col-md-2">
                 <div class="mb-3">
                     <label for="intPorPagina" class="form-label">Por página</label>
-                    <select class="form-control" aria-label="Default select example" id="intPorPagina" v-model="intPorPagina" @change="getBuscar(1,'banners')">
+                    <select class="form-control" aria-label="Default select example" id="intPorPagina" v-model="intPorPagina" @change="getBuscar(1,'testimonios')">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -22,7 +22,7 @@
             <div class="col-md-10">
                 <div class="mb-3">
                     <label for="strBuscar" class="form-label">Buscar</label>
-                    <input type="text" class="form-control" id="strBuscar" v-model="strBuscar" @keyup="getBuscar(1,'banners')">
+                    <input type="text" class="form-control" id="strBuscar" v-model="strBuscar" @keyup="getBuscar(1,'testimonios')">
                 </div>
             </div> 
         </div>
@@ -33,21 +33,21 @@
                         <th>ID</th>
                         <th>Portada</th>
                         <th>Nombre</th>
+                        <th>Profesión</th>
                         <th>Descripción</th>
-                        <th>Texto botón</th>
                         <th>Estado</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(data,index) in arrData" :key="index">
-                        <td data-title="ID" class="text-center">{{data.id_banner}}</td>
+                        <td data-title="ID" class="text-center">{{data.id}}</td>
                         <td data-title="Portada">
                             <img :src="data.url" :alt="data.name" class="img-thumbnail" style="width: 50px; height: 50px;">
                         </td>
                         <td data-title="Nombre">{{data.name}}</td>
+                        <td data-title="Profesión">{{data.profession}}</td>
                         <td data-title="Descripción">{{data.description}}</td>
-                        <td data-title="Botón">{{data.button}}</td>
                         <td data-title="Estado">
                             <span :class="data.status == '1' ? 'bg-success' : 'bg-danger'" class="badge text-white">
                                 {{ data.status == '1' ? "Activo" : "Inactivo" }}
@@ -55,15 +55,15 @@
                         </td>
                         <td data-title="Opciones">
                             <div class="d-flex justify-content-center">
-                                <button class="btn btn-success m-1" type="button" title="Editar" v-if="data.edit" @click="getDatos(data.id_banner,'banners')" ><i class="fas fa-pencil-alt"></i></button>
-                                <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete" @click="delDatos(data.id_banner,'banners')" ><i class="fas fa-trash-alt"></i></button>
+                                <button class="btn btn-success m-1" type="button" title="Editar" v-if="data.edit" @click="getDatos(data.id_banner,'testimonios')" ><i class="fas fa-pencil-alt"></i></button>
+                                <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete" @click="delDatos(data.id_banner,'testimonios')" ><i class="fas fa-trash-alt"></i></button>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <?php getComponent("paginationAdmin","banners");?>
+        <?php getComponent("paginationAdmin","testimonios");?>
     </div>
 </div>
 <?php footerAdmin($data)?>

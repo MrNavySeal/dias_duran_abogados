@@ -23,28 +23,26 @@ const App = {
             strImagen:"",
             strNombre:"",
             strDescripcion:"",
-            strBoton:"",
-            strEnlace:"",
+            strProfesion:"",
             intEstado:"",
             strTituloModal:"",
         };
     },mounted(){
-        this.getBuscar(1,"banners");
+        this.getBuscar(1,"testimonios");
     },methods:{
         showModal:function(){
-            this.strTituloModal = "Nuevo banner";
+            this.strTituloModal = "Nuevo testimonio";
             this.strImgUrl= base_url+'/Assets/images/uploads/category.jpg';
             this.strImagen= "";
             this.strNombre= "";
             this.strDescripcion= "";
-            this.strBoton= "";
-            this.strEnlace= "";
+            this.strProfesion= "";
             this.intEstado= 1;
-            this.modal = new bootstrap.Modal(document.querySelector("#modalBanner"));
+            this.modal = new bootstrap.Modal(document.querySelector("#modalTestimonial"));
             this.modal.show();
         },
         setDatos: async function(){
-            if(this.strNombre == ""){
+            if(this.strNombre == "" || this.strDescripcion == ""){
                 Swal.fire("Error","Todos los campos marcados con (*) son obligatorios","error");
                 return false;
             }
@@ -53,10 +51,9 @@ const App = {
             formData.append("imagen",this.strImagen);
             formData.append("nombre",this.strNombre);
             formData.append("descripcion",this.strDescripcion);
-            formData.append("boton",this.strBoton);
-            formData.append("enlace",this.strEnlace);
+            formData.append("profesion",this.strProfesion);
             formData.append("estado",this.intEstado);
-            const response = await fetch(base_url+"/Secciones/setBanner",{method:"POST",body:formData});
+            const response = await fetch(base_url+"/Secciones/setTestimonio",{method:"POST",body:formData});
             const objData = await response.json();
             if(objData.status){
                 Swal.fire("Guardado!",objData.msg,"success");
@@ -65,8 +62,7 @@ const App = {
                   this.strImagen= "";
                   this.strNombre= "";
                   this.strDescripcion= "";
-                  this.strBoton= "";
-                  this.strEnlace= "";
+                  this.strProfesion= "";
                   this.intEstado= 1;
                 }else{
                   this.modal.hide();
@@ -74,7 +70,7 @@ const App = {
             }else{
               Swal.fire("Error",objData.msg,"error");
             }
-            await this.getBuscar(1,"banners");
+            await this.getBuscar(1,"testimonios");
         },
         getBuscar:async function (intPagina=1,strTipo = ""){
             this.intPagina = intPagina;
@@ -94,7 +90,7 @@ const App = {
         },
         getDatos:async function(intId,strTipo){
           this.intId = intId;
-          this.strTituloModal = "Editar banner";
+          this.strTituloModal = "Editar testimonio";
           const formData = new FormData();
           formData.append("id",this.intId);
           formData.append("tipo_busqueda",strTipo);
@@ -105,8 +101,7 @@ const App = {
               this.strImagen= "",
               this.strNombre= objData.data.name,
               this.strDescripcion= objData.data.description,
-              this.strBoton= objData.data.button,
-              this.strEnlace= objData.data.link,
+              this.strProfesion= objData.data.profession,
               this.intEstado= objData.data.status,
               this.modal = new bootstrap.Modal(document.querySelector("#modalBanner"));
               this.modal.show();
@@ -135,12 +130,12 @@ const App = {
                   const objData = await response.json();
                   if(objData.status){
                     Swal.fire("Eliminado!",objData.msg,"success");
-                    objVue.getBuscar(1,"banners");
+                    objVue.getBuscar(1,"testimonios");
                   }else{
                     Swal.fire("Error",objData.msg,"error");
                   }
               }else{
-                objVue.getBuscar(1,"banners");
+                objVue.getBuscar(1,"testimonios");
               }
           });
         },

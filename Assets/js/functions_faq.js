@@ -19,54 +19,38 @@ const App = {
 
             //Variables
             intId:0,
-            strImgUrl:base_url+'/Assets/images/uploads/category.jpg',
-            strImagen:"",
-            strNombre:"",
-            strDescripcion:"",
-            strBoton:"",
-            strEnlace:"",
+            strPregunta:"",
+            strRespuesta:"",
             intEstado:"",
             strTituloModal:"",
         };
     },mounted(){
-        this.getBuscar(1,"banners");
+        this.getBuscar(1,"faq");
     },methods:{
         showModal:function(){
-            this.strTituloModal = "Nuevo banner";
-            this.strImgUrl= base_url+'/Assets/images/uploads/category.jpg';
-            this.strImagen= "";
-            this.strNombre= "";
-            this.strDescripcion= "";
-            this.strBoton= "";
-            this.strEnlace= "";
+            this.strTituloModal = "Nuevo FAQ";
+            this.strPregunta= "";
+            this.strRespuesta= "";
             this.intEstado= 1;
-            this.modal = new bootstrap.Modal(document.querySelector("#modalBanner"));
+            this.modal = new bootstrap.Modal(document.querySelector("#modalFaq"));
             this.modal.show();
         },
         setDatos: async function(){
-            if(this.strNombre == ""){
+            if(this.strPregunta == "" || this.strRespuesta == ""){
                 Swal.fire("Error","Todos los campos marcados con (*) son obligatorios","error");
                 return false;
             }
             const formData = new FormData();
             formData.append("id",this.intId);
-            formData.append("imagen",this.strImagen);
-            formData.append("nombre",this.strNombre);
-            formData.append("descripcion",this.strDescripcion);
-            formData.append("boton",this.strBoton);
-            formData.append("enlace",this.strEnlace);
-            formData.append("estado",this.intEstado);
-            const response = await fetch(base_url+"/Secciones/setBanner",{method:"POST",body:formData});
+            formData.append("pregunta",this.strPregunta);
+            formData.append("respuesta",this.strRespuesta);
+            const response = await fetch(base_url+"/Secciones/setFaq",{method:"POST",body:formData});
             const objData = await response.json();
             if(objData.status){
                 Swal.fire("Guardado!",objData.msg,"success");
                 if(this.intId == 0){
-                  this.strImgUrl= base_url+'/Assets/images/uploads/category.jpg';
-                  this.strImagen= "";
-                  this.strNombre= "";
-                  this.strDescripcion= "";
-                  this.strBoton= "";
-                  this.strEnlace= "";
+                  this.strPregunta= "";
+                  this.strRespuesta= "";
                   this.intEstado= 1;
                 }else{
                   this.modal.hide();
@@ -74,7 +58,7 @@ const App = {
             }else{
               Swal.fire("Error",objData.msg,"error");
             }
-            await this.getBuscar(1,"banners");
+            await this.getBuscar(1,"faq");
         },
         getBuscar:async function (intPagina=1,strTipo = ""){
             this.intPagina = intPagina;
@@ -94,21 +78,17 @@ const App = {
         },
         getDatos:async function(intId,strTipo){
           this.intId = intId;
-          this.strTituloModal = "Editar banner";
+          this.strTituloModal = "Editar FAQ";
           const formData = new FormData();
           formData.append("id",this.intId);
           formData.append("tipo_busqueda",strTipo);
           const response = await fetch(base_url+"/Secciones/getDatos",{method:"POST",body:formData});
           const objData = await response.json();
           if(objData.status){
-              this.strImgUrl= objData.data.url,
-              this.strImagen= "",
-              this.strNombre= objData.data.name,
-              this.strDescripcion= objData.data.description,
-              this.strBoton= objData.data.button,
-              this.strEnlace= objData.data.link,
+              this.strPregunta= objData.data.question,
+              this.strRespuesta= objData.data.answer,
               this.intEstado= objData.data.status,
-              this.modal = new bootstrap.Modal(document.querySelector("#modalBanner"));
+              this.modal = new bootstrap.Modal(document.querySelector("#modalFaq"));
               this.modal.show();
           }else{
               Swal.fire("Error",objData.msg,"error");
@@ -135,12 +115,12 @@ const App = {
                   const objData = await response.json();
                   if(objData.status){
                     Swal.fire("Eliminado!",objData.msg,"success");
-                    objVue.getBuscar(1,"banners");
+                    objVue.getBuscar(1,"faq");
                   }else{
                     Swal.fire("Error",objData.msg,"error");
                   }
               }else{
-                objVue.getBuscar(1,"banners");
+                objVue.getBuscar(1,"faq");
               }
           });
         },
@@ -150,17 +130,6 @@ const App = {
                 this.arrBotones.push(i);
             }
         },
-        uploadImagen:function(e){
-            this.strImagen = e.target.files[0];
-            let type = this.strImagen.type;
-            if(type != "image/png" && type != "image/jpg" && type != "image/jpeg" && type != "image/gif"){
-                Swal.fire("Error","Solo se permite imágenes.","error");
-            }else{
-                let objectUrl = window.URL || window.webkitURL;
-                let route = objectUrl.createObjectURL(this.strImagen);
-                this.strImgUrl = route;
-            }
-        }
     }
 };
 const app = Vue.createApp(App);

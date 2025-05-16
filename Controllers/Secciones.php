@@ -17,10 +17,26 @@
                     "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'] ? true : false, "evento"=>"@click","funcion"=>"showModal()"],
                 ];
                 $data['page_tag'] = "";
-                $data['page_title'] = "Secciones | Banners";
+                $data['page_title'] = "Banners | Secciones";
                 $data['page_name'] = "inicio";
                 $data['panelapp'] = "functions_banners.js";
                 $this->views->getView($this,"banners",$data);
+            }else{
+                header("location: ".base_url());
+                die();
+            }
+        }
+        public function testimonios(){
+            if($_SESSION['permitsModule']['r']){
+                $data['botones'] = [
+                    "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'] ? true : false, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/secciones/testimonios"."','','');mypop.focus();"],
+                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'] ? true : false, "evento"=>"@click","funcion"=>"showModal()"],
+                ];
+                $data['page_tag'] = "";
+                $data['page_title'] = "Testimonios | Secciones";
+                $data['page_name'] = "inicio";
+                $data['panelapp'] = "functions_testimonios.js";
+                $this->views->getView($this,"testimonios",$data);
             }else{
                 header("location: ".base_url());
                 die();
@@ -112,8 +128,12 @@
                     $strTipoBusqueda = clear_cadena(strClean($_POST['tipo_busqueda']));
                     if($strTipoBusqueda == "banners"){
                         $request = $this->model->selectBanners($intPorPagina,$intPaginaActual, $strBuscar);
+                    }else if($strTipoBusqueda == "testimonios"){
+                        $request = $this->model->selectTestimonios($intPorPagina,$intPaginaActual, $strBuscar);
+                    }
+                    if(!empty($request)){
                         foreach ($request['data'] as &$data) { 
-                            $data['url'] = media()."/images/uploads/".$data['picture'];
+                            if(isset($data['picture'])){ $data['url'] = media()."/images/uploads/".$data['picture'];}
                             $data['edit'] = $_SESSION['permitsModule']['u'];
                             $data['delete'] = $_SESSION['permitsModule']['d'];
                         }
@@ -130,9 +150,11 @@
                         $arrResponse = array("status"=>false,"msg"=>"Error de datos");
                     }else{
                         $intId = intval($_POST['id']);
-                        $request = $this->model->selectBanner($intId);
+                        $strTipoBusqueda = clear_cadena(strClean($_POST['tipo_busqueda']));
+                        if($strTipoBusqueda == "banners"){ $request = $this->model->selectBanner($intId);}
+                        else if($strTipoBusqueda == "testimonios"){$request = $this->model->selectTestimonio($intId);}
                         if(!empty($request)){
-                            $request['url'] = media()."/images/uploads/".$request['picture'];
+                            if(isset($request['picture'])){$request['url'] = media()."/images/uploads/".$request['picture'];}
                             $arrResponse = array("status"=>true,"data"=>$request);
                         }else{
                             $arrResponse = array("status"=>false,"msg"=>"Error, intenta de nuevo"); 
@@ -150,11 +172,16 @@
                         $arrResponse=array("status"=>false,"msg"=>"Error de datos");
                     }else{
                         $intId = intval($_POST['id']);
-                        $request = $this->model->selectBanner($intId);
-                        if($request['picture']!="category.jpg"){
-                            deleteFile($request['picture']);
+                        $strTipoBusqueda = clear_cadena(strClean($_POST['tipo_busqueda']));
+                        if($strTipoBusqueda == "banners"){ 
+                            $request = $this->model->selectBanner($intId);
+                            if($request['picture']!="category.jpg"){ deleteFile($request['picture']); }
+                            $this->model->deleteBanner($intId);
+                        }else if($strTipoBusqueda == "testimonios"){
+                            $request = $this->model->selectTestimonio($intId);
+                            if($request['picture']!="category.jpg"){ deleteFile($request['picture']); }
+                            $this->model->deleteTestimonio($intId);
                         }
-                        $request = $this->model->deleteBanner($intId);
                         if($request=="ok"){
                             $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado correctamente.");
                         }else{
