@@ -20,7 +20,7 @@
         <script src="<?=media()?>/DashboardTemplate/lib/tempusdominus/js/moment.min.js"></script>
         <script src="<?=media()?>/DashboardTemplate/lib/tempusdominus/js/moment-timezone.min.js"></script>
         <script src="<?=media()?>/DashboardTemplate/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-        <script src="<?=media()?>/DashboardTemplate/js/main.js"></script>
+        <script src="<?=media()."/DashboardTemplate/js/main.js?v=".rand()?>"></script>
         
         <!------------------------------Plugins--------------------------------->
         <script src="<?= media();?>/plugins/sweetalert/sweetalert.js"></script>
@@ -48,9 +48,6 @@
         
         <?php if(isset($data['panelapp'])){?>
         <script src="<?=media();?>/js/<?=$data['panelapp']."?v=".rand()?>"></script>
-        <?php }?>
-        <?php if(isset($data['framing'])){?>
-        <script src="<?=media();?>/js/<?=$data['framing']."?v=".rand()?>"></script>
         <?php }?>
     </body>
 </html>
