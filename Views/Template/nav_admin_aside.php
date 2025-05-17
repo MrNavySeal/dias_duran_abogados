@@ -100,10 +100,8 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle <?=$active?>" data-bs-toggle="dropdown"><i class="fas fa-puzzle-piece"></i>Secciones</a>
                 <div class="dropdown-menu bg-transparent border-0">
+                    <a href="<?=base_url()?>/Secciones/paginas" class="dropdown-item">Paginas</a>
                     <a href="<?=base_url()?>/Secciones/banners" class="dropdown-item">Banners</a>
-                    <a href="<?=base_url()?>/Secciones/diferencial" class="dropdown-item">Diferencial</a>
-                    <a href="<?=base_url()?>/Secciones/nosotros" class="dropdown-item">Nosotros</a>
-                    <a href="<?=base_url()?>/Secciones/contacto" class="dropdown-item">Contacto</a>
                     <a href="<?=base_url()?>/Secciones/equipo" class="dropdown-item">Equipo</a>
                     <a href="<?=base_url()?>/Secciones/testimonios" class="dropdown-item">Testimonios</a>
                     <a href="<?=base_url()?>/Secciones/faq" class="dropdown-item">FAQ</a>

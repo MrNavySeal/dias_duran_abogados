@@ -9,11 +9,11 @@
                 <form id="formItem" name="formItem" class="mb-4">
                     <div class="mb-3">
                         <label for="txtName" class="form-label">Pregunta <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" v-model="strNombre" required>
+                        <input type="text" class="form-control" v-model="strPregunta" required>
                     </div>
                     <div class="mb-3">
-                        <label for="txtName" class="form-label">Respuesta <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" v-model="strProfesion" required>
+                        <label for="exampleFormControlTextarea1" class="form-label">Respuesta</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" v-model="strRespuesta" required rows="3"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="statusList" class="form-label">Estado </label>

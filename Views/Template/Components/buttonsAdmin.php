@@ -8,4 +8,7 @@
     <?php if($data['botones']['nuevo']['mostrar']) { ?>
         <button type="button" class="btn btn-primary mx-1" <?=$data['botones']['nuevo']['evento']."=".'"'.$data['botones']['nuevo']['funcion'].'"'?>>Nuevo <i class="fas fa-plus"></i></button>
     <?php }?>
+    <?php if($data['botones']['guardar']['mostrar']) { ?>
+        <button type="button" class="btn btn-primary mx-1" <?=$data['botones']['guardar']['evento']."=".'"'.$data['botones']['guardar']['funcion'].'"'?>>Guardar <i class="fas fa-save"></i></button>
+    <?php }?>
 </div>

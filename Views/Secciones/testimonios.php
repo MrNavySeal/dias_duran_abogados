@@ -55,8 +55,8 @@
                         </td>
                         <td data-title="Opciones">
                             <div class="d-flex justify-content-center">
-                                <button class="btn btn-success m-1" type="button" title="Editar" v-if="data.edit" @click="getDatos(data.id_banner,'testimonios')" ><i class="fas fa-pencil-alt"></i></button>
-                                <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete" @click="delDatos(data.id_banner,'testimonios')" ><i class="fas fa-trash-alt"></i></button>
+                                <button class="btn btn-success m-1" type="button" title="Editar" v-if="data.edit" @click="getDatos(data.id,'testimonios')" ><i class="fas fa-pencil-alt"></i></button>
+                                <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete" @click="delDatos(data.id,'testimonios')" ><i class="fas fa-trash-alt"></i></button>
                             </div>
                         </td>
                     </tr>
