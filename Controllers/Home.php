@@ -1,12 +1,10 @@
 <?php
     
-    require_once("Models/ProductTrait.php");
     require_once("Models/CustomerTrait.php");
-    require_once("Models/EnmarcarTrait.php");
     require_once("Models/BlogTrait.php");
     require_once("Models/CategoryTrait.php");
     class Home extends Controllers{
-        use CustomerTrait,EnmarcarTrait,ProductTrait,BlogTrait,CategoryTrait;
+        use CustomerTrait,BlogTrait,CategoryTrait;
         public function __construct(){
             session_start();
             parent::__construct();
@@ -17,13 +15,10 @@
             $company = getCompanyInfo();
             $data['page_tag'] = $company['name'];
             $data['page_title'] = $company['name'];
-            $data['productos'] = $this->getProductsT(8);
             $data['page_name'] = "inicio";
             $data['app'] = "functions_inicio.js";
             $data['company'] = $company;
-            $data['categories'] = $this->getProductsCategories("15,25,21",24);
             $data['posts'] = $this->getArticlesT(3);
-            $data['tipos'] = $this->selectTipos();
             $this->views->getView($this,"home",$data);
         }
         public function getInitialData(){
@@ -32,13 +27,6 @@
             );
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             die();
-        }
-        public function getProductsCategories(string $categories,int $qty){
-            $categories = $this->getCategoriesShowT($categories);
-            for ($i=0; $i < count($categories) ; $i++) { 
-                $categories[$i]['products'] = $this->getProductsByCat($categories[$i]['idcategory'],$qty);
-            }
-            return $categories;
         }
     }
 ?>

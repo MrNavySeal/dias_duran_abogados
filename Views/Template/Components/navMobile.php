@@ -1,4 +1,3 @@
-<?php $subLinks = navSubLinks();?>
 <div class="navmobile">
     <div class="navmobile--mask"></div>
     <div class="navmobile--elements">

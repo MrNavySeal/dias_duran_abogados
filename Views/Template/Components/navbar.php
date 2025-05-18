@@ -1,4 +1,3 @@
-<?php $qtyCart = 0;?>
 <header class="new-header p-0 bg-color-2 d-flex justify-content-between">
     <div class="container">
         <nav class="new-navbar ">
@@ -52,5 +51,5 @@
             </el-menu>
         </nav>
     </div>
-    <?php getComponent("navMobile",$data)?>h
+    <?php getComponent("navMobile",$data)?>
 </header>

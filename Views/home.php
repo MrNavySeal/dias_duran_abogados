@@ -13,15 +13,6 @@
             }
         }
     }
-
-    $tipos = $data['tipos'];
-    $productos = $data['productos'];
-    $proCant = 4;
-    $sliders = round(count($productos)/$proCant);
-    $activeSlider = "active";
-    $indexProduct=0;
-    $categories = $data['categories'];
-    $tipos = $data['tipos'];
 ?>
     <div id="modalItem"></div>
     <div id="modalPoup"></div>

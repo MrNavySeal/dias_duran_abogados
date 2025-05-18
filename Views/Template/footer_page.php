@@ -1,8 +1,6 @@
 <?php 
-$discount = statusCoupon();
 $company = getCompanyInfo();
 $social = getSocialMedia();
-
 $links ="";
 for ($i=0; $i < count($social) ; $i++) { 
     if($social[$i]['link']!=""){
