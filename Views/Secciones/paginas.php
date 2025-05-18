@@ -28,11 +28,11 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="txtName" class="form-label">Título <span class="text-danger">*</span></label>
+                <label for="txtName" class="form-label">Título </label>
                 <input type="text" class="form-control" v-model="strTituloNosotros" required>
             </div>
             <div class="mb-3">
-                <label for="txtName" class="form-label">Subtítulo <span class="text-danger">*</span></label>
+                <label for="txtName" class="form-label">Subtítulo </label>
                 <input type="text" class="form-control" v-model="strSubtituloNosotros" required>
             </div>
             <div class="mb-3">
@@ -40,18 +40,46 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" v-model="strDescripcionCortaNosotros" required rows="4"></textarea>
             </div>
             <div class="mb-3">
-                <label for="strDescripcionNosotros" class="form-label">Descripción <span class="text-danger">*</span></label>
+                <label for="strDescripcionNosotros" class="form-label">Descripción </label>
                 <textarea class="form-control" id="strDescripcionNosotros" rows="5"></textarea>
             </div>
         </div>
-        <div class="tab-pane fade show active" id="navContacto">
-
+        <div class="tab-pane fade" id="navContacto">
+            <div class="mb-3">
+                <div class="mb-3 uploadImg">
+                    <img :src="strImagenUrlContacto">
+                    <label for="strImagenUrlContacto"><a class="btn btn-info text-white"><i class="fas fa-camera"></i></a></label>
+                    <input class="d-none" id="strImagenUrlContacto" type="file" accept="image/*" @change="uploadImagen"> 
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="txtName" class="form-label">Título </label>
+                <input type="text" class="form-control" v-model="strTituloContacto" required>
+            </div>
+            <div class="mb-3">
+                <label for="txtName" class="form-label">Subtítulo </label>
+                <input type="text" class="form-control" v-model="strSubtituloContacto" required>
+            </div>
         </div>
-        <div class="tab-pane fade show active" id="navTerminos">
-
+        <div class="tab-pane fade" id="navTerminos">
+            <div class="mb-3">
+                <label for="txtName" class="form-label">Título</label>
+                <input type="text" class="form-control" v-model="strTituloTerminos" required>
+            </div>
+            <div class="mb-3">
+                <label for="strDescripcionTerminos" class="form-label">Descripción</label>
+                <textarea class="form-control" id="strDescripcionTerminos" rows="5"></textarea>
+            </div>
         </div>
-        <div class="tab-pane fade show active" id="navPoliticas">
-
+        <div class="tab-pane fade" id="navPoliticas">
+            <div class="mb-3">
+                <label for="txtName" class="form-label">Título</label>
+                <input type="text" class="form-control" v-model="strTituloPrivacidad" required>
+            </div>
+            <div class="mb-3">
+                <label for="strDescripcionPrivacidad" class="form-label">Descripción</label>
+                <textarea class="form-control" id="strDescripcionPrivacidad" rows="5"></textarea>
+            </div>
         </div>
     </div>
 </div>

@@ -58,6 +58,22 @@
                 die();
             }
         }
+        public function equipo(){
+            if($_SESSION['permitsModule']['r']){
+                $data['botones'] = [
+                    "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'] ? true : false, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/secciones/equipo"."','','');mypop.focus();"],
+                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'] ? true : false, "evento"=>"@click","funcion"=>"showModal()"],
+                ];
+                $data['page_tag'] = "";
+                $data['page_title'] = "Equipo | Secciones";
+                $data['page_name'] = "";
+                $data['panelapp'] = "functions_secciones_equipo.js";
+                $this->views->getView($this,"equipo",$data);
+            }else{
+                header("location: ".base_url());
+                die();
+            }
+        }
         public function faq(){
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
@@ -77,45 +93,67 @@
         public function setPagina(){
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
-                    if(empty($_POST['pagina'])){
-                        $arrResponse = array("status"=>false,"msg"=>"Error de datos");
-                    }else if($_POST['pagina'] == "nosotros" && (empty($_POST['nosotros_descripcion']) || empty($_POST['nosotros_descripcion_corta']) 
-                        || empty($_POST['nosotros_titulo']) || empty($_POST['nosotros_subtitulo']))){
-                        $arrResponse = array("status"=>false,"msg"=>"Todos los campos con (*) son obligatorios");
-                    }else{
-                        $strPagina = strtolower(strClean($_POST['pagina']));
-                        $strDescripcion = "";
-                        $strDescripcionCorta ="";
-                        $strTitulo = "";
-                        $strSubtitulo ="";
+                    $strPagina = strtolower(strClean($_POST['nosotros_pagina']));
+                    $strDescripcion = "";
+                    $strDescripcionCorta ="";
+                    $strTitulo = "";
+                    $strSubtitulo ="";
+                    $strImagen="";
+                    $strImagenNombre="";
+                    if($strPagina =="nosotros"){
                         $strImagen="";
-                        $strImagenNombre="";
-                        if($strPagina =="nosotros"){
-                            $strDescripcion=$_POST['nosotros_descripcion'];
-                            $strDescripcionCorta=ucfirst(strClean($_POST['nosotros_descripcion_corta']));
-                            $strTitulo=ucfirst(strClean($_POST['nosotros_titulo']));
-                            $strSubtitulo=ucfirst(strClean($_POST['nosotros_subtitulo']));
-                            $request = $this->model->selectPagina($strPagina);
-                            if($_FILES['nosotros_imagen']['name'] == ""){
-                                $strImagenNombre = $request['picture'];
-                            }else{
-                                if($request['picture'] != "category.jpg"){
-                                    deleteFile($request['picture']);
-                                }
-                                $strImagen = $_FILES['nosotros_imagen'];
-                            }
-                        }
-                        $strImagenNombre = $strPagina.'_'.bin2hex(random_bytes(6)).'.png';
-                        $request = $this->model->updatePagina($strPagina,$strTitulo,$strSubtitulo,$strDescripcionCorta,$strDescripcion,$strImagenNombre);
-                        if($request > 0 ){
-                            if($strImagen!=""){
-                                uploadImage($strImagen,$strImagenNombre);
-                            }
-                            $arrResponse = array('status' => true, 'msg' => 'Datos guardados');	
+                        $strDescripcion=$_POST['nosotros_descripcion'];
+                        $strDescripcionCorta=ucfirst(strClean($_POST['nosotros_descripcion_corta']));
+                        $strTitulo=ucfirst(strClean($_POST['nosotros_titulo']));
+                        $strSubtitulo=ucfirst(strClean($_POST['nosotros_subtitulo']));
+                        $request = $this->model->selectPagina($strPagina);
+                        if($_FILES['nosotros_imagen']['name'] == ""){
+                            $strImagenNombre = $request['picture'];
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                            if($request['picture'] != "category.jpg"){deleteFile($request['picture']);}
+                            $strImagen = $_FILES['nosotros_imagen'];
+                            $strImagenNombre = $strPagina.'_'.bin2hex(random_bytes(6)).'.png';
                         }
+                        $request = $this->model->updatePagina($strPagina,$strTitulo,$strSubtitulo,$strDescripcionCorta,$strDescripcion,$strImagenNombre);
+                        if($strImagen != ""){ uploadImage($strImagen,$strImagenNombre); }
                     }
+
+                    $strPagina = strtolower(strClean($_POST['contacto_pagina']));
+                    if($strPagina =="contacto"){
+                        $strImagen="";
+                        $strTitulo=ucfirst(strClean($_POST['contacto_titulo']));
+                        $strSubtitulo=ucfirst(strClean($_POST['contacto_subtitulo']));
+                        $request = $this->model->selectPagina($strPagina);
+                        if($_FILES['contacto_imagen']['name'] == ""){
+                            $strImagenNombre = $request['picture'];
+                        }else{
+                            if($request['picture'] != "category.jpg"){deleteFile($request['picture']);}
+                            $strImagen = $_FILES['contacto_imagen'];
+                            $strImagenNombre = $strPagina.'_'.bin2hex(random_bytes(6)).'.png';
+                        }
+                        $request = $this->model->updatePagina($strPagina,$strTitulo,$strSubtitulo,"","",$strImagenNombre);
+                        if($strImagen != ""){ uploadImage($strImagen,$strImagenNombre); }
+                    }
+
+                    $strPagina = strtolower(strClean($_POST['terminos_pagina']));
+                    if($strPagina =="terminos"){
+                        $strTitulo=ucfirst(strClean($_POST['terminos_titulo']));
+                        $strDescripcion=$_POST['terminos_descripcion'];
+                        $request = $this->model->updatePagina($strPagina,$strTitulo,"","",$strDescripcion,"");
+                    }
+
+                    $strPagina = strtolower(strClean($_POST['privacidad_pagina']));
+                    if($strPagina =="privacidad"){
+                        $strTitulo=ucfirst(strClean($_POST['privacidad_titulo']));
+                        $strDescripcion=$_POST['privacidad_descripcion'];
+                        $request = $this->model->updatePagina($strPagina,$strTitulo,"","",$strDescripcion,"");
+                    }
+                    if($request > 0 ){
+                        $arrResponse = array('status' => true, 'msg' => 'Datos guardados');	
+                    }else{
+                        $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                    }
+                    
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
             }
@@ -254,6 +292,61 @@
             }
 			die();
 		}
+        public function setEquipo(){
+            if($_SESSION['permitsModule']['r']){
+                if($_POST){
+                    if(empty($_POST['nombre'])){
+                        $arrResponse = array("status" => false, "msg" => 'Error de datos');
+                    }else{ 
+                        $intId = intval($_POST['id']);
+                        $strNombre = ucwords(strClean($_POST['nombre']));
+                        $strProfesion = ucwords(strClean($_POST['profesion']));
+                        $intEstado = intval($_POST['estado']);
+                        $photo = "";
+                        $photoCategory="";
+
+                        if($intId == 0){
+                            if($_SESSION['permitsModule']['w']){
+                                $option = 1;
+
+                                if($_FILES['imagen']['name'] == ""){
+                                    $photoCategory = "category.jpg";
+                                }else{
+                                    $photo = $_FILES['imagen'];
+                                    $photoCategory = 'equipo_'.bin2hex(random_bytes(6)).'.png';
+                                }
+
+                                $request= $this->model->insertEquipo($photoCategory,$strNombre,$intEstado,$strProfesion);
+                            }
+                        }else{
+                            if($_SESSION['permitsModule']['u']){
+                                $option = 2;
+                                $request = $this->model->selectEquipo($intId);
+                                if($_FILES['imagen']['name'] == ""){
+                                    $photoCategory = $request['picture'];
+                                }else{
+                                    if($request['picture'] != "category.jpg"){
+                                        deleteFile($request['picture']);
+                                    }
+                                    $photo = $_FILES['imagen'];
+                                    $photoCategory = 'equipo_'.bin2hex(random_bytes(6)).'.png';
+                                }
+                                $request = $this->model->updateEquipo($intId,$photoCategory,$strNombre,$intEstado,$strProfesion);
+                            }
+                        }
+                        if($request > 0 ){
+                            if($photo!=""){ uploadImage($photo,$photoCategory); }
+                            if($option == 1){ $arrResponse = array('status' => true, 'msg' => 'Datos guardados');	
+                            }else{ $arrResponse = array('status' => true, 'msg' => 'Datos actualizados'); }
+                        }else{
+                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                        }
+                    }
+                    echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+                }
+            }
+			die();
+		}
         public function setFaq(){
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
@@ -300,6 +393,8 @@
                         $request = $this->model->selectTestimonios($intPorPagina,$intPaginaActual, $strBuscar);
                     }else if($strTipoBusqueda == "faq"){
                         $request = $this->model->selectFaqs($intPorPagina,$intPaginaActual, $strBuscar);
+                    }else if($strTipoBusqueda == "equipo"){
+                        $request = $this->model->selectEquipos($intPorPagina,$intPaginaActual, $strBuscar);
                     }
                     if(!empty($request)){
                         foreach ($request['data'] as &$data) { 
@@ -321,6 +416,22 @@
                     if($strTipoBusqueda == "banners"){ $request = $this->model->selectBanner($intId);}
                     else if($strTipoBusqueda == "testimonios"){$request = $this->model->selectTestimonio($intId);}
                     else if($strTipoBusqueda == "faq"){$request = $this->model->selectFaq($intId);}
+                     else if($strTipoBusqueda == "equipo"){$request = $this->model->selectEquipo($intId);}
+                    else if($strTipoBusqueda == "paginas"){
+                        $arrNosotros = $this->model->selectPagina("nosotros");
+                        $arrContacto = $this->model->selectPagina("contacto");
+                        $arrTerminos = $this->model->selectPagina("terminos");
+                        $arrPrivacidad = $this->model->selectPagina("privacidad");
+                        $arrNosotros['url'] = media()."/images/uploads/".$arrNosotros['picture'];
+                        $arrContacto['url'] = media()."/images/uploads/".$arrContacto['picture'];
+                        $request = array(
+                            "nosotros"=>$arrNosotros,
+                            "contacto"=>$arrContacto,
+                            "terminos"=>$arrTerminos,
+                            "privacidad"=>$arrPrivacidad,
+                        );
+                        
+                    }
                     if(!empty($request)){
                         if(isset($request['picture'])){$request['url'] = media()."/images/uploads/".$request['picture'];}
                         $arrResponse = array("status"=>true,"data"=>$request);
@@ -347,6 +458,8 @@
                         $request = $this->model->deleteTestimonio($intId);
                     }else if($strTipoBusqueda == "faq"){
                         $request = $this->model->deleteFaq($intId);
+                    }else if($strTipoBusqueda == "equipo"){
+                        $request = $this->model->deleteEquipo($intId);
                     }
                     if($request > 0 || $request == "ok"){
                         $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado correctamente.");
