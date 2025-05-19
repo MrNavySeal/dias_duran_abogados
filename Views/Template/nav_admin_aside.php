@@ -1,7 +1,7 @@
 <?php
     $notification = emailNotification(); 
-    $comments = commentNotification();
-    $reviews = $comments['total'];
+    $comments = "";
+    $reviews ="";
 ?>
 <!-- Sidebar Start -->
 <div class="sidebar pe-4 pb-3">
@@ -55,8 +55,8 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle <?=$active?>" data-bs-toggle="dropdown"><i class="fas fa-shopping-bag"></i>Áreas de asesoría</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="<?=base_url()?>/Servicios/categorias" class="dropdown-item">Áreas</a>
-                    <a href="<?=base_url()?>/Servicios/servicios" class="dropdown-item">Servicios</a>
+                    <a href="<?=base_url()?>/Areas/areas" class="dropdown-item">Áreas</a>
+                    <a href="<?=base_url()?>/Areas/servicios" class="dropdown-item">Servicios</a>
                 </div>
             </div>
             <?php } ?>

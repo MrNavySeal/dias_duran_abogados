@@ -2,8 +2,8 @@
     //sessionCookie();
     $notification = emailNotification();
     $companyData = getCompanyInfo();
-    $comments = commentNotification();
-    $reviews = $comments['total'];
+    $comments = "";
+    $reviews = "";
 ?>
 
 <!DOCTYPE html>
