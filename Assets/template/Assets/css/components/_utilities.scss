@@ -115,6 +115,9 @@
 .t-color-5{
     color:$color5 !important;
 }
+.t-color-6{
+    color:$color6 !important;
+}
 .t-color-h-2{
     &:hover{
         color:$color1;
@@ -130,7 +133,13 @@
     background-color: $color3 !important;
 }
 .bg-color-4{
-    background-color: $color2 !important;
+    background-color: $color4 !important;
+}
+.bg-color-5{
+    background-color: $color5 !important;
+}
+.bg-color-6{
+    background-color: $color6 !important;
 }
 .c-p{
     cursor: pointer;
@@ -150,6 +159,10 @@
         width: 100%;
         object-fit: cover;
     }
+}
+.mx-11{
+    margin-right: $spacer*15 !important;
+    margin-left: $spacer*15 !important;
 }
 .scroll-y{
     overflow-y: scroll;

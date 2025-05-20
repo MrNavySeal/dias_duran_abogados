@@ -26,6 +26,11 @@
             height: auto;
         }
     }
+    .new-contact-navbar{
+        .el-link{
+            font-size: 1rem !important;
+        }
+    }
     .mobileOptions{
         display: block;
     }
@@ -51,6 +56,27 @@
     }
 }
 @media screen and (max-width: 992px){
+    .new-header{
+        background-color: $color4 !important;
+        div{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-right: $spacer*1 !important;
+            margin-left: $spacer*1 !important;
+        }
+    }
+    .new-navbar-logo-mobile{
+        display: block;
+        height: 100px;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .new-info-navbar,.new-contact-navbar{
+        display: none !important;
+    }
     .new-header-item-login{
         display: none !important;
     }
@@ -105,7 +131,12 @@
         display: block;
     }
     #btnNav{
+        background-color: $color4 !important;
+        border: none !important;
         display: block;
+        i{
+            color: $color2 !important;
+        }
     }
     .nav--links{
         &:nth-of-type(1){

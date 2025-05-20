@@ -3,6 +3,7 @@ $color2:#162542;
 $color3:#777777;
 $color4:#fff;
 $color5: #BFBDC1;
+$color6: #F5F2EA;
 
 $primary:#b68c5a;
 $secondary:#162542;
@@ -14,6 +15,7 @@ $light:#ebedef;
 $dark:#777777;
 $black:#000;
 $font-size-base:1rem;
+$spacer:1rem;
 @mixin textColor($color:$color2){
     color:$color !important;
 }

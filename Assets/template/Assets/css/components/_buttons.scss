@@ -126,6 +126,15 @@
         }
     }
 }
+.social--white{
+    li{
+        background-color: $color1;
+        border: none;
+        i{
+            color:$color4;
+        }
+    }
+}
 
 .btn-qty-1{
     display: flex;
