@@ -49,6 +49,12 @@
         left:0;
     }
 }
+@media screen and (max-width: 1024px){
+    .new-info-navbar,.new-contact-navbar,.new-header div{
+        margin-right: $spacer*2 !important;
+         margin-left: $spacer*2 !important;
+    }
+}
 @media screen and (min-width:992px){
     
     .tmobilefoot{

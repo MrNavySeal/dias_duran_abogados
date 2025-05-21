@@ -14,19 +14,19 @@ for ($i=0; $i < count($social) ; $i++) {
 
 ?>
 
-<footer class="bg-color-2 container mt-4">
+<footer class="container mt-4">
     <div class="row m-0">
         <div class="col-lg-4 p-5 t-color-4">
             <div class="logo">
                 <img src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>">
             </div>
-            <p><?=$company['description']?></p>
+            <p class="t-color-2"><?=$company['description']?></p>
             <p class="fw-bold fs-4 ">Síguenos</p>
             <ul class="social social--dark">
                 <?=$links?>
             </ul>
         </div>
-        <div class="col-lg-8 p-0">
+        <div class="col-lg-8 p-0 bg-color-2 ">
             <div class="footer--info">
                 <div class="row mb-5">
                     <div class="col-md-4">
