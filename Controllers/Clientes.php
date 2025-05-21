@@ -38,7 +38,6 @@
             die();
         }
         public function setCliente(){
-            dep($_POST);exit;
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
                     if(empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['tipo_documento']) || empty($_POST['documento'])
@@ -48,9 +47,10 @@
                         $arrResponse = array("status" => false, "msg" => 'Todos los campos con (*) son obligatorios');
                     }else{ 
                         $intId = intval($_POST['id']);
-                        $strName = ucwords(strClean($_POST['nombre']));
+                        $strNombre = ucwords(strClean($_POST['nombre']));
                         $strApellido = ucwords(strClean($_POST['apellido']));
-                        $strTelefono = intval(strClean($_POST['telefono']));
+                        $intTelefono = doubleval(strClean($_POST['telefono']));
+                        $intPaisTelefono = doubleval(strClean($_POST['pais_telefono']));
                         $strCorreo = $_POST['correo'] != "" ? strtolower(strClean($_POST['correo'])) : "generico@generico.co";
                         $strDireccion = strClean($_POST['direccion']);
                         $intPais = intval($_POST['pais']) != 0 ? intval($_POST['pais']) : 99999;
@@ -63,19 +63,19 @@
                         $request = "";
                         $intTipoDocumento = intval($_POST['tipo_documento']);
                         $strDocumento = strClean($_POST['documento']) !="" ? strClean($_POST['documento']) : "222222222";
-                        $photo = "";
-                        $photoProfile="";
+                        $strImagen = "";
+                        $strImagenNombre="";
                         $company = getCompanyInfo();
                         if($intId == 0){
                             if($_SESSION['permitsModule']['w']){
     
                                 $option = 1;
     
-                                if($_FILES['txtImg']['name'] == ""){
-                                    $photoProfile = "user.jpg";
+                                if($_FILES['imagen']['name'] == ""){
+                                    $strImagenNombre = "user.jpg";
                                 }else{
-                                    $photo = $_FILES['txtImg'];
-                                    $photoProfile = 'profile_'.bin2hex(random_bytes(6)).'.png';
+                                    $strImagen = $_FILES['imagen'];
+                                    $strImagenNombre = 'profile_'.bin2hex(random_bytes(6)).'.png';
                                 }
     
                                 if($strContrasena !=""){
@@ -85,20 +85,22 @@
                                     $strContrasena =  hash("SHA256",$strTempContrasena);
                                 }
     
-                                $request_user = $this->model->insertCustomer(
-                                    $strName, 
-                                    $strLastName,
-                                    $strIdentification,
-                                    $photoProfile, 
-                                    $intPhone, 
-                                    $strEmail,
-                                    $strAddress,
-                                    $intCountry,
-                                    $intState,
-                                    $intCity,
-                                    $strPassword,
-                                    $intStatus,
-                                    $intRolId
+                                $request = $this->model->insertCliente(
+                                    $strNombre, 
+                                    $strApellido,
+                                    $intTelefono,
+                                    $intPaisTelefono,
+                                    $strCorreo, 
+                                    $strDireccion, 
+                                    $intPais,
+                                    $intDepartamento,
+                                    $intCiudad,
+                                    $strContrasena,
+                                    $intEstado,
+                                    $intTipoDocumento,
+                                    $strDocumento,
+                                    $intRolId,
+                                    $strImagenNombre,
                                 );
                             }
                         }else{
@@ -108,13 +110,13 @@
                                 $request = $this->model->selectCustomer($idUser);
     
                                 if($_FILES['txtImg']['name'] == ""){
-                                    $photoProfile = $request['image'];
+                                    $strImagenNombre = $request['image'];
                                 }else{
                                     if($request['image'] != "user.jpg"){
                                         deleteFile($request['image']);
                                     }
-                                    $photo = $_FILES['txtImg'];
-                                    $photoProfile = 'profile_'.bin2hex(random_bytes(6)).'.png';
+                                    $strImagen = $_FILES['txtImg'];
+                                    $strImagenNombre = 'profile_'.bin2hex(random_bytes(6)).'.png';
                                 }
     
                                 if($strPassword!=""){
@@ -122,49 +124,51 @@
                                 }
                                 
                                 $request_user = $this->model->updateCustomer(
-                                    $idUser, 
-                                    $strName, 
-                                    $strLastName,
-                                    $strIdentification,
-                                    $photoProfile, 
-                                    $intPhone, 
-                                    $strEmail,
-                                    $strAddress,
-                                    $intCountry,
-                                    $intState,
-                                    $intCity,
-                                    $strPassword, 
-                                    $intStatus,
-                                    $intRolId
+                                    $intId, 
+                                    $strNombre, 
+                                    $strApellido,
+                                    $intTelefono,
+                                    $intPaisTelefono,
+                                    $strCorreo, 
+                                    $strDireccion, 
+                                    $intPais,
+                                    $intDepartamento,
+                                    $intCiudad,
+                                    $strContrasena,
+                                    $intEstado,
+                                    $intTipoDocumento,
+                                    $strDocumento,
+                                    $intRolId,
+                                    $strImagenNombre,
                                 );
                             }
                         }
     
-                        if($request_user > 0 ){
-                            if($photo!=""){
-                                uploadImage($photo,$photoProfile);
+                        if($request > 0 ){
+                            if($strImagen!=""){
+                                uploadImage($strImagen,$strImagenNombre);
                             }
                             
                             if($option == 1){
-                                $data['nombreUsuario'] = $strName." ".$strLastName;
+                                $data['nombreUsuario'] = $strNombre." ".$strApellido;
                                 $data['asunto']="Credentials";
-                                $data['email_usuario'] = $strEmail;
+                                $data['email_usuario'] = $strCorreo;
                                 $data['email_remitente'] = $company['email'];
-                                $data['password'] = $password;
+                                $data['password'] = $strTempContrasena;
                                 $data['company'] = $company;
-                                if($strEmail !="generico@generico.co"){
+                                if($strCorreo !="generico@generico.co"){
                                     sendEmail($data,"email_credentials");
                                 }
                                 $arrResponse = array("status"=>true,"msg"=>'Datos guardados. Se ha enviado un correo electrónico al usuario con las credenciales.');
                             }else{
                                 if($strPassword!=""){
-                                    $data['nombreUsuario'] = $strName." ".$strLastName;
+                                    $data['nombreUsuario'] = $strNombre." ".$strApellido;
                                     $data['asunto']="Credentials";
-                                    $data['email_usuario'] = $strEmail;
+                                    $data['email_usuario'] = $strCorreo;
                                     $data['email_remitente'] = $company['email'];
-                                    $data['password'] = $password;
+                                    $data['password'] = $strTempContrasena;
                                     $data['company'] = $company;
-                                    if($strEmail !="generico@generico.co"){
+                                    if($strCorreo !="generico@generico.co"){
                                         sendEmail($data,"email_passwordUpdated");
                                     }
                                     $arrResponse = array("status"=>true,"msg"=>'La contraseña ha sido actualizada, se ha enviado un correo electrónico con la nueva contraseña.');
@@ -173,7 +177,7 @@
                                 }
                                 
                             }
-                        }else if($request_user == 'exist'){
+                        }else if($request == 'exist'){
                             $arrResponse = array('status' => false, 'msg' => '¡Atención! el correo electrónico, la identificación o el número de teléfono ya están registrados, pruebe con otro.');		
                         }else{
                             $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
@@ -184,6 +188,25 @@
             }
 			die();
 		}
+        public function getBuscar(){
+            if($_SESSION['permitsModule']['r']){
+                if($_POST){
+                    $intPorPagina = intval($_POST['paginas']);
+                    $intPaginaActual = intval($_POST['pagina']);
+                    $strBuscar = clear_cadena(strClean($_POST['buscar']));
+                    $request = $this->model->selectClientes($intPorPagina,$intPaginaActual, $strBuscar);
+                    if(!empty($request)){
+                        foreach ($request['data'] as &$data) { 
+                            if(isset($data['image'])){ $data['url'] = media()."/images/uploads/".$data['image'];}
+                            $data['edit'] = $_SESSION['permitsModule']['u'];
+                            $data['delete'] = $_SESSION['permitsModule']['d'];
+                        }
+                    }
+                    echo json_encode($request,JSON_UNESCAPED_UNICODE);
+                }
+            }
+            die();
+        }
         public function getEstados($params){
             $arrParams = explode(",",$params);
             $strTipo = $arrParams[0];

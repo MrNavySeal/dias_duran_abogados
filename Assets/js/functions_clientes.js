@@ -41,7 +41,7 @@ const App = {
             arrCiudades:[],
         };
     },mounted(){
-        //this.getBuscar();
+        this.getBuscar();
         this.getDatosIniciales();
     },methods:{
         getDatosIniciales:async function(){
@@ -174,6 +174,11 @@ const App = {
           }else{
               Swal.fire("Error",objData.msg,"error");
           }
+        },
+        openBotones:function(tipo,dato){ 
+            if(tipo == "correo")window.open('mailto:'+dato);
+            if(tipo == "llamar")window.open('tel:'+dato);
+            if(tipo == "wpp")window.open('https://wa.me/'+dato);
         },
         delDatos:function(intId,strTipo){
             const objVue = this;
