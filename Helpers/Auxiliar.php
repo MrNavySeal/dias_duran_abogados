@@ -135,4 +135,24 @@
         $file = "Views/Template/Components/{$name}.php";
         require $file;        
     }
+    function getPaises(){
+        $con = new Mysql();
+        $request = $con->select_all("SELECT * FROM countries ORDER BY name");
+        return $request;
+    }
+    function getDepartamentos(int $id){
+        $con = new Mysql();
+        $request = $con->select_all("SELECT * FROM states WHERE country_id = $id ORDER BY name ");
+        return $request;
+    }
+    function getCiudades(int $id){
+        $con = new Mysql();
+        $request = $con->select_all("SELECT * FROM cities WHERE state_id = $id ORDER BY name");
+        return $request;
+    }
+    function getTiposDocumento(){
+        $con = new Mysql();
+        $request = $con->select_all("SELECT * FROM document_type ORDER BY name");
+        return $request;
+    }
 ?>

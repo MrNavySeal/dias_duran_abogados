@@ -53,24 +53,16 @@
             <!-- Productos -->
             <?php  if($_SESSION['permit'][11]['r']){ $active = $_SESSION['permitsModule']['module'] == "Productos" ? "active" :"";?>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle <?=$active?>" data-bs-toggle="dropdown"><i class="fas fa-shopping-bag"></i>Áreas de asesoría</a>
+                <a href="#" class="nav-link dropdown-toggle <?=$active?>" data-bs-toggle="dropdown"><i class="fas fa-layer-group"></i>Áreas de asesoría</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <a href="<?=base_url()?>/Areas/areas" class="dropdown-item">Áreas</a>
-                    <a href="<?=base_url()?>/Areas/servicios" class="dropdown-item">Servicios</a>
+                    <a href="<?=base_url()?>/areas/areas" class="dropdown-item">Áreas</a>
+                    <a href="<?=base_url()?>/areas/servicios" class="dropdown-item">Servicios</a>
                 </div>
             </div>
             <?php } ?>
             <!-- Pedidos -->
             <?php if($_SESSION['permit'][6]['r']){ $active = $_SESSION['permitsModule']['module'] == "Pedidos" ? "active" :"";?>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle <?=$active?>" data-bs-toggle="dropdown"><i class="fas fa-receipt"></i>Mis pedidos</a>
-                    <div class="dropdown-menu bg-transparent border-0">
-                        <a href="<?=base_url()?>/pedidos" class="dropdown-item">Pedidos</a>
-                        <?php if($_SESSION['permit'][6]['w']){ ?>
-                        <a href="<?=base_url()?>/PedidosPos/venta" class="dropdown-item">Punto de venta</a>
-                        <?php } ?>
-                    </div>
-                </div>
+                <a href="<?=base_url()?>/casos" class="nav-item nav-link <?=$active?>"><i class="fas fa-briefcase"></i>Casos</a>
             <?php } ?>
             <!-- Administración -->
             <?php 
@@ -85,15 +77,8 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-cog"></i>Configuración</a>
                 <div class="dropdown-menu bg-transparent border-0">
-                    <?php 
-                        if($_SESSION['idUser']==1){
-                    ?>
                     <a href="<?=base_url()?>/empresa" class="dropdown-item">Parámetros de empresa</a>
-                    <?php } ?>
                     <a href="<?=base_url()?>/administracion/correo" class="dropdown-item">Correo <?=$emails?></a>
-                    <a href="<?=base_url()?>/administracion/envios" class="dropdown-item">Envío</a>
-                    <a href="<?=base_url()?>/paginas" class="dropdown-item">Páginas</a>
-                    <a href="<?=base_url()?>/banners" class="dropdown-item">Banners</a>
                 </div>
             </div>
             <?php } ?>
