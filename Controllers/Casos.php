@@ -81,5 +81,41 @@
             }
             die();
         }
+        public function getDatosIniciales(){
+            if($_SESSION['permitsModule']['r']){
+                echo json_encode(['currency'=>getCompanyInfo()['currency']['code']],JSON_UNESCAPED_UNICODE);
+            }
+        }
+        public function getConversion(){
+            if($_POST){
+                $intModo = intval($_POST['modo']);
+                $intMonedaBase = strtoupper(strClean($_POST['base']));
+                $intMonedaObjetivo = strtoupper(strClean($_POST['objetivo']));
+                $intValorBase = doubleval($_POST['valor_base']);
+                $intValorObjetivo = doubleval($_POST['valor_objetivo']);
+                $request = $this->model->selectMoneda($intMonedaObjetivo);
+                if(!empty($request)){
+
+                }
+                /*
+                $reqUrl = "https://v6.exchangerate-api.com/v6/f21b35a9dce0dc9441694e46/pair/$intMonedaBase/$intMonedaObjetivo";
+                $responseJson = file_get_contents($reqUrl);
+                if(false !== $responseJson) {
+                    try {
+                        $response = json_decode($responseJson);
+                        if('success' === $response->result) {
+                            $intValorObjetivo = round(($base_price * $response->conversion_rates->EUR), 2);
+
+                        }
+
+                    }
+                    catch(Exception $e) {
+                        // Handle JSON parse error...
+                    }
+
+                }
+                dep($_POST);exit;*/
+            }
+        }
     }
 ?>

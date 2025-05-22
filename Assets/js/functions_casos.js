@@ -30,6 +30,9 @@ const App = {
             strEstado:"confirmado",
             strTitulo:"",
             strTituloModal:"",
+            strMoneda:"",
+            intValorBase:0,
+            intValorObjetivo:0,
             strFecha:new Date().toISOString().split("T")[0],
             strHora: new Date().toTimeString().substring(0, 5),
             objServicio:{name:""},
@@ -37,7 +40,13 @@ const App = {
         };
     },mounted(){
         //this.getBuscar(1,"casos");
+        this.getDatosIniciales();
     },methods:{
+        getDatosIniciales:async function(){
+            const response = await fetch(base_url+"/casos/getDatosIniciales");
+            const objData = await response.json();
+            this.strMoneda = objData.currency;
+        },
         showModal:function(tipo="crear"){
             this.strTituloModal = "Nuevo caso";
             this.strEstado= 1;
@@ -171,6 +180,16 @@ const App = {
                 let route = objectUrl.createObjectURL(this.strImagen);
                 this.strImgUrl = route;
             }
+        },
+        getConversion:async function(flag=false){
+            const formData = new FormData();
+            formData.append("base",this.strMoneda);
+            formData.append("objetivo",this.objCliente.currency);
+            formData.append("valor_base",this.intValorBase);
+            formData.append("valor_objetivo",this.intValorObjetivo);
+            formData.append("modo",flag);
+            const response = await fetch(base_url+"/casos/getConversion",{method:"POST",body:formData});
+            const objData = await response.json();
         }
     }
 };

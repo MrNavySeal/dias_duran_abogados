@@ -41,15 +41,15 @@
                         <div class="col-md-6">
                             <label for="" class="form-label">Valor <span class="text-danger">*</span></label>
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">COP</span>
-                                <input type="text" class="form-control" aria-describedby="basic-addon1">
+                                <span class="input-group-text" id="basic-addon1">{{strMoneda}}</span>
+                                <input type="text" class="form-control" v-model="intValorBase" aria-describedby="basic-addon1" @keyup="getConversion()">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label">Conversión <span class="text-danger">*</span></label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">{{objCliente.currency}}</span>
-                                <input type="text" class="form-control" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" v-model="intValorObjetivo" aria-describedby="basic-addon1" @keyup="getConversion(true)">
                             </div>
                         </div>    
                     </div>
