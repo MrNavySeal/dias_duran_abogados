@@ -70,7 +70,7 @@
 			}
 	        return $return;
 		}
-        public function updateCustomer(int $intId,string $strNombre, string $strApellido,string $intTelefono, string $intPaisTelefono, string $strCorreo, string $strDireccion, 
+        public function updateCliente(int $intId,string $strNombre, string $strApellido,string $intTelefono, string $intPaisTelefono, string $strCorreo, string $strDireccion, 
         int $intPais, int $intDepartamento, int $intCiudad,string $strContrasena,int $intEstado,$intTipoDocumento,string $strDocumento,int $intRolId,string $strImagenNombre){
             $this->intId = $intId;
             $this->strImagenNombre = $strImagenNombre;
@@ -199,6 +199,18 @@
                 "total_records"=>$totalRecords,
             );
             return $arrData;
+        }
+        public function selectCliente(int $intId){
+            $this->intId = $intId;
+            $sql = "SELECT * FROM person WHERE idperson = $this->intId";
+            $request = $this->select($sql);
+            return $request;
+        }
+        public function deleteCliente($id){
+            $this->intId = $id;
+            $sql = "DELETE FROM person WHERE idperson = $this->intId";
+            $request = $this->delete($sql);
+            return $request;
         }
     }
 ?>

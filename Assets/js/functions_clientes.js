@@ -67,6 +67,7 @@ const App = {
             this.strTituloModal = "Nuevo cliente";
             this.strImgUrl= base_url+'/Assets/images/uploads/user.jpg';
             this.strImagen= "";
+            this.strNombre ="";
             this.strApellido= "";
             this.strDocumento= "";
             this.strCorreo= "";
@@ -77,6 +78,7 @@ const App = {
             this.strDireccion="";
             this.strContrasena="";
             this.intTipoDocumento="";
+            this.intTelefonoCodigo ="";
             this.intEstado= 1;
             this.intId = 0;
             this.modal = new bootstrap.Modal(document.querySelector("#modalCustomer"));
@@ -131,13 +133,14 @@ const App = {
                     this.strDireccion="";
                     this.strContrasena="";
                     this.intTipoDocumento="";
+                    this.intTelefonoCodigo="";
                     this.intEstado= 1;
                 }
+                this.getBuscar();
                 this.modal.hide();
             }else{
               Swal.fire("Error",objData.msg,"error");
             }
-            //await this.getBuscar(1,"clientes");
         },
         getBuscar:async function (intPagina=1,strTipo = ""){
             this.intPagina = intPagina;
@@ -155,24 +158,34 @@ const App = {
             this.intTotalResultados = objData.total_records;
             this.getBotones();
         },
-        getDatos:async function(intId,strTipo){
+        getDatos:async function(intId){
           this.intId = intId;
-          this.strTituloModal = "Editar área";
+          this.strTituloModal = "Editar cliente";
           const formData = new FormData();
           formData.append("id",this.intId);
-          formData.append("tipo_busqueda",strTipo);
-          const response = await fetch(base_url+"/Areas/getDatos",{method:"POST",body:formData});
+          const response = await fetch(base_url+"/clientes/getDatos",{method:"POST",body:formData});
           const objData = await response.json();
           if(objData.status){
-              this.strImgUrl= objData.data.url,
-              this.strImagen= "",
-              this.strNombre= objData.data.name,
-              this.strDescripcionCorta= objData.data.short_description,
-              this.intEstado= objData.data.status,
-              this.modal = new bootstrap.Modal(document.querySelector("#modalAreas"));
-              this.modal.show();
+                this.strImgUrl= objData.data.url,
+                this.strNombre= objData.data.firstname,
+                this.strApellido= objData.data.lastname,
+                this.strDocumento= objData.data.identification,
+                this.strCorreo= objData.data.email,
+                this.intPais= objData.data.countryid,
+                await this.setFiltro("paises");
+                this.intDepartamento= objData.data.stateid,
+                await this.setFiltro("departamentos");
+                this.intCiudad= objData.data.cityid,
+                this.strTelefono= objData.data.phone;
+                this.strDireccion= objData.data.address;
+                this.intTipoDocumento=objData.data.typeid;
+                this.intTelefonoCodigo = objData.data.phone_country;
+                this.intEstado= objData.data.status,
+                this.strContrasena="";
+                this.modal = new bootstrap.Modal(document.querySelector("#modalCustomer"));
+                this.modal.show();
           }else{
-              Swal.fire("Error",objData.msg,"error");
+                Swal.fire("Error",objData.msg,"error");
           }
         },
         openBotones:function(tipo,dato){ 
@@ -226,7 +239,36 @@ const App = {
                 let route = objectUrl.createObjectURL(this.strImagen);
                 this.strImgUrl = route;
             }
-        }
+        },
+        delDatos:function(intId){
+            const objVue = this;
+            Swal.fire({
+              title:"¿Esta seguro de eliminarlo?",
+              text:"Se eliminará para siempre...",
+              icon: 'warning',
+              showCancelButton:true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText:"Sí, eliminar",
+              cancelButtonText:"No, cancelar"
+          }).then(async function(result){
+              if(result.isConfirmed){
+                  objVue.intId = intId;
+                  const formData = new FormData();
+                  formData.append("id",objVue.intId);
+                  const response = await fetch(base_url+"/clientes/delDatos",{method:"POST",body:formData});
+                  const objData = await response.json();
+                  if(objData.status){
+                    Swal.fire("Eliminado!",objData.msg,"success");
+                    objVue.getBuscar();
+                  }else{
+                    Swal.fire("Error",objData.msg,"error");
+                  }
+              }else{
+                objVue.getBuscar();
+              }
+          });
+        },
     }
 };
 const app = Vue.createApp(App);

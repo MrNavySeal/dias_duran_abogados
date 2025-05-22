@@ -72,8 +72,8 @@
                                 <button class="btn btn-info text-white m-1" type="button" title="Correo" v-if="data.edit" @click="openBotones('correo',data.email)" target="_blank"><i class="fa fa-envelope"></i></button>
                                 <button class="btn btn-primary m-1" type="button" title="Correo" v-if="data.edit" @click="openBotones('llamar',data.phonecode+data.phone)" target="_blank"><i class="fa fa-phone"></i></button>
                                 <button class="btn btn-success m-1"  title="Whatsapp" v-if="data.edit" @click="openBotones('wpp',data.phonecode+data.phone)"><i class="fab fa-whatsapp"></i></button>
-                                <button class="btn btn-success m-1" type="button" title="Editar" v-if="data.edit" @click="getDatos(data.id,'areas')" ><i class="fas fa-pencil-alt"></i></button>
-                                <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete" @click="delDatos(data.id,'areas')" ><i class="fas fa-trash-alt"></i></button>
+                                <button class="btn btn-success m-1" type="button" title="Editar" v-if="data.edit" @click="getDatos(data.id)" ><i class="fas fa-pencil-alt"></i></button>
+                                <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete" @click="delDatos(data.id)" ><i class="fas fa-trash-alt"></i></button>
                             </div>
                         </td>
                     </tr>

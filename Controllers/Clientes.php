@@ -107,23 +107,20 @@
                             if($_SESSION['permitsModule']['u']){
     
                                 $option = 2;
-                                $request = $this->model->selectCustomer($idUser);
+                                $request = $this->model->selectCliente($intId);
     
-                                if($_FILES['txtImg']['name'] == ""){
+                                if($_FILES['imagen']['name'] == ""){
                                     $strImagenNombre = $request['image'];
                                 }else{
                                     if($request['image'] != "user.jpg"){
                                         deleteFile($request['image']);
                                     }
-                                    $strImagen = $_FILES['txtImg'];
+                                    $strImagen = $_FILES['imagen'];
                                     $strImagenNombre = 'profile_'.bin2hex(random_bytes(6)).'.png';
                                 }
-    
-                                if($strPassword!=""){
-                                    $strPassword =  hash("SHA256",$strPassword);
-                                }
+                                if($strContrasena!=""){ $strContrasena =  hash("SHA256",$strContrasena); }
                                 
-                                $request_user = $this->model->updateCustomer(
+                                $request = $this->model->updateCliente(
                                     $intId, 
                                     $strNombre, 
                                     $strApellido,
@@ -161,7 +158,7 @@
                                 }
                                 $arrResponse = array("status"=>true,"msg"=>'Datos guardados. Se ha enviado un correo electrónico al usuario con las credenciales.');
                             }else{
-                                if($strPassword!=""){
+                                if($strContrasena!=""){
                                     $data['nombreUsuario'] = $strNombre." ".$strApellido;
                                     $data['asunto']="Credentials";
                                     $data['email_usuario'] = $strCorreo;
@@ -207,6 +204,22 @@
             }
             die();
         }
+        public function getDatos(){
+            if($_SESSION['permitsModule']['r']){
+                if($_POST){
+                    $intId = intval($_POST['id']);
+                    $request = $this->model->selectCliente($intId);
+                    if(!empty($request)){
+                        if(isset($request['image'])){$request['url'] = media()."/images/uploads/".$request['image'];}
+                        $arrResponse = array("status"=>true,"data"=>$request);
+                    }else{
+                        $arrResponse = array("status"=>false,"msg"=>"Error, intenta de nuevo"); 
+                    }
+                    echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+                }
+            }
+            die();
+        }
         public function getEstados($params){
             $arrParams = explode(",",$params);
             $strTipo = $arrParams[0];
@@ -214,6 +227,23 @@
             if($strTipo == "estado"){$request = getDepartamentos($intId);}
             else{$request = getCiudades($intId);}
             echo json_encode($request,JSON_UNESCAPED_UNICODE);
+        }
+        public function delDatos(){
+            if($_SESSION['permitsModule']['d']){
+                if($_POST){
+                    $intId = intval($_POST['id']);
+                    $request = $this->model->selectCliente($intId);
+                    if($request['image']!="user.jpg"){ deleteFile($request['image']); }
+                    $request = $this->model->deleteCliente($intId);
+                    if($request > 0 || $request == "ok"){
+                        $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado correctamente.");
+                    }else{
+                        $arrResponse = array("status"=>false,"msg"=>"No es posible eliminar, intenta de nuevo.");
+                    }
+                    echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+                }
+            }
+            die();
         }
     }
 ?>
