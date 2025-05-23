@@ -28,13 +28,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="" class="form-label">Fecha de cita</label>
+                                <label for="" class="form-label">Fecha de cita <span class="text-danger">*</span></label>
                                 <input type="date" class="form-control" v-model="strFecha">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="" class="form-label">Hora de cita</label>
+                                <label for="" class="form-label">Hora de cita <span class="text-danger">*</span></label>
                                 <input type="time" class="form-control" v-model="strHora">
                             </div>
                         </div>
@@ -42,14 +42,14 @@
                             <label for="" class="form-label">Valor <span class="text-danger">*</span></label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">{{strMoneda}}</span>
-                                <input type="text" class="form-control" v-model="intValorBase" aria-describedby="basic-addon1" @keyup="getConversion()">
+                                <input type="text" class="form-control text-end" :value="valorBase" aria-describedby="basic-addon1" @keyup="setBase($event)">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label">Conversión <span class="text-danger">*</span></label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">{{objCliente.currency}}</span>
-                                <input type="text" class="form-control" v-model="intValorObjetivo" aria-describedby="basic-addon1" @keyup="getConversion(true)">
+                                <input type="text" class="form-control text-end" :value="valorObjetivo" aria-describedby="basic-addon1" @keyup="setObjetivo($event)">
                             </div>
                         </div>    
                     </div>

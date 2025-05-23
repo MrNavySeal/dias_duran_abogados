@@ -33,25 +33,59 @@ const App = {
             strMoneda:"",
             intValorBase:0,
             intValorObjetivo:0,
-            strFecha:new Date().toISOString().split("T")[0],
-            strHora: new Date().toTimeString().substring(0, 5),
-            objServicio:{name:""},
-            objCliente:{firstname:"",lastname:"",currency:"COP"},
+            strFecha:"",
+            strHora: "",
+            objServicio:{id:"",name:""},
+            objCliente:{id:"",firstname:"",lastname:"",currency:"COP"},
         };
     },mounted(){
         //this.getBuscar(1,"casos");
         this.getDatosIniciales();
+    },computed:{
+        valorBase:function() {
+            return formatMoney(this.intValorBase)
+        },
+        valorObjetivo:function() {
+            return formatMoney(this.intValorObjetivo)
+        },
     },methods:{
+        setBase:function(e){
+            const input = e.target.value;
+            const numericValue = input.replace(/[^0-9,]/g, "");
+            const parts = numericValue.split(",");
+            let valor = numericValue;
+            if (parts.length > 2) {valor = parts[0] + "," + parts[1];}
+            else {valor = numericValue;}
+            this.intValorBase = valor;
+            this.getConversion(0);
+        },
+        setObjetivo:function(e){
+            const input = e.target.value;
+            const numericValue = input.replace(/[^0-9,]/g, "");
+            const parts = numericValue.split(",");
+            let valor = numericValue;
+            if (parts.length > 2) {valor = parts[0] + "," + parts[1];}
+            else {valor = numericValue;}
+            this.intValorObjetivo = valor;
+            this.getConversion(1);
+        },
         getDatosIniciales:async function(){
             const response = await fetch(base_url+"/casos/getDatosIniciales");
             const objData = await response.json();
             this.strMoneda = objData.currency;
         },
         showModal:function(tipo="crear"){
-            this.strTituloModal = "Nuevo caso";
-            this.strEstado= 1;
-            this.intId = 0;
             if(tipo == "crear"){ 
+                this.strTituloModal = "Nuevo caso";
+                this.strEstado= 1;
+                this.intId = 0;
+                this.intValorBase=0;
+                this.intValorObjetivo=0;
+                this.strTitulo="";
+                this.strFecha="";
+                this.strHora="";
+                this.objServicio={id:"",name:""};
+                this.objCliente={id:"",firstname:"",lastname:"",currency:"COP"};
                 setTinymce("#strDescripcion");
                 document.querySelector("#strDescripcion").value ="";
                 this.modal = new bootstrap.Modal(document.querySelector("#modalCase")); this.modal.show();
@@ -61,36 +95,49 @@ const App = {
             
         },
         setDatos: async function(){
-            if(this.strNombre == ""){
+            if(this.objCliente.id == "" || this.objServicio.id == "" || this.strFecha == "" || this.strHora=="" || this.intValorBase=="" || this.intValorObjetivo==""){
                 Swal.fire("Error","Todos los campos marcados con (*) son obligatorios","error");
+                return false;
+            }
+            if(this.intValorBase <= 0 || this.intValorObjetivo <=0){
+                Swal.fire("Error","El valor y su conversión no puede ser menor o igual a cero","error");
                 return false;
             }
             tinymce.triggerSave();
             this.strDescripcion = document.querySelector("#strDescripcion").value;
             const formData = new FormData();
             formData.append("id",this.intId);
-            formData.append("imagen",this.strImagen);
             formData.append("nombre",this.strNombre);
-            formData.append("descripcion_corta",this.strDescripcionCorta);
+            formData.append("servicio",this.objServicio.id);
+            formData.append("cliente",this.objCliente.id);
+            formData.append("moneda_base",this.strMoneda);
+            formData.append("moneda_objetivo",this.objCliente.currency);
+            formData.append("fecha",this.strFecha);
+            formData.append("hora",this.strHora);
+            formData.append("valor_base",this.intValorBase);
+            formData.append("valor_objetivo",this.intValorObjetivo);
             formData.append("descripcion",this.strDescripcion);
-            formData.append("estado",this.strEstado);
-            const response = await fetch(base_url+"/Areas/setArea",{method:"POST",body:formData});
+            formData.append("titulo",this.strTitulo);
+
+            const response = await fetch(base_url+"/Casos/setCaso",{method:"POST",body:formData});
             const objData = await response.json();
             if(objData.status){
                 Swal.fire("Guardado!",objData.msg,"success");
                 if(this.intId == 0){
-                    this.strImgUrl= base_url+'/Assets/images/uploads/category.jpg';
-                    this.strImagen= "";
-                    this.strNombre= "";
-                    this.strDescripcionCorta= "";
-                    this.strDescripcion= "";
+                    this.intValorBase=0;
+                    this.intValorObjetivo=0;
+                    this.strTitulo="";
+                    this.strFecha="";
+                    this.strHora="";
+                    this.objServicio={id:"",name:""};
+                    this.objCliente={id:"",firstname:"",lastname:"",currency:"COP"};
                     this.strEstado= 1;
                 }
                 this.modal.hide();
             }else{
               Swal.fire("Error",objData.msg,"error");
             }
-            await this.getBuscar(1,"areas");
+            //await this.getBuscar(1,"casos");
         },
         getBuscar:async function (intPagina=1,strTipo = ""){
             this.intPagina = intPagina;
@@ -162,7 +209,7 @@ const App = {
         },
         setItem:function(data,tipo){
             if(tipo == "servicios"){this.objServicio=data;this.modalServicios.hide()}
-            if(tipo == "clientes"){this.objCliente=data;this.modalClientes.hide()}
+            if(tipo == "clientes"){this.objCliente=data;this.modalClientes.hide();this.getConversion()}
         },
         getBotones:function(){
             this.arrBotones = [];
@@ -170,18 +217,7 @@ const App = {
                 this.arrBotones.push(i);
             }
         },
-        uploadImagen:function(e){
-            this.strImagen = e.target.files[0];
-            let type = this.strImagen.type;
-            if(type != "image/png" && type != "image/jpg" && type != "image/jpeg" && type != "image/gif"){
-                Swal.fire("Error","Solo se permite imágenes.","error");
-            }else{
-                let objectUrl = window.URL || window.webkitURL;
-                let route = objectUrl.createObjectURL(this.strImagen);
-                this.strImgUrl = route;
-            }
-        },
-        getConversion:async function(flag=false){
+        getConversion:async function(flag=0){
             const formData = new FormData();
             formData.append("base",this.strMoneda);
             formData.append("objetivo",this.objCliente.currency);
@@ -190,6 +226,9 @@ const App = {
             formData.append("modo",flag);
             const response = await fetch(base_url+"/casos/getConversion",{method:"POST",body:formData});
             const objData = await response.json();
+            if(flag){ this.intValorBase = objData.data; }
+            else { this.intValorObjetivo = objData.data; }
+           
         }
     }
 };

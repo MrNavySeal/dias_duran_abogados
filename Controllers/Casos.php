@@ -57,6 +57,40 @@
                 die();
             }
         }
+        public function setCaso(){
+            dep($_POST);exit;
+            if($_SESSION['permitsModule']['r']){
+                if($_POST){
+                    if(empty($_POST['nombre'])){
+                        $arrResponse = array("status" => false, "msg" => 'Los campos con (*) son obligatorios.');
+                    }else{ 
+                        $intId = intval($_POST['id']);
+                        $strNombre = ucfirst(strClean($_POST['nombre']));
+                        $strDescripcion = $_POST['descripcion'];
+
+                        if($intId == 0){
+                            if($_SESSION['permitsModule']['w']){
+                                $option = 1;
+                                $request= $this->model->insertArea($strNombre,$strDescripcion,$strDescripcionCorta,$intEstado,$strRuta,$strImagenNombre);
+                            }
+                        }else{
+                            if($_SESSION['permitsModule']['u']){
+                                $option = 2;
+                                $request = $this->model->updateArea($intId,$strNombre,$strDescripcion,$strDescripcionCorta,$intEstado,$strRuta,$strImagenNombre);
+                            }
+                        }
+                        if($request > 0 ){
+                            if($option == 1){ $arrResponse = array('status' => true, 'msg' => 'Datos guardados');	
+                            }else{ $arrResponse = array('status' => true, 'msg' => 'Datos actualizados'); }
+                        }else{
+                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                        }
+                    }
+                    echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+                }
+            }
+			die();
+		}
         public function getBuscar(){
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
@@ -85,6 +119,7 @@
             if($_SESSION['permitsModule']['r']){
                 echo json_encode(['currency'=>getCompanyInfo()['currency']['code']],JSON_UNESCAPED_UNICODE);
             }
+            die();
         }
         public function getConversion(){
             if($_POST){
@@ -93,29 +128,61 @@
                 $intMonedaObjetivo = strtoupper(strClean($_POST['objetivo']));
                 $intValorBase = doubleval($_POST['valor_base']);
                 $intValorObjetivo = doubleval($_POST['valor_objetivo']);
-                $request = $this->model->selectMoneda($intMonedaObjetivo);
-                if(!empty($request)){
-
-                }
-                /*
+                $intValorConversionObjetivo = 0;
                 $reqUrl = "https://v6.exchangerate-api.com/v6/f21b35a9dce0dc9441694e46/pair/$intMonedaBase/$intMonedaObjetivo";
-                $responseJson = file_get_contents($reqUrl);
-                if(false !== $responseJson) {
-                    try {
-                        $response = json_decode($responseJson);
-                        if('success' === $response->result) {
-                            $intValorObjetivo = round(($base_price * $response->conversion_rates->EUR), 2);
-
+                $request = $this->model->selectConversion($intMonedaBase,$intMonedaObjetivo);
+                if(!empty($request)){
+                    $strFechaConversion = new DateTime($request['date']);
+                    $strFechaActual = new DateTime();
+                    $intDias = $strFechaActual->diff($strFechaConversion)->days;
+                    
+                    $intValorConversionObjetivo = $request['target'];
+                    if($intDias >=15){
+                        $strFechaActual = date_format($strFechaActual,"Y-m-d");
+                        $responseJson = file_get_contents($reqUrl);
+                        if(false !== $responseJson) {
+                            try {
+                                $response = json_decode($responseJson);
+                                if('success' === $response->result) {
+                                    $intValorConversionObjetivo = $response->conversion_rate;
+                                    $this->model->updateConversion($request['id'],$intValorConversionObjetivo,$strFechaActual);
+                                    $intValorObjetivo = round(($intValorBase * $intValorConversionObjetivo));
+                                    $arrResponse = array("status"=>true,"data"=>$intValorObjetivo);
+                                }
+                            }
+                            catch(Exception $e) {
+                                $arrResponse = array("status"=>false,"msg"=>$e);
+                            }
+        
                         }
-
                     }
-                    catch(Exception $e) {
-                        // Handle JSON parse error...
+                    if(!$intModo){
+                        $intValorObjetivo =  round(($intValorBase*$intValorConversionObjetivo));
+                    }else{
+                        $intValorObjetivo =  round(($intValorObjetivo/$intValorConversionObjetivo));
                     }
-
+                    $arrResponse = array("status"=>true,"data"=>$intValorObjetivo);
+                }else{
+                    $responseJson = file_get_contents($reqUrl);
+                    if(false !== $responseJson) {
+                        try {
+                            $response = json_decode($responseJson);
+                            if('success' === $response->result) {
+                                $intValorConversionObjetivo = $response->conversion_rate;
+                                $this->model->insertConversion($intMonedaBase,$intMonedaObjetivo,$intValorConversionObjetivo);
+                                $intValorObjetivo = round(($intValorBase * $intValorConversionObjetivo));
+                                $arrResponse = array("status"=>true,"data"=>$intValorObjetivo);
+                            }
+                        }
+                        catch(Exception $e) {
+                            $arrResponse = array("status"=>false,"msg"=>$e);
+                        }
+    
+                    }
                 }
-                dep($_POST);exit;*/
+                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             }
+            die();
         }
     }
 ?>

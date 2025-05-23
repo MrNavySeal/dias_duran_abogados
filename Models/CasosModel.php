@@ -4,7 +4,11 @@
         private $intPorPagina;
         private $intPaginaActual;
         private $intPaginaInicio;
+        private $strFecha;
         private $strBuscar;
+        private $intMonedaBase;
+        private $intMonedaObjetivo;
+        private $intConversionObjetivo;
         public function __construct(){
             parent::__construct();
         }
@@ -100,6 +104,26 @@
                 "total_records"=>$totalRecords,
             );
             return $arrData;
+        }
+        public function selectConversion($intMonedaBase,$intMonedaObjetivo){
+            $this->intMonedaBase = $intMonedaBase;
+            $this->intMonedaObjetivo = $intMonedaObjetivo;
+            $request = $this->select("SELECT * FROM conversion WHERE code_base = '$this->intMonedaBase' AND code_target = '$this->intMonedaObjetivo'");
+            return $request;
+        }
+        public function insertConversion($intMonedaBase,$intMonedaObjetivo,$intConversionObjetivo){
+            $this->intMonedaBase = $intMonedaBase;
+            $this->intMonedaObjetivo = $intMonedaObjetivo;
+            $this->intConversionObjetivo = $intConversionObjetivo;
+            $request = $this->insert("INSERT INTO conversion(code_base,code_target,target) VALUES(?,?,?)",[$this->intMonedaBase,$this->intMonedaObjetivo,$this->intConversionObjetivo]);
+            return $request;
+        }
+        public function updateConversion($intId,$intConversionObjetivo,$strFecha){
+            $this->intId = $intId;
+            $this->intConversionObjetivo = $intConversionObjetivo;
+            $this->strFecha = $strFecha;
+            $request = $this->update("UPDATE conversion SET target=?,date=? WHERE id = $this->intId",[$this->intConversionObjetivo,$this->strFecha]);
+            return $request;
         }
     }
 ?>
