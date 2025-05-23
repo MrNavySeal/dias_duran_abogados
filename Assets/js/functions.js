@@ -1,4 +1,15 @@
 'use strict'
+function formatMoney(valor){
+    valor = new String(valor);
+    // Separar la parte entera y decimal
+    const [integerPart, decimalPart] = valor.split(",");
+
+    // Formatear la parte entera
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return decimalPart !== undefined
+    ? `$${formattedInteger},${decimalPart}`
+    : `$${formattedInteger}`;
+}
 function printDiv(element,title=null){
     
     let div = document.querySelector("#"+element);
