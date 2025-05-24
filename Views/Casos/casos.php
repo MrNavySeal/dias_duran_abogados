@@ -33,22 +33,52 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Portada</th>
+                        <th>Transacción</th>
                         <th>Nombre</th>
-                        <th>Tipo documento</th>
-                        <th>No. documento</th>
+                        <th>Documento</th>
+                        <th>Teléfono</th>
                         <th>Correo</th>
                         <th>País</th>
-                        <th>Departamento</th>
-                        <th>Ciudad</th>
-                        <th>Teléfono</th>
-                        <th>Dirección</th>
                         <th>Fecha</th>
-                        <th>Estado</th>
+                        <th>Valor</th>
+                        <th>Conversión</th>
+                        <th>Estado de pago</th>
+                        <th>Estado de caso</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr v-for="(data,index) in arrData" :key="index">
+                        <td data-title="ID" class="text-center">{{data.idorder}}</td>
+                        <td data-title="Transacción">{{idtransacion}}</td>
+                        <td data-title="Nombre">{{data.firstname+" "+data.lastname}}</td>
+                        <td data-title="Documento">{{data.identification}}</td>
+                        <td data-title="Teléfono" class="text-nowrap">{{data.telefono}}</td>
+                        <td data-title="Correo">{{data.email}}</td>
+                        <td data-title="País">{{data.pais}}</td>
+                        <td data-title="Fecha" class="text-center text-nowrap">{{data.date}}</td>
+                        <td data-title="Valor" class="text-end text-nowrap">{{data.currency_base+" "+formatMoney(data.value_base)}}</td>
+                        <td data-title="Conversion" class="text-end text-nowrap">{{data.currency_target+" "+formatMoney(data.value_target)}}</td>
+                        <td data-title="Estado" class="text-center">
+                            <span :class="data.status == 'approved' ? 'bg-success text-white' : data.status == 'pendent' ? 'bg-warning text-black' :'bg-danger text-white'" class="badge">
+                                {{ data.status == 'approved' ? "pagado" : data.status == 'pendent' ? "pendiente" : "anulado" }}
+                            </span>
+                        </td>
+                        <td data-title="Estado" class="text-center">
+                            <span :class="data.statusorder == 'confirmado' ? 'bg-black text-white' : data.statusorder == 'en proceso' ? 'bg-warning text-black' : data.statusorder == 'finalizado' ? 'bg-success text-white' :'bg-danger text-white'" class="badge">
+                                {{ data.statusorder}}
+                            </span>
+                        </td>
+                        <td data-title="Opciones">
+                            <div class="d-flex justify-content-center">
+                                <button class="btn btn-info text-white m-1" type="button" title="Correo" v-if="data.edit" @click="openBotones('correo',data.email)" target="_blank"><i class="fa fa-envelope"></i></button>
+                                <button class="btn btn-primary m-1" type="button" title="Correo" v-if="data.edit" @click="openBotones('llamar',data.phonecode+data.phone)" target="_blank"><i class="fa fa-phone"></i></button>
+                                <button class="btn btn-success m-1"  title="Whatsapp" v-if="data.edit" @click="openBotones('wpp',data.phonecode+data.phone)"><i class="fab fa-whatsapp"></i></button>
+                                <button class="btn btn-success m-1" type="button" title="Editar" v-if="data.edit" @click="getDatos(data.id)" ><i class="fas fa-pencil-alt"></i></button>
+                                <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete" @click="delDatos(data.id)" ><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

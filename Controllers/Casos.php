@@ -58,25 +58,35 @@
             }
         }
         public function setCaso(){
-            dep($_POST);exit;
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
-                    if(empty($_POST['nombre'])){
+                    if(empty($_POST['servicio']) || empty($_POST['cliente']) || empty($_POST['fecha']) || empty($_POST['hora']) || empty($_POST['valor_base'])
+                    || empty($_POST['valor_objetivo']) || empty($_POST['moneda_base']) || empty($_POST['moneda_objetivo'])){
                         $arrResponse = array("status" => false, "msg" => 'Los campos con (*) son obligatorios.');
                     }else{ 
                         $intId = intval($_POST['id']);
-                        $strNombre = ucfirst(strClean($_POST['nombre']));
+                        $strTitulo = ucfirst(strClean(clear_cadena($_POST['titulo'])));
                         $strDescripcion = $_POST['descripcion'];
-
+                        $intServicio = intval($_POST['servicio']);
+                        $intCliente = intval($_POST['cliente']);
+                        $strHora = strClean($_POST['hora']);
+                        $strFecha = strClean($_POST['fecha']);
+                        $strMonedaBase = strtoupper(strClean($_POST['moneda_base']));
+                        $strMonedaObjetivo = strtoupper(strClean($_POST['moneda_objetivo']));
+                        $strEstado = strtolower(strClean($_POST['estado']));
+                        $intValorBase = doubleval($_POST['valor_base']);
+                        $intValorObjetivo = doubleval($_POST['valor_objetivo']);
                         if($intId == 0){
                             if($_SESSION['permitsModule']['w']){
                                 $option = 1;
-                                $request= $this->model->insertArea($strNombre,$strDescripcion,$strDescripcionCorta,$intEstado,$strRuta,$strImagenNombre);
+                                $request= $this->model->insertCaso($strTitulo,$strDescripcion,$intServicio,$intCliente,$strHora,$strFecha,
+                                $strMonedaBase,$strMonedaObjetivo,$intValorBase,$intValorObjetivo,$strEstado);
                             }
                         }else{
                             if($_SESSION['permitsModule']['u']){
                                 $option = 2;
-                                $request = $this->model->updateArea($intId,$strNombre,$strDescripcion,$strDescripcionCorta,$intEstado,$strRuta,$strImagenNombre);
+                                $request = $this->model->updateCaso($intId,$strTitulo,$strDescripcion,$intServicio,$intCliente,$strHora,$strFecha,
+                                $strMonedaBase,$strMonedaObjetivo,$intValorBase,$intValorObjetivo,$strEstado);
                             }
                         }
                         if($request > 0 ){
@@ -117,7 +127,7 @@
         }
         public function getDatosIniciales(){
             if($_SESSION['permitsModule']['r']){
-                echo json_encode(['currency'=>getCompanyInfo()['currency']['code']],JSON_UNESCAPED_UNICODE);
+                echo json_encode(['currency'=>getCompanyInfo()['currency']['code'],"status"=>STATUS],JSON_UNESCAPED_UNICODE);
             }
             die();
         }

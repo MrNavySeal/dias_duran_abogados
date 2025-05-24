@@ -37,18 +37,30 @@ const App = {
             strHora: "",
             objServicio:{id:"",name:""},
             objCliente:{id:"",firstname:"",lastname:"",currency:"COP"},
+            arrEstados:[],
         };
     },mounted(){
-        //this.getBuscar(1,"casos");
+        this.getBuscar(1,"casos");
         this.getDatosIniciales();
     },computed:{
         valorBase:function() {
-            return formatMoney(this.intValorBase)
+            return this.formatMoney(this.intValorBase)
         },
         valorObjetivo:function() {
-            return formatMoney(this.intValorObjetivo)
+            return this.formatMoney(this.intValorObjetivo)
         },
     },methods:{
+        formatMoney: function(valor){
+            valor = new String(valor);
+            // Separar la parte entera y decimal
+            const [integerPart, decimalPart] = valor.split(",");
+
+            // Formatear la parte entera
+            const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return decimalPart !== undefined
+            ? `${formattedInteger},${decimalPart}`
+            : `${formattedInteger}`;
+        },
         setBase:function(e){
             const input = e.target.value;
             const numericValue = input.replace(/[^0-9,]/g, "");
@@ -73,11 +85,12 @@ const App = {
             const response = await fetch(base_url+"/casos/getDatosIniciales");
             const objData = await response.json();
             this.strMoneda = objData.currency;
+            this.arrEstados =objData.status;
         },
         showModal:function(tipo="crear"){
             if(tipo == "crear"){ 
                 this.strTituloModal = "Nuevo caso";
-                this.strEstado= 1;
+                this.strEstado= "confirmado";
                 this.intId = 0;
                 this.intValorBase=0;
                 this.intValorObjetivo=0;
@@ -107,7 +120,6 @@ const App = {
             this.strDescripcion = document.querySelector("#strDescripcion").value;
             const formData = new FormData();
             formData.append("id",this.intId);
-            formData.append("nombre",this.strNombre);
             formData.append("servicio",this.objServicio.id);
             formData.append("cliente",this.objCliente.id);
             formData.append("moneda_base",this.strMoneda);
@@ -118,6 +130,7 @@ const App = {
             formData.append("valor_objetivo",this.intValorObjetivo);
             formData.append("descripcion",this.strDescripcion);
             formData.append("titulo",this.strTitulo);
+            formData.append("estado",this.strEstado);
 
             const response = await fetch(base_url+"/Casos/setCaso",{method:"POST",body:formData});
             const objData = await response.json();
@@ -131,13 +144,14 @@ const App = {
                     this.strHora="";
                     this.objServicio={id:"",name:""};
                     this.objCliente={id:"",firstname:"",lastname:"",currency:"COP"};
-                    this.strEstado= 1;
+                    this.strEstado= "confirmado";
+                    document.querySelector("#strDescripcion").value="";
                 }
                 this.modal.hide();
             }else{
               Swal.fire("Error",objData.msg,"error");
             }
-            //await this.getBuscar(1,"casos");
+            await this.getBuscar(1,"casos");
         },
         getBuscar:async function (intPagina=1,strTipo = ""){
             this.intPagina = intPagina;
