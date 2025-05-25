@@ -42,7 +42,7 @@
                 if($_POST){
                     if(empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['tipo_documento']) || empty($_POST['documento'])
                     || empty($_POST['correo']) || empty($_POST['pais']) || empty($_POST['departamento']) || empty($_POST['ciudad'])
-                    || empty($_POST['pais_telefono']) || empty($_POST['telefono']) || empty($_POST['direccion'])
+                    || empty($_POST['pais_telefono']) || empty($_POST['telefono'])
                     ){
                         $arrResponse = array("status" => false, "msg" => 'Todos los campos con (*) son obligatorios');
                     }else{ 
@@ -107,10 +107,10 @@
                             if($_SESSION['permitsModule']['u']){
     
                                 $option = 2;
-                                $request = $this->model->selectCliente($intId);
+                                $request = doubleval($this->model->selectCliente($intId));
     
                                 if($_FILES['imagen']['name'] == ""){
-                                    $strImagenNombre = $request['image'];
+                                    $strImagenNombre = $request['image'] != "" ? $request['image'] :"user.jpg";
                                 }else{
                                     if($request['image'] != "user.jpg"){
                                         deleteFile($request['image']);
@@ -120,7 +120,7 @@
                                 }
                                 if($strContrasena!=""){ $strContrasena =  hash("SHA256",$strContrasena); }
                                 
-                                $request = $this->model->updateCliente(
+                                $request = doubleval($this->model->updateCliente(
                                     $intId, 
                                     $strNombre, 
                                     $strApellido,
@@ -137,15 +137,13 @@
                                     $strDocumento,
                                     $intRolId,
                                     $strImagenNombre,
-                                );
+                                ));
                             }
                         }
-    
-                        if($request > 0 ){
+                        if(is_numeric($request) && $request > 0){
                             if($strImagen!=""){
                                 uploadImage($strImagen,$strImagenNombre);
                             }
-                            
                             if($option == 1){
                                 $data['nombreUsuario'] = $strNombre." ".$strApellido;
                                 $data['asunto']="Credentials";

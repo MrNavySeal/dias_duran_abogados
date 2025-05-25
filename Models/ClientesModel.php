@@ -71,7 +71,7 @@
 	        return $return;
 		}
         public function updateCliente(int $intId,string $strNombre, string $strApellido,string $intTelefono, string $intPaisTelefono, string $strCorreo, string $strDireccion, 
-        int $intPais, int $intDepartamento, int $intCiudad,string $strContrasena,int $intEstado,$intTipoDocumento,string $strDocumento,int $intRolId,string $strImagenNombre){
+        int $intPais, int $intDepartamento, int $intCiudad,string $strContrasena,int $intEstado,$intTipoDocumento,string $strDocumento,int $intRolId, $strImagenNombre){
             $this->intId = $intId;
             $this->strImagenNombre = $strImagenNombre;
 			$this->strNombre = $strNombre;
@@ -89,9 +89,9 @@
             $this->intEstado = $intEstado;
             $this->intRolId = $intRolId;
 
-            $sql= "SELECT * FROM person WHERE (identification = '{$this->strDocumento}' OR phone = '{$this->intTelefono}' OR email = '{$this->intTelefono}') AND  idperson != $this->intId";
-			$request = $this->select_all($sql);
-
+            $sql= "SELECT * FROM person WHERE (identification = '{$this->strDocumento}' OR phone = '{$this->intTelefono}' OR email = '{$this->strCorreo}') AND  idperson != $this->intId";
+            $request = $this->select_all($sql);
+            
 			if(empty($request)){
 				if($this->strContrasena  != ""){
 					$sql = "UPDATE person SET image=?, firstname=?, lastname=?,email=?, phone=?,address=?,countryid=?,stateid=?,cityid=?,identification=?, 
@@ -165,9 +165,9 @@
             LEFT JOIN cities ci ON p.cityid = ci.id
             LEFT JOIN countries cp ON p.phone_country = cp.id
             LEFT JOIN document_type ty ON p.typeid = ty.id
-            WHERE CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
+            WHERE p.roleid = 2 AND (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
-            OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%' 
+            OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%') 
             ORDER BY p.idperson DESC $limit";  
 
             $sqlTotal = "SELECT count(*) as total FROM person p
@@ -176,9 +176,9 @@
             LEFT JOIN cities ci ON p.cityid = ci.id
             LEFT JOIN countries cp ON p.phone_country = cp.id
             LEFT JOIN document_type ty ON p.typeid = ty.id
-            WHERE CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
+            WHERE p.roleid = 2 AND (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
-            OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%' 
+            OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%') 
             ORDER BY p.idperson DESC";
 
             $totalRecords = $this->select($sqlTotal)['total'];
