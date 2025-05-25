@@ -77,7 +77,7 @@
             LEFT JOIN countries cp ON p.phone_country = cp.id
             LEFT JOIN document_type ty ON p.typeid = ty.id
             LEFT JOIN currency cu ON cp.shortname = cu.iso
-            WHERE p.status = 1 AND (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
+            WHERE p.status = 1 AND p.roleid = 2 AND (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
             OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%') 
             ORDER BY p.idperson DESC $limit";  
@@ -88,7 +88,7 @@
             LEFT JOIN cities ci ON p.cityid = ci.id
             LEFT JOIN countries cp ON p.phone_country = cp.id
             LEFT JOIN document_type ty ON p.typeid = ty.id
-            WHERE p.status = 1 AND (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
+            WHERE p.status = 1 AND p.roleid = 2 AND (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
             OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%') 
             ORDER BY p.idperson DESC";
@@ -152,7 +152,7 @@
             WHERE p.status = 1 AND (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
             OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%' OR serv.name like '$this->strBuscar%' OR c.name like '$this->strBuscar%') 
-            ORDER BY p.idperson DESC $limit";  
+            ORDER BY ord.idorder DESC $limit";  
 
             $sqlTotal = "SELECT count(*) as total FROM orderdata ord
             LEFT JOIN person p ON p.idperson = ord.personid
@@ -167,7 +167,7 @@
             WHERE p.status = 1 AND (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
             OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%' OR serv.name like '$this->strBuscar%' OR c.name like '$this->strBuscar%') 
-            ORDER BY p.idperson DESC";
+            ORDER BY ord.idorder DESC";
 
             $totalRecords = $this->select($sqlTotal)['total'];
             $totalPages = intval($totalRecords > 0 ? ceil($totalRecords/$this->intPorPagina) : 0);

@@ -133,8 +133,12 @@ const App = {
             formData.append("titulo",this.strTitulo);
             formData.append("estado",this.strEstado);
 
+            this.$refs.btnAdd.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
+            this.$refs.btnAdd.disabled = true;
             const response = await fetch(base_url+"/Casos/setCaso",{method:"POST",body:formData});
             const objData = await response.json();
+            this.$refs.btnAdd.innerHTML = `Guardar <i class="fas fa-save"></i>`;
+            this.$refs.btnAdd.disabled = false;
             if(objData.status){
                 Swal.fire("Guardado!",objData.msg,"success");
                 if(this.intId == 0){
@@ -152,6 +156,7 @@ const App = {
             }else{
               Swal.fire("Error",objData.msg,"error");
             }
+            
             await this.getBuscar(1,"casos");
         },
         getBuscar:async function (intPagina=1,strTipo = ""){
@@ -196,6 +201,11 @@ const App = {
           }else{
             Swal.fire("Error",objData.msg,"error");
           }
+        },
+        openBotones:function(tipo,dato){ 
+            if(tipo == "correo")window.open('mailto:'+dato);
+            if(tipo == "llamar")window.open('tel:'+dato);
+            if(tipo == "wpp")window.open('https://wa.me/'+dato);
         },
         delDatos:function(intId,strTipo){
             const objVue = this;

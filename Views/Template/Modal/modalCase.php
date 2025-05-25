@@ -23,7 +23,7 @@
                                     <div class="mb-3">
                                         <label for="" class="form-label">Asignar cliente <span class="text-danger">*</span></label>
                                         <div class="d-flex">
-                                            <button :disabled="strEstado =='approved' && intId > 0" type="button" @click="showModal('clientes')" class="btn btn-primary"><i class="fas fa-plus"></i></button>
+                                            <button :disabled="strEstadoPedido =='approved' && intId > 0" type="button" @click="showModal('clientes')" class="btn btn-primary"><i class="fas fa-plus"></i></button>
                                             <input type="text" class="form-control"  :value="objCliente.firstname+' '+objCliente.lastname" required disabled>
                                         </div>
                                     </div>
@@ -44,14 +44,14 @@
                                     <label for="" class="form-label">Valor <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">{{strMoneda}}</span>
-                                        <input :disabled="strEstado =='approved' && intId > 0" type="text" class="form-control text-end" :value="valorBase" aria-describedby="basic-addon1" @keyup="setBase($event)">
+                                        <input :disabled="strEstadoPedido =='approved' && intId > 0" type="text" class="form-control text-end" :value="valorBase" aria-describedby="basic-addon1" @keyup="setBase($event)">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="" class="form-label">Conversión <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">{{objCliente.currency}}</span>
-                                        <input :disabled="strEstado =='approved' && intId > 0" type="text" class="form-control text-end" :value="valorObjetivo" aria-describedby="basic-addon1" @keyup="setObjetivo($event)">
+                                        <input :disabled="strEstadoPedido =='approved' && intId > 0" type="text" class="form-control text-end" :value="valorObjetivo" aria-describedby="basic-addon1" @keyup="setObjetivo($event)">
                                     </div>
                                 </div>
                                 <div class="col-md-12">

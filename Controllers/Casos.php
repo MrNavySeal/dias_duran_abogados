@@ -60,10 +60,12 @@
         public function setCaso(){
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
+                    
                     if(empty($_POST['servicio']) || empty($_POST['cliente']) || empty($_POST['fecha']) || empty($_POST['hora']) || empty($_POST['valor_base'])
                     || empty($_POST['valor_objetivo']) || empty($_POST['moneda_base']) || empty($_POST['moneda_objetivo'])){
                         $arrResponse = array("status" => false, "msg" => 'Los campos con (*) son obligatorios.');
                     }else{ 
+                        
                         $intId = intval($_POST['id']);
                         $strTitulo = ucfirst(strClean(clear_cadena($_POST['titulo'])));
                         $strDescripcion = $_POST['descripcion'];
@@ -82,6 +84,7 @@
                                 $request= $this->model->insertCaso($strTitulo,$strDescripcion,$intServicio,$intCliente,$strHora,$strFecha,
                                 $strMonedaBase,$strMonedaObjetivo,$intValorBase,$intValorObjetivo,$strEstado);
                             }
+                                
                         }else{
                             if($_SESSION['permitsModule']['u']){
                                 $option = 2;
@@ -89,8 +92,22 @@
                                 $strMonedaBase,$strMonedaObjetivo,$intValorBase,$intValorObjetivo,$strEstado);
                             }
                         }
+
                         if($request > 0 ){
-                            if($option == 1){ $arrResponse = array('status' => true, 'msg' => 'Datos guardados');	
+                            if($option == 1){ 
+                                $arrResponse = array('status' => true, 'msg' => 'Datos guardados');	
+                                $company = getCompanyInfo();
+                                $arrCaso = $this->model->selectCaso($request);
+                                $arrCaso['url'] =base_url()."/pago/pago/".openssl_encrypt($arrCaso['idorder'],METHOD,KEY);
+                                $arrCaso['total'] = $arrCaso['value_target'];
+                                $arrEmailOrden = array(
+                                    'asunto' => "Continua con el pago!",
+                                    'email_usuario' => $arrCaso['cliente']['email'], 
+                                    'email_remitente'=>$company['email'],
+                                    'company'=>$company,
+                                    'email_copia' => $company['secondary_email'],
+                                    'order' => $arrCaso);
+                                try {sendEmail($arrEmailOrden,'email_order_caso');} catch (Exception $e) {}
                             }else{ $arrResponse = array('status' => true, 'msg' => 'Datos actualizados'); }
                         }else{
                             $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
@@ -148,7 +165,7 @@
                     if(!empty($request)){
                         foreach ($request['data'] as &$data) { 
                             if(isset($data['picture'])){ $data['url'] = media()."/images/uploads/".$data['picture'];}
-                            $data['id_encrypt'] =openssl_encrypt($data['idorder'],METHOD,KEY);
+                            $data['id_encrypt'] = setEncriptar($data['idorder']);
                             $data['edit'] = $_SESSION['permitsModule']['u'];
                             $data['delete'] = $_SESSION['permitsModule']['d'];
                         }

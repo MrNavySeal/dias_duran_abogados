@@ -41,7 +41,7 @@
                         <th>País</th>
                         <th>Cita</th>
                         <th>Valor</th>
-                        <th>Conversión</th>
+                        <th>Total</th>
                         <th>Estado de pago</th>
                         <th>Estado de caso</th>
                         <th>Opciones</th>
@@ -50,7 +50,7 @@
                 <tbody>
                     <tr v-for="(data,index) in arrData" :key="index">
                         <td data-title="ID" class="text-center">{{data.idorder}}</td>
-                        <td data-title="Transacción">{{idtransacion}}</td>
+                        <td data-title="Transacción">{{data.idtransaction}}</td>
                         <td data-title="Nombre">{{data.firstname+" "+data.lastname}}</td>
                         <td data-title="Documento">{{data.identification}}</td>
                         <td data-title="Teléfono" class="text-nowrap">{{data.telefono}}</td>
@@ -58,7 +58,7 @@
                         <td data-title="País">{{data.pais}}</td>
                         <td data-title="Cita" class="text-center text-nowrap">{{data.date}}</td>
                         <td data-title="Valor" class="text-end text-nowrap">{{data.currency_base+" "+formatMoney(data.value_base)}}</td>
-                        <td data-title="Conversion" class="text-end text-nowrap">{{data.currency_target+" "+formatMoney(data.value_target)}}</td>
+                        <td data-title="Total" class="text-end text-nowrap">{{data.currency_target+" "+formatMoney(data.value_target)}}</td>
                         <td data-title="Estado" class="text-center">
                             <span :class="data.status == 'approved' ? 'bg-success text-white' : data.status == 'pendent' ? 'bg-warning text-black' :'bg-danger text-white'" class="badge">
                                 {{ data.status == 'approved' ? "pagado" : data.status == 'pendent' ? "pendiente" : "anulado" }}
