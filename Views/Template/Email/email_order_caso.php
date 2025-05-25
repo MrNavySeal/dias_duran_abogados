@@ -150,57 +150,11 @@ table, td { color: #7e8f9e; } #u_body a { color: #000000; text-decoration: under
 			<p style="line-height: 150%;"><span style="color: #000000; line-height: 24px;">Hola <?= $arrCliente['firstname']?></span></p>
 			<p style="line-height: 150%;"> </p>
 			<p style="line-height: 150%;">
-				<span style="color: #000000; line-height: 24px;">Aquí estan los detalles de tu pago.</span>
-			</p>
+				<span style="color: #000000; line-height: 24px;">Por favor da click en el botón de pagar para continuar. En caso de fallar el botón, por favor copia el siguiente enlace:</span>
 			<p style="line-height: 150%;"> </p>
-			<table>
-				<tbody>
-					<tr style="border:1px solid #BFBDC1;">
-						<td style="padding:10px;background:#162542;color: #fff">Factura de venta</td>
-						<td style="padding:10px;color:#162542"> <?=$arrOrden['idorder']?></td>
-					</tr>
-					<tr style="border:1px solid #BFBDC1;">
-						<td style="padding:10px;background:#162542;color: #fff">Transacción</td>
-						<td style="padding:10px;color:#162542"> <?=$arrOrden['idtransaction']?></td>
-					</tr>
-					<tr style="border:1px solid #BFBDC1;">
-						<td style="padding:10px;background:#162542;color: #fff">Nombre</td>
-						<td style="padding:10px;color:#162542"> <?=$arrCliente['firstname']?></td>
-					</tr>
-					<tr style="border:1px solid #BFBDC1;">
-						<td style="padding:10px;background:#162542;color: #fff">Apellido</td>
-						<td style="padding:10px; color:#162542"> <?=$arrCliente['lastname']?></td>
-					</tr>
-					<tr style="border:1px solid #BFBDC1;">
-						<td style="padding:10px;background:#162542;color: #fff">Tipo documento</td>
-						<td style="padding:10px; color:#162542"> <?=$arrCliente['tipo_documento']?></td>
-					</tr>
-					<tr style="border:1px solid #BFBDC1;">
-						<td style="padding:10px;background:#162542;color: #fff">No. documento</td>
-						<td style="padding:10px; color:#162542"> <?=$arrCliente['identification']?></td>
-					</tr>
-					<tr style="border:1px solid #BFBDC1;">
-						<td style="padding:10px;background:#162542;color: #fff">Correo</td>
-						<td style="padding:10px; color:#162542"> <?=$arrCliente['email']?></td>
-					</tr>
-					<tr style="border:1px solid #BFBDC1;">
-						<td style="padding:10px;background:#162542;color: #fff">Teléfono</td>
-						<td style="padding:10px; color:#162542"> <?=$arrCliente['telefono']?></td>
-					</tr>
-					<tr style="border:1px solid #BFBDC1;">
-						<td style="padding:10px;background:#162542;color: #fff">Dirección</td>
-						<td style="padding:10px; color:#162542"> <?=$arrCliente['pais']."/".$arrCliente['departamento']."/".$arrCliente['ciudad']."/".$arrCliente['address'];?></td>
-					</tr>
-					<tr style="border:1px solid #BFBDC1;">
-						<td style="padding:10px;background:#162542;color: #fff">Concepto</td>
-						<td style="padding:10px; color:#162542"> <?=$arrServicio['servicio']?></td>
-					</tr>
-					<tr style="border:1px solid #BFBDC1;">
-						<td style="padding:10px;background:#162542;color: #fff">Total</td>
-						<td style="padding:10px; color:#162542"> <?=$arrOrden['currency']." ".formatNum($arrOrden['total'])?></td>
-					</tr>
-				</tbody>
-			</table>
+      <p style="line-height: 150%;">
+				<span style="color: #000000; line-height: 24px;"><?=$arrOrden['url']?></span>
+			</p>
 		</div>
       </td>
     </tr>
@@ -211,7 +165,7 @@ table, td { color: #7e8f9e; } #u_body a { color: #000000; text-decoration: under
   <tbody>
     <tr>
       <td style="overflow-wrap:break-word;word-break:break-word;padding:50px 10px 10px;font-family:helvetica,sans-serif;" align="left">
-    		<h2 style="margin: 0px; color: #162542; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 20px; font-weight: 700;"><span><span><span><span><span><span><span>Gracias por tu compra!</span></span></span></span></span></span></span></h2>
+    		<h2 style="margin: 0px; color: #162542; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 20px; font-weight: 700;"><span><span><span><span><span><span><span>Gracias por confiar en nosotros</span></span></span></span></span></span></span></h2>
       </td>
     </tr>
   </tbody>
@@ -223,11 +177,10 @@ table, td { color: #7e8f9e; } #u_body a { color: #000000; text-decoration: under
       <td style="overflow-wrap:break-word;word-break:break-word;padding:30px;font-family:helvetica,sans-serif;" align="left">
         
 		<div align="center">
-			<p style="line-height: 150%;"><span style="color: #000000; line-height: 24px;">Puedes ver el detalle ingresando a tu perfil de usuario.</span></p>
 			<p style="line-height: 150%;"> </p>
 		
-			<a href="<?=base_url()?>/usuarios/perfil" target="_blank" class="v-button" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #ffffff; background-color: #b68c5a; border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;font-size: 16px;font-weight: 700; ">
-			<span style="display:block;padding:16px;line-height:120%;"><span style="line-height: 19.2px;">MI PERFIL</span></span>
+			<a href="<?=$arrOrden['url']?>" target="_blank" class="v-button" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #ffffff; background-color: #b68c5a; border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;font-size: 16px;font-weight: 700; ">
+			<span style="display:block;padding:16px;line-height:120%;"><span style="line-height: 19.2px;">PAGAR</span></span>
 			</a>
 		</div>
 

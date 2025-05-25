@@ -7,8 +7,15 @@
             <div>
                 <h1 class="fs-1 t-color-2">Error 404</h1>
                 <h2 class="fs-2 text-secondary mb-3">¡Uy! Te has perdido.</h2>
-                <a href="<?=base_url()?>/tienda" class="btn btn-bg-2">Ver tienda</a>
-                <a href="<?=base_url()?>/enmarcar" class="btn btn-bg-2">Enmarcar</a>
+                <hr>
+                <div class="mt-3 d-flex align-items-center justify-content-center">
+                    <el-button onclick="window.location.href='<?=base_url()?>'" class="btn btn-bg-2" type="primary">Inicio</el-button>
+                    <?php if(isset($_SESSION['login'])){ ?>
+                        <el-button onclick="window.location.href='<?=base_url()?>/usuarios/perfil'" class="btn btn-bg-2" type="primary">Mi perfil</el-button>
+                    <?php }else {?>
+                        <el-button onclick="openLoginModal();" class="btn btn-bg-2" type="primary">Iniciar sesión</el-button>
+                    <?php }?>
+                </div>
             </div>
         </div>
     </main>

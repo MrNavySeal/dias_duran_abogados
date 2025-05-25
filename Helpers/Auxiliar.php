@@ -155,4 +155,15 @@
         $request = $con->select_all("SELECT * FROM document_type ORDER BY name");
         return $request;
     }
+    function setEncriptar($data){
+        $encrypted = openssl_encrypt($data, METHOD,KEY);
+        $base64 = base64_encode($encrypted); 
+        $safe = str_replace(['/', '+'], ['_', '-'], $base64);
+        return $safe;
+    }
+    function setDesencriptar($data){
+        $padded = str_pad(str_replace(['_', '-'], ['/', '+'], $data), strlen($data) % 4, '=', STR_PAD_RIGHT);
+        $decrypted = openssl_decrypt($padded, METHOD, KEY);
+        return $decrypted;
+    }
 ?>
