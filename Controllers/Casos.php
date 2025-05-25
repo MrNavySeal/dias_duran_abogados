@@ -101,6 +101,36 @@
             }
 			die();
 		}
+        public function delDatos(){
+            if($_SESSION['permitsModule']['d']){
+                if($_POST){
+                    $intId = intval($_POST['id']);
+                    $request = $this->model->deleteCaso($intId);
+                    if($request > 0 || $request == "ok"){
+                        $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado correctamente.");
+                    }else{
+                        $arrResponse = array("status"=>false,"msg"=>"No es posible eliminar, intenta de nuevo.");
+                    }
+                    echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+                }
+            }
+            die();
+        }
+        public function getDatos(){
+            if($_SESSION['permitsModule']['r']){
+                if($_POST){
+                    $intId = intval($_POST['id']);
+                    $request = $this->model->selectCaso($intId);
+                    if(!empty($request)){
+                        $arrResponse = array("status"=>true,"data"=>$request);
+                    }else{
+                        $arrResponse = array("status"=>false,"msg"=>"Error, intenta de nuevo"); 
+                    }
+                    echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+                }
+            }
+            die();
+        }
         public function getBuscar(){
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
@@ -118,6 +148,9 @@
                     if(!empty($request)){
                         foreach ($request['data'] as &$data) { 
                             if(isset($data['picture'])){ $data['url'] = media()."/images/uploads/".$data['picture'];}
+                            $data['id_encrypt'] =openssl_encrypt($data['idorder'],METHOD,KEY);
+                            $data['edit'] = $_SESSION['permitsModule']['u'];
+                            $data['delete'] = $_SESSION['permitsModule']['d'];
                         }
                     }
                     echo json_encode($request,JSON_UNESCAPED_UNICODE);

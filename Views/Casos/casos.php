@@ -39,7 +39,7 @@
                         <th>Teléfono</th>
                         <th>Correo</th>
                         <th>País</th>
-                        <th>Fecha</th>
+                        <th>Cita</th>
                         <th>Valor</th>
                         <th>Conversión</th>
                         <th>Estado de pago</th>
@@ -56,7 +56,7 @@
                         <td data-title="Teléfono" class="text-nowrap">{{data.telefono}}</td>
                         <td data-title="Correo">{{data.email}}</td>
                         <td data-title="País">{{data.pais}}</td>
-                        <td data-title="Fecha" class="text-center text-nowrap">{{data.date}}</td>
+                        <td data-title="Cita" class="text-center text-nowrap">{{data.date}}</td>
                         <td data-title="Valor" class="text-end text-nowrap">{{data.currency_base+" "+formatMoney(data.value_base)}}</td>
                         <td data-title="Conversion" class="text-end text-nowrap">{{data.currency_target+" "+formatMoney(data.value_target)}}</td>
                         <td data-title="Estado" class="text-center">
@@ -71,11 +71,11 @@
                         </td>
                         <td data-title="Opciones">
                             <div class="d-flex justify-content-center">
-                                <button class="btn btn-info text-white m-1" type="button" title="Correo" v-if="data.edit" @click="openBotones('correo',data.email)" target="_blank"><i class="fa fa-envelope"></i></button>
-                                <button class="btn btn-primary m-1" type="button" title="Correo" v-if="data.edit" @click="openBotones('llamar',data.phonecode+data.phone)" target="_blank"><i class="fa fa-phone"></i></button>
-                                <button class="btn btn-success m-1"  title="Whatsapp" v-if="data.edit" @click="openBotones('wpp',data.phonecode+data.phone)"><i class="fab fa-whatsapp"></i></button>
-                                <button class="btn btn-success m-1" type="button" title="Editar" v-if="data.edit" @click="getDatos(data.id)" ><i class="fas fa-pencil-alt"></i></button>
-                                <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete" @click="delDatos(data.id)" ><i class="fas fa-trash-alt"></i></button>
+                                <button class="btn btn-primary text-white m-1" :id="'btnPopover'+data.idorder" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Copiado!" type="button" title="Paypal"  @click="copiar(data,'btnPopover'+data.idorder)" v-if="data.status != 'approved'"><i class="fab fa-paypal"></i></button>
+                                <button class="btn btn-info text-white m-1" type="button" title="Correo"  @click="openBotones('correo',data.email)" ><i class="fa fa-envelope"></i></button>
+                                <button class="btn btn-success m-1"  title="Whatsapp" @click="openBotones('wpp',data.phonecode+data.phone)"><i class="fab fa-whatsapp"></i></button>
+                                <button class="btn btn-success m-1" type="button" title="Editar" v-if="data.edit" @click="getDatos(data.idorder)" ><i class="fas fa-pencil-alt"></i></button>
+                                <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete && data.status != 'approved'" @click="delDatos(data.idorder)" ><i class="fas fa-trash-alt"></i></button>
                             </div>
                         </td>
                     </tr>

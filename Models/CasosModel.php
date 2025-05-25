@@ -191,6 +191,39 @@
             );
             return $arrData;
         }
+        public function selectCaso($intId){
+            $this->intId = $intId;
+            $sql = "SELECT * FROM orderdata WHERE idorder = $this->intId";
+           
+            $request = $this->select($sql);
+            if(!empty($request)){
+                $sqlCliente = "SELECT p.*,p.idperson as id,p.image as picture,
+                DATE_FORMAT(p.date, '%d/%m/%Y') as date,
+                co.name as pais,
+                st.name as departamento,
+                ci.name as ciudad,
+                cp.phonecode,
+                ty.name as tipo_documento,
+                cu.code as currency,
+                CONCAT('+',cp.phonecode,' ',p.phone) as telefono
+                FROM person p
+                LEFT JOIN countries co ON p.countryid = co.id
+                LEFT JOIN states st ON p.stateid = st.id
+                LEFT JOIN cities ci ON p.cityid = ci.id
+                LEFT JOIN countries cp ON p.phone_country = cp.id
+                LEFT JOIN document_type ty ON p.typeid = ty.id
+                LEFT JOIN currency cu ON cp.shortname = cu.iso
+                WHERE p.idperson = $request[personid] AND p.status = 1";
+
+
+                $sqlServicio = "SELECT p.*, c.name as category 
+                FROM service p INNER JOIN category c ON c.id = p.categoryid 
+                WHERE p.status = 1 AND p.id = $request[service_id]";
+                $request['cliente'] = $this->select($sqlCliente);
+                $request['servicio'] = $this->select($sqlServicio);
+            }
+            return $request;
+        }
         public function selectConversion($strMonedaBase,$strMonedaObjetivo){
             $this->strMonedaBase = $strMonedaBase;
             $this->strMonedaObjetivo = $strMonedaObjetivo;
@@ -229,6 +262,38 @@
             $request = $this->insert($sql,$arrData);
             return $request;
         }
+        public function updateCaso($intId,$strTitulo,$strDescripcion,$intServicio,$intCliente,$strHora,$strFecha,
+        $strMonedaBase,$strMonedaObjetivo,$intValorBase,$intValorObjetivo,$strEstado){
+            $this->intId = $intId;
+            $this->strTitulo = $strTitulo;
+            $this->strDescripcion = $strDescripcion;
+            $this->intServicio = $intServicio;
+            $this->intCliente = $intCliente;
+            $this->strHora = $strHora;
+            $this->strFecha = $strFecha;
+            $this->intValorBase = $intValorBase;
+            $this->intValorObjetivo = $intValorObjetivo;
+            $this->strMonedaBase = $strMonedaBase;
+            $this->strMonedaObjetivo = $strMonedaObjetivo;
+            $this->strEstado = $strEstado;
+            $sql = "UPDATE orderdata SET title=?,note=?,service_id=?,personid=?,time=?,date=?,value_base=?,value_target=?,currency_base=?,currency_target=?,statusorder=?
+            WHERE idorder = $this->intId";
+            $arrData =[
+                $this->strTitulo,
+                $this->strDescripcion,
+                $this->intServicio,
+                $this->intCliente, 
+                $this->strHora,
+                $this->strFecha, 
+                $this->intValorBase,
+                $this->intValorObjetivo,
+                $this->strMonedaBase,
+                $this->strMonedaObjetivo,
+                $this->strEstado,
+            ];
+            $request = $this->update($sql,$arrData);
+            return $request;
+        }
         public function insertConversion($strMonedaBase,$strMonedaObjetivo,$intValorObjetivo){
             $this->strMonedaBase = $strMonedaBase;
             $this->strMonedaObjetivo = $strMonedaObjetivo;
@@ -241,6 +306,12 @@
             $this->intValorObjetivo = $intValorObjetivo;
             $this->strFecha = $strFecha;
             $request = $this->update("UPDATE conversion SET target=?,date=? WHERE id = $this->intId",[$this->intValorObjetivo,$this->strFecha]);
+            return $request;
+        }
+        public function deleteCaso($id){
+            $this->intId = $id;
+            $sql = "DELETE FROM orderdata WHERE idorder = $this->intId";
+            $request = $this->delete($sql);
             return $request;
         }
     }

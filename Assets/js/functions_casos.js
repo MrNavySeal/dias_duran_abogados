@@ -28,6 +28,7 @@ const App = {
             strDescripcion:"",
             strDescripcionCorta:"",
             strEstado:"confirmado",
+            strEstadoPedido:"pendent",
             strTitulo:"",
             strTituloModal:"",
             strMoneda:"",
@@ -171,24 +172,29 @@ const App = {
         },
         getDatos:async function(intId,strTipo){
           this.intId = intId;
-          this.strTituloModal = "Editar área";
+          this.strTituloModal = "Editar caso";
           const formData = new FormData();
           formData.append("id",this.intId);
           formData.append("tipo_busqueda",strTipo);
-          const response = await fetch(base_url+"/Areas/getDatos",{method:"POST",body:formData});
+          const response = await fetch(base_url+"/Casos/getDatos",{method:"POST",body:formData});
           const objData = await response.json();
+
           if(objData.status){
-              this.strImgUrl= objData.data.url,
-              this.strImagen= "",
-              this.strNombre= objData.data.name,
-              this.strDescripcionCorta= objData.data.short_description,
-              this.strEstado= objData.data.status,
-              setTinymce("#strDescripcion");
-              document.querySelector("#strDescripcion").value = objData.data.description,
-              this.modal = new bootstrap.Modal(document.querySelector("#modalCase"));
-              this.modal.show();
+            this.objCliente = objData.data.cliente;
+            this.objServicio = objData.data.servicio;
+            this.strFecha = objData.data.date;
+            this.strHora = objData.data.time;
+            this.intValorBase = objData.data.value_base;
+            this.intValorObjetivo = objData.data.value_target;
+            this.strTitulo = objData.data.title;
+            this.strEstado = objData.data.statusorder;
+            this.strEstadoPedido = objData.data.status;
+            setTinymce("#strDescripcion",500);
+            document.querySelector("#strDescripcion").value = objData.data.note,
+            this.modal = new bootstrap.Modal(document.querySelector("#modalCase"));
+            this.modal.show();
           }else{
-              Swal.fire("Error",objData.msg,"error");
+            Swal.fire("Error",objData.msg,"error");
           }
         },
         delDatos:function(intId,strTipo){
@@ -208,16 +214,16 @@ const App = {
                   const formData = new FormData();
                   formData.append("id",objVue.intId);
                   formData.append("tipo_busqueda",strTipo);
-                  const response = await fetch(base_url+"/Areas/delDatos",{method:"POST",body:formData});
+                  const response = await fetch(base_url+"/casos/delDatos",{method:"POST",body:formData});
                   const objData = await response.json();
                   if(objData.status){
                     Swal.fire("Eliminado!",objData.msg,"success");
-                    objVue.getBuscar(1,"areas");
+                    objVue.getBuscar(1,"casos");
                   }else{
                     Swal.fire("Error",objData.msg,"error");
                   }
               }else{
-                objVue.getBuscar(1,"areas");
+                objVue.getBuscar(1,"casos");
               }
           });
         },
@@ -243,6 +249,17 @@ const App = {
             if(flag){ this.intValorBase = objData.data; }
             else { this.intValorObjetivo = objData.data; }
            
+        },
+        copiar:function(data,idBtn){
+            const url =base_url+"/pago/pago/"+data.id_encrypt;
+            navigator.clipboard.writeText(url).then(function() { 
+                const exampleEl = document.getElementById(idBtn)
+                const popover = new bootstrap.Popover(exampleEl)
+                popover.show();
+                setTimeout(function(){
+                    popover.dispose();
+                },1500);
+            });
         }
     }
 };
