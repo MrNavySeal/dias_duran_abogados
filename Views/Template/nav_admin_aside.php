@@ -60,11 +60,34 @@
                 </div>
             </div>
             <?php } ?>
-            <!-- Pedidos -->
-            <?php if($_SESSION['permit'][6]['r']){ $active = $_SESSION['permitsModule']['module'] == "Pedidos" ? "active" :"";?>
+            <!-- Casos -->
+            <?php if($_SESSION['permit'][6]['r']){ $active = $_SESSION['permitsModule']['module'] == "Casos" ? "active" :"";?>
                 <a href="<?=base_url()?>/casos" class="nav-item nav-link <?=$active?>"><i class="fas fa-briefcase"></i>Casos</a>
             <?php } ?>
             <!-- Administración -->
+             <?php if($_SESSION['permit'][7]['r']){ $active = $_SESSION['permitsModule']['module'] == "Secciones" ? "active" :"";?>
+             <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle <?=$active?>" data-bs-toggle="dropdown"><i class="fas fa-puzzle-piece"></i>Secciones</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="<?=base_url()?>/Secciones/paginas" class="dropdown-item">Paginas</a>
+                    <a href="<?=base_url()?>/Secciones/banners" class="dropdown-item">Banners</a>
+                    <a href="<?=base_url()?>/Secciones/equipo" class="dropdown-item">Equipo</a>
+                    <a href="<?=base_url()?>/Secciones/testimonios" class="dropdown-item">Testimonios</a>
+                    <a href="<?=base_url()?>/Secciones/faq" class="dropdown-item">FAQ</a>
+                </div>
+            </div>
+            <?php } ?>
+            
+            <?php if($_SESSION['permit'][8]['r']){$active = $_SESSION['permitsModule']['module'] == "Blog" ? "active" :"";?>                
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle <?=$active?>" data-bs-toggle="dropdown"><i class="far fa-newspaper"></i>Blog</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="<?=base_url()?>/Noticias/categorias" class="dropdown-item">Categorias</a>
+                    <a href="<?=base_url()?>/Noticias/noticias" class="dropdown-item">Noticias</a>
+                </div>
+            </div>
+            <?php } ?>
+            
             <?php 
                 if($_SESSION['permit'][5]['r']){
                     $emails = "";
@@ -79,25 +102,6 @@
                 <div class="dropdown-menu bg-transparent border-0">
                     <a href="<?=base_url()?>/empresa" class="dropdown-item">Parámetros de empresa</a>
                     <a href="<?=base_url()?>/administracion/correo" class="dropdown-item">Correo <?=$emails?></a>
-                </div>
-            </div>
-            <?php } ?>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle <?=$active?>" data-bs-toggle="dropdown"><i class="fas fa-puzzle-piece"></i>Secciones</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="<?=base_url()?>/Secciones/paginas" class="dropdown-item">Paginas</a>
-                    <a href="<?=base_url()?>/Secciones/banners" class="dropdown-item">Banners</a>
-                    <a href="<?=base_url()?>/Secciones/equipo" class="dropdown-item">Equipo</a>
-                    <a href="<?=base_url()?>/Secciones/testimonios" class="dropdown-item">Testimonios</a>
-                    <a href="<?=base_url()?>/Secciones/faq" class="dropdown-item">FAQ</a>
-                </div>
-            </div>
-            <?php if($_SESSION['permit'][10]['r']){$active = $_SESSION['permitsModule']['module'] == "Blog" ? "active" :"";?>                
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle <?=$active?>" data-bs-toggle="dropdown"><i class="far fa-newspaper"></i>Blog</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="<?=base_url()?>/Noticias/categorias" class="dropdown-item">Categorias</a>
-                    <a href="<?=base_url()?>/Noticias/noticias" class="dropdown-item">Noticias</a>
                 </div>
             </div>
             <?php } ?>
