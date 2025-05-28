@@ -1,4 +1,4 @@
-<section class="mt-5 mb-5 bg-color-2">
+<section class="mt-5 mb-5 bg-color-2" v-if="arrTestimonios && arrTestimonios.length > 0">
     <div>
         <div class="testimonial">
             <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
@@ -13,14 +13,14 @@
                         </div>
                         <div class="col-md-6">
                             <div class="carousel-testimonial owl-carousel owl-theme" data-bs-ride="carousel">
-                                <div class="testimonial-info">
+                                <div class="testimonial-info" v-for="(data,index) in arrTestimonios" :key="index">
                                     <div class="testimonial-img">
-                                        <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
+                                        <img :src="data.url" :alt="data.name">
                                     </div>
                                     <div class="testimonial-description">
-                                        <h6 class="t-color-2 fs-3 fw-bold">Vilma Ladino</h6>
-                                        <span class="t-color-1 fw-bold">Abogada</span>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe hic quo quaerat obcaecati quasi iste odio quibusdam, cupiditate suscipit veritatis atque quisquam impedit doloremque maxime nisi commodi, nobis veniam! Sunt.</p>
+                                        <h6 class="t-color-2 fs-3 fw-bold">aaaa{{data.name}}</h6>
+                                        <span class="t-color-1 fw-bold">{{data.profession}}</span>
+                                        <p>{{data.description}}</p>
                                     </div>
                                 </div>
                             </div>

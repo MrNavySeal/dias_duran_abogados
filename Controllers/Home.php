@@ -1,10 +1,8 @@
 <?php
-    
-    require_once("Models/CustomerTrait.php");
+    require_once("Models/GeneralTrait.php");
     require_once("Models/BlogTrait.php");
-    require_once("Models/CategoryTrait.php");
     class Home extends Controllers{
-        use CustomerTrait,BlogTrait,CategoryTrait;
+        use GeneralTrait,BlogTrait;
         public function __construct(){
             session_start();
             parent::__construct();
@@ -18,12 +16,14 @@
             $data['page_name'] = "inicio";
             $data['app'] = "functions_inicio.js";
             $data['company'] = $company;
-            $data['posts'] = $this->getArticlesT(3);
             $this->views->getView($this,"home",$data);
         }
         public function getInitialData(){
             $arrResponse = array(
-                "banners"=>$this->getBanners()
+                "banners"=>$this->getBanners(),
+                "testimonios"=>$this->getTestimonios(),
+                "areas"=>$this->getAreas(),
+                "noticias"=>$this->getNoticias(),
             );
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             die();
