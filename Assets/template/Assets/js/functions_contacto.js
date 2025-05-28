@@ -1,6 +1,7 @@
 const App = {
     data() {
       return {
+        arrAreas:[],
         form: {
           name: '',
           region: '',
@@ -13,9 +14,13 @@ const App = {
         }
       };
     },mounted(){
-
+        this.getInitialData();
     },methods:{
-      
+       getInitialData: async function(){
+            const response = await fetch(base_url+"/Home/getInitialData");
+            const objData = await response.json();
+            this.arrAreas = objData.areas;
+        },
     }
 
   };

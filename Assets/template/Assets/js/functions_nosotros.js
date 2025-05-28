@@ -3,6 +3,7 @@ const App = {
       return {
         arrTestimonios:[],
         arrEquipo:[],
+        arrAreas:[],
         objNosotros:[],
       };
     },mounted(){
@@ -18,6 +19,7 @@ const App = {
             this.arrTestimonios = objData.testimonios;
             this.arrEquipo = objData.equipo;
             this.objNosotros = objData.nosotros;
+            this.arrAreas = objData.areas;
             this.$refs.strDescripcion.innerHTML = this.objNosotros.description;
         },
         setCarousel:function(){

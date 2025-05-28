@@ -20,8 +20,7 @@
                     <div id="collapseServices" class="accordion-collapse collapse" aria-labelledby="headingServices" data-bs-parent="#accordionServices">
                         <div class="accordion-body">
                             <ul>
-                                <li class="navmobile-link"><a href="#">Servicio 1</a></li>
-                                <li class="navmobile-link"><a href="#">Servicio 2</a></li>
+                                <li class="navmobile-link" v-for="(data,index) in arrAreas" :key="index"><a :href="data.route">{{data.name}}</a></li>
                             </ul>
                         </div>
                     </div>

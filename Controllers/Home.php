@@ -1,9 +1,8 @@
 <?php
     
     require_once("Models/GeneralTrait.php");
-    require_once("Models/BlogTrait.php");
     class Home extends Controllers{
-        use GeneralTrait,BlogTrait;
+        use GeneralTrait;
         public function __construct(){
             session_start();
             parent::__construct();

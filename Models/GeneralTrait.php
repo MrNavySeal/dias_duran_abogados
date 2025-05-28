@@ -78,6 +78,12 @@
             $request['url'] = $strUrl;
             return $request;
         }
+        public function getFaq(){
+            $this->con=new Mysql();
+            $sql = "SELECT * FROM faq WHERE status = 1";
+            $request = $this->con->select_all($sql);
+            return $request;
+        }
     }
     
 ?>
