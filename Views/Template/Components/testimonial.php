@@ -18,7 +18,7 @@
                                         <img :src="data.url" :alt="data.name">
                                     </div>
                                     <div class="testimonial-description">
-                                        <h6 class="t-color-2 fs-3 fw-bold">aaaa{{data.name}}</h6>
+                                        <h6 class="t-color-2 fs-3 fw-bold">{{data.name}}</h6>
                                         <span class="t-color-1 fw-bold">{{data.profession}}</span>
                                         <p>{{data.description}}</p>
                                     </div>

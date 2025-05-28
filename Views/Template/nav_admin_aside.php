@@ -50,8 +50,8 @@
             <a href="<?=base_url()?>/clientes" class="nav-item nav-link <?=$active?>"><i class="fas fa-user-tag"></i>Clientes</a>
             <?php } ?>
 
-            <!-- Productos -->
-            <?php  if($_SESSION['permit'][11]['r']){ $active = $_SESSION['permitsModule']['module'] == "Productos" ? "active" :"";?>
+            <!-- Areas de asesoria -->
+            <?php  if($_SESSION['permit'][4]['r']){ $active = $_SESSION['permitsModule']['module'] == "asesoria" ? "active" :"";?>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle <?=$active?>" data-bs-toggle="dropdown"><i class="fas fa-layer-group"></i>Áreas de asesoría</a>
                 <div class="dropdown-menu bg-transparent border-0">

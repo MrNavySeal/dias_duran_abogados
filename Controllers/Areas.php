@@ -7,7 +7,7 @@
                 die();
             }
             parent::__construct();
-            getPermits(11);
+            getPermits(4);
         }
         public function areas(){
             if($_SESSION['permitsModule']['r']){

@@ -1,4 +1,5 @@
 <?php
+    
     require_once("Models/GeneralTrait.php");
     require_once("Models/BlogTrait.php");
     class Home extends Controllers{
@@ -24,6 +25,8 @@
                 "testimonios"=>$this->getTestimonios(),
                 "areas"=>$this->getAreas(),
                 "noticias"=>$this->getNoticias(),
+                "equipo"=>$this->getEquipo(),
+                "nosotros"=>$this->getPagina("nosotros"),
             );
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             die();

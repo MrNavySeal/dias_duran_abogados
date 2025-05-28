@@ -150,7 +150,7 @@
             $this->strDescripcion = $strDescripcion;
             $this->strRuta = $strRuta;
             $this->intCategoria = $intCategoria;
-            $sql  = "INSERT INTO blog(name,picture,shortdescription,description,status,route,category_id)  VALUES(?,?,?,?,?,?,?)";
+            $sql  = "INSERT INTO blog(name,picture,shortdescription,description,status,route,category_id,person_id)  VALUES(?,?,?,?,?,?,?,?)";
             $arrData = array(
                 $this->strNombre,
                 $this->strImagen,
@@ -159,6 +159,7 @@
                 $this->intEstado,
                 $this->strRuta,
                 $this->intCategoria,
+                $_SESSION['idUser']
             );
             $request = $this->insert($sql,$arrData);
 	        return $request;

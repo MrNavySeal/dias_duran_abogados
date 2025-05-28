@@ -16,17 +16,22 @@
         }
         public function getNoticias(){
             $this->con=new Mysql();
-            $sql = "SELECT b.*,c.name as categoria 
+            $sql = "SELECT b.*,c.name as categoria,
+            CONCAT(p.firstname,' ',p.lastname) as user_name,
+            p.image as picture_user
             FROM blog b 
             INNER JOIN blog_category c ON c.id = b.category_id
+            INNER JOIN person p ON p.idperson = b.person_id
             WHERE b.status = 1  ORDER BY b.id DESC";
             $request = $this->con->select_all($sql);
             $total = count($request);
             for ($i=0; $i < $total; $i++) { 
                 $strUrl = media()."/images/uploads/".$request[$i]['picture'];
+                $strUrlPicture = media()."/images/uploads/".$request[$i]['picture_user'];
                 $strFecha = new DateTime($request[$i]['date']);
-                $request[$i]['route'] = base_url()."/"
+                $request[$i]['route'] = base_url()."/blog/noticia/".$request[$i]['route'];
                 $request[$i]['url'] = $strUrl;
+                $request[$i]['url_picture'] = $strUrlPicture;
                 $request[$i]['date_format'] = $strFecha->format('M j, Y');
             }
             return $request;
@@ -39,6 +44,7 @@
             for ($i=0; $i < $total; $i++) { 
                 $strUrl = media()."/images/uploads/".$request[$i]['picture'];
                 $request[$i]['url'] = $strUrl;
+                $request[$i]['route'] = base_url()."/servicios/area/".$request[$i]['route'];
             }
             return $request;
         }
@@ -51,6 +57,25 @@
                 $strUrl = media()."/images/uploads/".$request[$i]['picture'];
                 $request[$i]['url'] = $strUrl;
             }
+            return $request;
+        }
+        public function getEquipo(){
+            $this->con=new Mysql();
+            $sql = "SELECT * FROM team WHERE status = 1 ORDER BY name ASC";
+            $request = $this->con->select_all($sql);
+            $total = count($request);
+            for ($i=0; $i < $total; $i++) { 
+                $strUrl = media()."/images/uploads/".$request[$i]['picture'];
+                $request[$i]['url'] = $strUrl;
+            }
+            return $request;
+        }
+        public function getPagina($tipo){
+            $this->con=new Mysql();
+            $sql = "SELECT * FROM page WHERE type = '$tipo'";
+            $request = $this->con->select($sql);
+            $strUrl = media()."/images/uploads/".$request['picture'];
+            $request['url'] = $strUrl;
             return $request;
         }
     }
