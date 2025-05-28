@@ -34,7 +34,10 @@
                         <th>Portada</th>
                         <th>Categoría</th>
                         <th>Título</th>
-                        <th>Descripción corta</th>
+                        <th>Autor</th>
+                        <th>Descripción</th>
+                        <th class="text-nowrap">Fecha de creación</th>
+                        <th class="text-nowrap">Fecha de actualización</th>
                         <th>Estado</th>
                         <th>Opciones</th>
                     </tr>
@@ -47,7 +50,10 @@
                         </td>
                         <td data-title="Área">{{data.categoria}}</td>
                         <td data-title="Nombre">{{data.name}}</td>
+                        <td data-title="Autor">{{data.user_name}}</td>
                         <td data-title="Descripción">{{data.shortdescription}}</td>
+                        <td data-title="Fecha de creación">{{data.date_created}}</td>
+                        <td data-title="Fecha de actualizacion">{{data.date_updated}}</td>
                         <td data-title="Estado" class="text-center">
                             <span :class="data.status == '1' ? 'bg-success' : 'bg-danger'" class="badge text-white">
                                 {{ data.status == '1' ? "Activo" : "Inactivo" }}

@@ -105,15 +105,20 @@
             if($this->intPorPagina != 0){
                 $limit = " LIMIT $this->intPaginaInicio,$this->intPorPagina";
             }
-            $sql = "SELECT b.*,c.name as categoria 
+            $sql = "SELECT b.*,c.name as categoria,
+            CONCAT(p.firstname,' ',p.lastname) as user_name, 
+            DATE_FORMAT(b.date_created,'%d/%m/%Y') as date_created,
+            DATE_FORMAT(b.date_updated,'%d/%m/%Y') as date_updated
             FROM blog b 
             INNER JOIN blog_category c ON c.id = b.category_id
+            INNER JOIN person p ON p.idperson = b.person_id
             WHERE b.name like '$this->strBuscar%' OR c.name like '$this->strBuscar%'
             ORDER BY b.id DESC $limit";
 
             $sqlTotal = "SELECT count(*) as total 
             FROM blog b 
             INNER JOIN blog_category c ON c.id = b.category_id
+            INNER JOIN person p ON p.idperson = b.person_id
             WHERE b.name like '$this->strBuscar%' OR c.name like '$this->strBuscar%'
             ORDER BY b.id DESC";
 
