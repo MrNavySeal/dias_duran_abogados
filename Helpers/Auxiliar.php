@@ -157,13 +157,13 @@
     }
     function setEncriptar($data){
         $encrypted = openssl_encrypt($data, METHOD,KEY);
-        $base64 = base64_encode($encrypted); 
-        $safe = str_replace(['/', '+'], ['_', '-'], $base64);
+        //$base64 = base64_encode($encrypted); 
+        $safe = str_replace(['/', '+'], ['_', '-'], $encrypted);
         return $safe;
     }
     function setDesencriptar($data){
-        $padded = str_pad(str_replace(['_', '-'], ['/', '+'], $data), strlen($data) % 4, '=', STR_PAD_RIGHT);
-        $decrypted = openssl_decrypt($padded, METHOD, KEY);
+        $data = str_replace(['_', '-'], ['/', '+'], $data);
+        $decrypted = openssl_decrypt($data, METHOD, KEY);
         return $decrypted;
     }
     function getRedesSociales(){
