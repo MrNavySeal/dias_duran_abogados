@@ -2,6 +2,11 @@
     require_once("Libraries/Core/Mysql.php");
     trait GeneralTrait{
         private $con;
+        private $intPorPagina;
+        private $intPaginaActual;
+        private $intPaginaInicio;
+        private $strBuscar;
+        private $strCategoria;
 
         public function getBanners(){
             $this->con=new Mysql();
@@ -124,6 +129,106 @@
             $this->con=new Mysql();
             $sql = "SELECT * FROM faq WHERE status = 1";
             $request = $this->con->select_all($sql);
+            return $request;
+        }
+        public function getBlogPaginacion($intPorPagina,$intPaginaActual, $strBuscar,$strCategoria){
+            $this->con = new Mysql();
+            $this->intPorPagina = $intPorPagina;
+            $this->intPaginaActual = $intPaginaActual;
+            $this->strBuscar = $strBuscar;
+            $this->strCategoria = $strCategoria;
+            $limit ="";
+            $this->intPaginaInicio = ($this->intPaginaActual-1)*$this->intPorPagina;
+            if($this->intPorPagina != 0){
+                $limit = " LIMIT $this->intPaginaInicio,$this->intPorPagina";
+            }
+            if($this->strCategoria != ""){
+                $this->strCategoria = " AND c.id = '$this->strCategoria'";
+            }
+            $sql = "SELECT b.*,c.name as categoria,
+            CONCAT(p.firstname,' ',p.lastname) as user_name, 
+            b.date_created as date,
+            DATE_FORMAT(b.date_created,'%d/%m/%Y') as date_created,
+            DATE_FORMAT(b.date_updated,'%d/%m/%Y') as date_updated,
+            p.image as picture_user
+            FROM blog b 
+            INNER JOIN blog_category c ON c.id = b.category_id
+            INNER JOIN person p ON p.idperson = b.person_id
+            WHERE (b.name like '$this->strBuscar%' OR c.name like '$this->strBuscar%') AND b.status=1 $this->strCategoria
+            ORDER BY b.id $limit";
+
+            $sqlTotal = "SELECT count(*) as total 
+            FROM blog b 
+            INNER JOIN blog_category c ON c.id = b.category_id
+            INNER JOIN person p ON p.idperson = b.person_id
+            WHERE (b.name like '$this->strBuscar%' OR c.name like '$this->strBuscar%') AND b.status=1 $this->strCategoria
+            ORDER BY b.id";
+
+            $totalRecords = $this->con->select($sqlTotal)['total'];
+            $totalPages = intval($totalRecords > 0 ? ceil($totalRecords/$this->intPorPagina) : 0);
+            $totalPages = $totalPages == 0 ? 1 : $totalPages;
+            $request = $this->con->select_all($sql);
+
+            foreach ($request as &$data) {
+                $strUrl = media()."/images/uploads/".$data['picture'];
+                $strUrlPicture = media()."/images/uploads/".$data['picture_user'];
+                $strFecha = new DateTime($data['date']);
+                $data['route'] = base_url()."/blog/noticia/".$data['route'];
+                $data['url'] = $strUrl;
+                $data['url_picture'] = $strUrlPicture;
+                $data['date_format'] = $strFecha->format('M j, Y');
+            }
+
+            $startPage = max(1, $this->intPaginaActual - floor(BUTTONS / 2));
+            if ($startPage + BUTTONS - 1 > $totalPages) {
+                $startPage = max(1, $totalPages - BUTTONS + 1);
+            }
+            $limitPages = min($startPage + BUTTONS, $totalPages+1);
+            $arrData = array(
+                "data"=>$request,
+                "start_page"=>$startPage,
+                "limit_page"=>$limitPages,
+                "total_pages"=>$totalPages,
+                "total_records"=>$totalRecords,
+            );
+            return $arrData;
+        }
+        public function getBlogCategorias(){
+            $this->con = new Mysql();
+            $sql = "SELECT * FROM blog_category WHERE status = 1 ORDER BY name DESC";
+            $request = $this->con->select_all($sql);
+            foreach ($request as &$data) { $data['route'] = base_url()."/blog/categoria/".$data['route']; }
+            return $request;
+        }
+        public function selectBlogCategoria($strRuta){
+            $this->con = new Mysql();
+            $sql = "SELECT * FROM blog_category WHERE status = 1 AND route = '$strRuta' ORDER BY name DESC";
+            $request = $this->con->select($sql);
+            $request['route'] = base_url()."/blog/categoria/".$request['route'];
+            return $request;
+        }
+        public function getBlogRecientes(){
+            $this->con = new Mysql();
+            $sql = "SELECT b.*,c.name as categoria,
+            CONCAT(p.firstname,' ',p.lastname) as user_name, 
+            b.date_created as date,
+            DATE_FORMAT(b.date_created,'%d/%m/%Y') as date_created,
+            DATE_FORMAT(b.date_updated,'%d/%m/%Y') as date_updated,
+            p.image as picture_user
+            FROM blog b 
+            INNER JOIN blog_category c ON c.id = b.category_id
+            INNER JOIN person p ON p.idperson = b.person_id
+            WHERE b.status=1 ORDER BY b.id DESC LIMIT 0,5";
+            $request = $this->con->select_all($sql);
+            foreach ($request as &$data) {
+                $strUrl = media()."/images/uploads/".$data['picture'];
+                $strUrlPicture = media()."/images/uploads/".$data['picture_user'];
+                $strFecha = new DateTime($data['date']);
+                $data['route'] = base_url()."/blog/noticia/".$data['route'];
+                $data['url'] = $strUrl;
+                $data['url_picture'] = $strUrlPicture;
+                $data['date_format'] = $strFecha->format('M j, Y');
+            }
             return $request;
         }
     }

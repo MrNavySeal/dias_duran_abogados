@@ -1,11 +1,8 @@
+<?php $company = $data['company'];?>
 <header class=" p-0">
     <div class="bg-color-1">
         <div class="new-contact-navbar d-flex justify-content-between py-2">
-            <ul class="social social--white">
-                <li><a href="https://web.facebook.com/BuhoMyG" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
-                <li><a href="https://www.instagram.com/buhos_myg/" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-                <li><a href="https://wa.me/573108714741" target="_blank"><i class="fab fa-whatsapp" aria-hidden="true"></i></a></li>
-            </ul>
+            <ul class="social social--white"> <?=getRedesSociales()?></ul>
             <el-link :underline="false" href="<?=base_url()?>/contacto" class="fs-5" type="primary">Estamos encantados de escucharte. Solicite una cotización.</el-link>
         </div>
     </div>
@@ -19,14 +16,14 @@
                     <i class="fas fa-phone fs-1 me-4 t-color-1"></i>
                     <div class="d-flex flex-column fs-5">
                         <span class="t-color-3">Llámanos ahora!</span>
-                        <strong>3124567890</strong>
+                        <strong><?=$company['phone']?></strong>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
                     <i class="fas fa-envelope fs-1 me-4 t-color-1"></i>
                     <div class="d-flex flex-column fs-5">
                         <span class="t-color-3">Escríbenos ahora</span>
-                        <strong>info@gmail.co</strong>
+                        <strong><?=$company['email']?></strong>
                     </div>
                 </div>
             </div>

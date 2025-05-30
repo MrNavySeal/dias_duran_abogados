@@ -1,6 +1,7 @@
 <?php headerPage($data); ?>
 <main>
     <?php getComponent("pageCover",$data)?>
+    <input type="hidden" name="" ref="strBuscar" value="<?=$data['buscar']?>">
     <section class="container my-5">
         <div class="row">
             <div class="col-lg-4 col-md-12 col-sm-12 mb-2">

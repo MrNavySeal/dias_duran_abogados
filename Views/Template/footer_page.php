@@ -1,18 +1,4 @@
-<?php 
-$company = getCompanyInfo();
-$social = getSocialMedia();
-$links ="";
-for ($i=0; $i < count($social) ; $i++) { 
-    if($social[$i]['link']!=""){
-        if($social[$i]['name']=="whatsapp"){
-            $links.='<li><a href="https://wa.me/'.$social[$i]['link'].'" target="_blank"><i class="fab fa-'.$social[$i]['name'].'"></i></a></li>';
-        }else{
-            $links.='<li><a href="'.$social[$i]['link'].'" target="_blank"><i class="fab fa-'.$social[$i]['name'].'"></i></a></li>';
-        }
-    }
-}
-
-?>
+<?php $company = getCompanyInfo();?>
 
 <footer class="container mt-4">
     <div class="row m-0">
@@ -22,9 +8,7 @@ for ($i=0; $i < count($social) ; $i++) {
             </div>
             <p class="t-color-2"><?=$company['description']?></p>
             <p class="fw-bold fs-4 ">Síguenos</p>
-            <ul class="social social--dark">
-                <?=$links?>
-            </ul>
+            <ul class="social social--dark"> <?=getRedesSociales()?> </ul>
         </div>
         <div class="col-lg-8 p-0 bg-color-2 ">
             <div class="footer--info">

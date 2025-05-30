@@ -1,6 +1,7 @@
 <?php headerPage($data); ?>
 <main>
     <?php getComponent("pageCover",$data)?>
+    <input type="hidden" name="" ref="intCategoria" value="<?=$data['id_categoria']?>">
     <section class="container my-5">
         <div class="row">
             <div class="col-lg-4 col-md-12 col-sm-12 mb-2">
@@ -27,7 +28,7 @@
                             <el-link class="btn btn-bg-2 py-2 px-3 mt-4" :underline="false" :href="data.route" type="primary">Leer más</el-link>
                         </div>
                     </div>
-                    <?php getComponent("paginationPage","blog")?>
+                    <?php getComponent("paginationPage","categoria")?>
                 </div>
             </div>
         </div>

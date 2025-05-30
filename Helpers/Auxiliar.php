@@ -166,4 +166,18 @@
         $decrypted = openssl_decrypt($padded, METHOD, KEY);
         return $decrypted;
     }
+    function getRedesSociales(){
+        $social = getSocialMedia();
+        $links ="";
+        for ($i=0; $i < count($social) ; $i++) { 
+            if($social[$i]['link']!=""){
+                if($social[$i]['name']=="whatsapp"){
+                    $links.='<li><a href="https://wa.me/'.$social[$i]['link'].'" target="_blank"><i class="fab fa-'.$social[$i]['name'].'"></i></a></li>';
+                }else{
+                    $links.='<li><a href="'.$social[$i]['link'].'" target="_blank"><i class="fab fa-'.$social[$i]['name'].'"></i></a></li>';
+                }
+            }
+        }
+        return $links;
+    }
 ?>
