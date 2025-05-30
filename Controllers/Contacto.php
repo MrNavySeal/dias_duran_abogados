@@ -1,5 +1,7 @@
 <?php
+    require_once("Models/GeneralTrait.php");
     class Contacto extends Controllers{
+        use GeneralTrait;
         public function __construct(){
             parent::__construct();
             session_start();
@@ -11,7 +13,8 @@
             $data['company']=$company;
             $data['page_tag'] = "Contacto | ".$company['name'];
 			$data['page_title'] = "Contacto | ".$company['name'];
-			$data['page_name'] = "contacto";
+			$data['page_name'] = "Contacto";
+            $data['url'] = $this->getPagina("contacto")['url'];
             $data['app'] = "functions_contacto.js";
             $this->views->getView($this,"contacto",$data);
         }

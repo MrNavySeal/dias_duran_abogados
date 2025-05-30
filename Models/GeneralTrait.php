@@ -45,6 +45,48 @@
                 $strUrl = media()."/images/uploads/".$request[$i]['picture'];
                 $request[$i]['url'] = $strUrl;
                 $request[$i]['route'] = base_url()."/servicios/area/".$request[$i]['route'];
+                $arrDet = $this->con->select_all("SELECT * FROM service WHERE categoryid = {$request[$i]['id']} AND status = 1 ORDER BY name");
+                foreach ($arrDet as &$data) { 
+                    $data['url'] = media()."/images/uploads/".$data['picture']; 
+                    $data['route'] = base_url()."/servicios/servicio/".$data['route'];
+                }
+                $request[$i]['services'] = $arrDet;
+            }
+            return $request;
+        }
+        public function selectArea($strRuta){
+            $this->con = new Mysql();
+            $sql = "SELECT * FROM category WHERE status = 1 AND (route = '$strRuta' OR id = '$strRuta')";
+            $request = $this->con->select($sql);
+            if(!empty($request)){
+                $request['url'] = media()."/images/uploads/".$request['picture'];
+                $arrDet = $this->con->select_all("SELECT * FROM service WHERE categoryid = $request[id] AND status = 1 ORDER BY name");
+                if(empty($arrDet)){$arrDet = $this->con->select_all("SELECT * FROM service WHERE status = 1 ORDER BY RAND()");}
+                foreach ($arrDet as &$data) {
+                    $data['url'] = media()."/images/uploads/".$data['picture'];
+                    $data['route'] = base_url()."/servicios/servicio/".$data['route'];
+                }
+                $request['services'] = $arrDet;
+            }
+            return $request;
+        }
+        public function selectServicio($strRuta){
+            $this->con = new Mysql();
+            $sql = "SELECT cab.*,det.name as category,det.route as category_route 
+            FROM service cab
+            INNER JOIN category det ON cab.categoryid = det.id
+            WHERE cab.status = 1 AND (cab.route = '$strRuta' OR cab.id = '$strRuta')";
+            $request = $this->con->select($sql);
+            if(!empty($request)){
+                $request['category_route'] = base_url()."/servicios/area/".$request['category_route'];
+                $request['url'] = media()."/images/uploads/".$request['picture'];
+                $arrDet = $this->con->select_all("SELECT * FROM service WHERE categoryid = $request[categoryid] AND status = 1 ORDER BY name");
+                if(empty($arrDet)){$arrDet = $this->con->select_all("SELECT * FROM service WHERE status = 1 ORDER BY RAND()");}
+                foreach ($arrDet as &$data) {
+                    $data['url'] = media()."/images/uploads/".$data['picture'];
+                    $data['route'] = base_url()."/servicios/servicio/".$data['route'];
+                }
+                $request['services'] = $arrDet;
             }
             return $request;
         }

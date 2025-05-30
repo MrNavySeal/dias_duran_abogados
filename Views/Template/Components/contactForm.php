@@ -2,7 +2,7 @@
     <div class="row ">
         <div class="col-md-5 p-0">
             <div class="contact-form">
-                <img class="contact-form-img" src="<?=media()?>/images/uploads/contact_picture.jpg" alt="">
+                <img class="contact-form-img" src="<?=$data['url']?>" alt="">
             </div>
         </div>
         <div class="col-md-7 bg-color-2 p-0">

@@ -14,6 +14,7 @@
             $data['page_tag'] = $company['name'];
             $data['page_title'] = $company['name'];
             $data['page_name'] = "inicio";
+            $data['url'] = $this->getPagina("contacto")['url'];
             $data['app'] = "functions_inicio.js";
             $data['company'] = $company;
             $this->views->getView($this,"home",$data);

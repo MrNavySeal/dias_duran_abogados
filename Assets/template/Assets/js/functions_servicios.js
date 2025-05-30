@@ -1,8 +1,9 @@
 const App = {
     data() {
       return {
-        strFecha:"",
+        intId:"",
         arrAreas:[],
+        objData:{id:""},
         arrNoticias:[],
       };
     },mounted(){
@@ -13,10 +14,17 @@ const App = {
         }.bind(vueObject));
     },methods:{
         getInitialData: async function(){
-            const response = await fetch(base_url+"/Home/getInitialData");
+            const formData = new FormData();
+            formData.append("id",this.$refs.intId ? this.$refs.intId.value :"" );
+            formData.append("tipo",this.$refs.strTipo ? this.$refs.strTipo.value :"" );
+            const response = await fetch(base_url+"/Servicios/getInitialData",{method:"POST",body:formData});
             const objData = await response.json();
             this.arrAreas = objData.areas;
             this.arrNoticias = objData.noticias;
+            if(objData.data){
+                this.objData = objData.data;
+                this.$refs.strDescripcion.innerHTML = this.objData.description;
+            }
         },
         setCarousel:function(){
             $(".carousel-blog").owlCarousel({

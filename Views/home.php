@@ -54,7 +54,7 @@
         <!-- Servicios -->
         <?php getComponent("serviceSection")?>
         <!-- Contacto -->
-        <?php getComponent("contactForm"); ?>
+        <?php getComponent("contactForm",$data); ?>
         <!-- Equipo -->
         <?php getComponent("team")?>
         <!-- Testimonios -->
