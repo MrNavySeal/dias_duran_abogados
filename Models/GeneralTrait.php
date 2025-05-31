@@ -231,6 +231,74 @@
             }
             return $request;
         }
+        public function selectBlogNoticia($strRuta){
+            $this->con = new Mysql();
+            $sql = "SELECT b.*,c.name as category,
+            c.route as route_category,
+            CONCAT(p.firstname,' ',p.lastname) as user_name, 
+            b.date_created as date,
+            DATE_FORMAT(b.date_created,'%d/%m/%Y') as date_created,
+            DATE_FORMAT(b.date_updated,'%d/%m/%Y') as date_updated,
+            p.image as picture_user
+            FROM blog b 
+            INNER JOIN blog_category c ON c.id = b.category_id
+            INNER JOIN person p ON p.idperson = b.person_id
+            WHERE b.route = '$strRuta' OR b.id = '$strRuta'";
+            $request = $this->con->select($sql);
+            $strUrl = media()."/images/uploads/".$request['picture'];
+            $strUrlPicture = media()."/images/uploads/".$request['picture_user'];
+            $strFecha = new DateTime($request['date']);
+            $request['route'] = base_url()."/blog/noticia/".$request['route'];
+            $request['route_category'] = base_url()."/blog/categoria/".$request['route_category'];
+            $request['url'] = $strUrl;
+            $request['url_picture'] = $strUrlPicture;
+            $request['date_format'] = $strFecha->format('M j, Y');
+
+            
+            //Noticias relacionadas
+            $sql = "SELECT b.*,c.name as categoria,
+            CONCAT(p.firstname,' ',p.lastname) as user_name,
+            p.image as picture_user
+            FROM blog b 
+            INNER JOIN blog_category c ON c.id = b.category_id
+            INNER JOIN person p ON p.idperson = b.person_id
+            WHERE b.status = 1 AND b.category_id = {$request['category_id']} ORDER BY b.id DESC";
+            $arrRelated = $this->con->select_all($sql);
+            if(empty($arrRelated)){
+                $sql = "SELECT b.*,c.name as categoria,
+                CONCAT(p.firstname,' ',p.lastname) as user_name,
+                p.image as picture_user
+                FROM blog b 
+                INNER JOIN blog_category c ON c.id = b.category_id
+                INNER JOIN person p ON p.idperson = b.person_id
+                WHERE b.status = 1  ORDER BY b.id RAND()";
+                $arrRelated = $this->con->select_all($sql);
+            }
+            $total = count($arrRelated);
+            for ($i=0; $i < $total; $i++) { 
+                $strUrl = media()."/images/uploads/".$arrRelated[$i]['picture'];
+                $strUrlPicture = media()."/images/uploads/".$arrRelated[$i]['picture_user'];
+                $strFecha = new DateTime($arrRelated[$i]['date']);
+                $arrRelated[$i]['route'] = base_url()."/blog/noticia/".$arrRelated[$i]['route'];
+                $arrRelated[$i]['url'] = $strUrl;
+                $arrRelated[$i]['url_picture'] = $strUrlPicture;
+                $arrRelated[$i]['date_format'] = $strFecha->format('M j, Y');
+            }
+            $intNext = $request['id'] + 1;
+            $intPrevious = $request['id'] - 1;
+            $arrNext = $this->con->select("SELECT route FROM blog WHERE id = $intNext AND status = 1");
+            $arrNext['route'] = isset($arrNext['route']) ? $arrNext['route'] :"";
+            $arrNext['url'] = base_url()."/blog/noticia/".$arrNext['route'];
+            $arrNext['id'] = $intNext;
+            $arrPrevious = $this->con->select("SELECT  route FROM blog WHERE id = $intPrevious AND status =1");
+            $arrPrevious['route'] = isset($arrPrevious['route']) ? $arrPrevious['route'] :"";
+            $arrPrevious['url'] = base_url()."/blog/noticia/".$arrPrevious['route'];
+            $arrPrevious['id'] = $intPrevious;
+            $request['next'] = $arrNext;
+            $request['previous'] = $arrPrevious;
+            $request['related'] = $arrRelated;
+            return $request;
+        }
     }
     
 ?>

@@ -43,17 +43,37 @@
                 $data['category'] = ['name'=>"blog",'url'=>base_url()."/blog"];
                 $data['app'] = "functions_blog.js";
                 $this->views->getView($this,"categoria",$data);
+            }else{
+                header("location: ".BASE_URL."/error");
+                die();
             }
         }
         public function noticia($params){
             $params = strClean($params);
-            $company=getCompanyInfo();
-            $data['company'] = $company;
-            $data['page_tag'] = $company['name'];
-            $data['page_name'] = "Noticia";
-            $data['page_title'] =$data['article']['name']." | ".$company['name'];
-            $data['app'] = "functions_blog.js";
-            $this->views->getView($this,"noticia",$data);
+            $request = $this->selectBlogNoticia($params);
+            if(!empty($request)){
+                $company=getCompanyInfo();
+                $data['company'] = $company;
+                $data['page_tag'] = $company['name'];
+                $data['page_name'] = $request['name'];
+                $data['page_title'] =$request['name']." | ".$company['name'];
+                $data['id'] = $request['id'];
+                $data['blog'] = $request;
+                $data['category'] = ['name'=>$request['category'],'url'=>$request['route_category']];
+                $data['app'] = "functions_blog.js";
+                $this->views->getView($this,"noticia",$data);
+            }else{
+                header("location: ".BASE_URL."/error");
+                die();
+            }
+        }
+        public function getNoticia(){
+            if($_POST){
+                $intId = intval($_POST['id']);
+                $request = $this->selectBlogNoticia($intId);
+                echo json_encode($request,JSON_UNESCAPED_UNICODE);
+            }
+            die();
         }
         public function getInitialData(){
             $arrResponse = array(
