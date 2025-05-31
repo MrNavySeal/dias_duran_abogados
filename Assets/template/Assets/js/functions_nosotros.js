@@ -29,7 +29,7 @@ const App = {
             autoplayHoverPause:true,
             loop:true,
             margin:10,
-            nav:true,
+            nav:false,
             responsive:{
                 0:{
                     items:1
