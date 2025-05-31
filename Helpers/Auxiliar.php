@@ -180,4 +180,14 @@
         }
         return $links;
     }
+    function getFooterServicios(){
+        $con = new Mysql();
+        $sql="SELECT * FROM category ORDER BY name";
+        $request = $con->select_all($sql);
+        $total = count($request);
+        for ($i=0; $i < $total ; $i++) { 
+            $request[$i]['route'] = base_url()."/servicios/area/".$request[$i]['route'];
+        }
+        return $request;
+    }
 ?>

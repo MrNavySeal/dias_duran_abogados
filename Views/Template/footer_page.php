@@ -1,4 +1,8 @@
-<?php $company = getCompanyInfo();?>
+<?php  
+    $company = getCompanyInfo();
+    $arrServicios = getFooterServicios();
+    $totalServicios = count($arrServicios);
+?>
 
 <footer class="container mt-4">
     <div class="row m-0">
@@ -39,11 +43,10 @@
                                 <h3>Enlaces</h3>
                             </div>
                             <ul>
-                                <li><el-link :underline="false" href="#" type="primary">Inicio</el-link></li>
-                                <li><el-link :underline="false" href="#" type="primary">Nosotros</el-link></li>
-                                <li><el-link :underline="false" href="#" type="primary">Servicios</el-link></li>
-                                <li><el-link :underline="false" href="#" type="primary">Nuestro equipo</el-link></li>
-                                <li><el-link :underline="false" href="#" type="primary">Blog</el-link></li>
+                                <li><el-link :underline="false" href="<?=base_url()?>" type="primary">Inicio</el-link></li>
+                                <li><el-link :underline="false" href="<?=base_url()."/nosotros"?>" type="primary">Nosotros</el-link></li>
+                                <li><el-link :underline="false" href="<?=base_url()."/servicios/areas"?>" type="primary">Servicios</el-link></li>
+                                <li><el-link :underline="false" href="<?=base_url()."/blog"?>" type="primary">Blog</el-link></li>
                             </ul>
                         </div>
                     </div>
@@ -53,10 +56,9 @@
                                 <h3>Servicios</h3>
                             </div>
                             <ul>
-                                <li><el-link :underline="false" href="#" type="primary">Derecho Tributario y Planeación Fiscal</el-link></li>
-                                <li><el-link :underline="false" href="#" type="primary">Derecho Tributario y Planeación Fiscal</el-link></li>
-                                <li><el-link :underline="false" href="#" type="primary">Derecho Tributario y Planeación Fiscal</el-link></li>
-                                <li><el-link :underline="false" href="#" type="primary">Derecho Tributario y Planeación Fiscal</el-link></li>
+                                <?php for ($i=0; $i < $totalServicios; $i++) { ?>
+                                <li><el-link :underline="false" href="<?=$arrServicios[$i]['route']?>" type="primary"><?=$arrServicios[$i]['name']?></el-link></li>
+                                <?php }?>
                             </ul>
                         </div>
                     </div>
@@ -67,7 +69,6 @@
                             </div>
                             <ul>
                                 <li>Todas las tarjetas débito y crédito</li>
-                                <li>Transferencia bancaria</li>
                                 <li>Paypal</li>
                             </ul>
                         </div>

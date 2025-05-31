@@ -24,6 +24,7 @@
                     </el-form-item>
                     <el-button class="btn btn-bg-1 p-4 fs-5" type="primary" @click="onSubmit">Enviar ahora</el-button>
                 </el-form>
+                <ul class="social social--white mt-5"> <?=getRedesSociales()?></ul>
             </div>
         </div>
     </div>
