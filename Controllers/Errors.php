@@ -6,16 +6,13 @@
             sessionCookie();
         }
 
-        public function notFound(){
-
+        public function errors(){
             $data['page_tag'] = "Error";
             $data['company'] = getCompanyInfo();
             $data['page_title'] = "Error";
             $data['page_name'] = "error";
-            $data['app'] = "functions_pago.js";
+            $data['app'] = "functions_contacto.js";
             $this->views->getView($this,"error",$data);
         }
     }
-    $error = new Errors();
-    $error->notFound();
 ?>
