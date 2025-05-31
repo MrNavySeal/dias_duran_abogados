@@ -31,7 +31,7 @@
                 $data['app'] = "functions_servicios.js";
                 $this->views->getView($this,"area",$data); 
             }else{
-                header("location: ".BASE_URL."/error");
+                header("location: ".BASE_URL."/errors");
                 die();
             }
         }
@@ -51,7 +51,7 @@
                 $data['app'] = "functions_servicios.js";
                 $this->views->getView($this,"servicio",$data); 
             }else{
-                header("location: ".BASE_URL."/error");
+                header("location: ".BASE_URL."/errors");
                 die();
             }
         }

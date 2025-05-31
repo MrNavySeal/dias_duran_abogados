@@ -23,11 +23,11 @@
                     $data['app'] = "functions_pago.js";
                     $this->views->getView($this,"pago",$data);
                 }else{
-                    header("location: ".BASE_URL."/error");
+                    header("location: ".BASE_URL."/errors");
                     die();
                 }
             }else{
-                header("location: ".BASE_URL."/error");
+                header("location: ".BASE_URL."/errors");
                 die();
             }
         }
@@ -50,15 +50,6 @@
                 header("location: ".base_url());
                 die();
             }
-        }
-        public function error(){
-            $company=getCompanyInfo();
-            $data['company'] = $company;
-            $data['page_tag'] = $company['name'];
-            $data['page_title'] ="Error | ".$company['name'];
-            $data['page_name'] = "Error";
-            $data['app'] = "functions_pago.js";
-            $this->views->getView($this,"error",$data); 
         }
         public function getOrden($params){
             if($params !=""){

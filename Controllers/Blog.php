@@ -44,7 +44,7 @@
                 $data['app'] = "functions_blog.js";
                 $this->views->getView($this,"categoria",$data);
             }else{
-                header("location: ".BASE_URL."/error");
+                header("location: ".BASE_URL."/errors");
                 die();
             }
         }
@@ -63,7 +63,7 @@
                 $data['app'] = "functions_blog.js";
                 $this->views->getView($this,"noticia",$data);
             }else{
-                header("location: ".BASE_URL."/error");
+                header("location: ".BASE_URL."/errors");
                 die();
             }
         }
