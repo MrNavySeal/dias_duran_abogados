@@ -1,25 +1,91 @@
 const App = {
     data() {
       return {
+        
+        strNombre:"",
+        strApellido:"",
+        strDocumento:"",
+        strCorreo:"",
+        intPais:"",
+        intDepartamento:"",
+        intCiudad:"",
+        strTelefono:"",
+        strDireccion:"",
+        strComentario:"",
+        intTelefonoCodigo:"",
         arrAreas:[],
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        }
+        arrPaises:[],
+        arrDepartamentos:[],
+        arrCiudades:[],
       };
     },mounted(){
         this.getInitialData();
     },methods:{
-       getInitialData: async function(){
-            const response = await fetch(base_url+"/Home/getInitialData");
+        getInitialData: async function(){
+            const response = await fetch(base_url+"/contacto/getInitialData");
             const objData = await response.json();
             this.arrAreas = objData.areas;
+            this.arrPaises = objData.paises;
+        },
+        setDatos: async function(){
+            if(this.strNombre == "" || this.strApellido == "" || this.strTelefono == "" || this.intTelefonoCodigo =="" 
+                ||this.intPais == "" || this.intDepartamento == "" || this.intCiudad == "" || this.strComentario ==""
+            ){
+                Swal.fire("Error","Todos los campos son obligatorios","error");
+                return false;
+            }
+            if(!fntEmailValidate(this.strCorreo) && this.strCorreo!=""){
+                Swal.fire("Error","El email es invalido","error");
+                return false;
+            }
+            const formData = new FormData();
+            formData.append("nombre",this.strNombre);
+            formData.append("apellido",this.strApellido);
+            formData.append("correo",this.strCorreo);
+            formData.append("pais",this.intPais);
+            formData.append("departamento",this.intDepartamento);
+            formData.append("ciudad",this.intCiudad);
+            formData.append("pais_telefono",this.intTelefonoCodigo);
+            formData.append("telefono",this.strTelefono);
+            formData.append("direccion",this.strDireccion);
+            formData.append("comentario",this.strComentario);
+            document.querySelector("#btnContacto").innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
+            document.querySelector("#btnContacto").setAttribute("disabled","");
+            const response = await fetch(base_url+"/contacto/setContacto",{method:"POST",body:formData});
+            const objData = await response.json();
+            document.querySelector("#btnContacto").innerHTML = `Enviar ahora`;
+            document.querySelector("#btnContacto").removeAttribute("disabled");
+            if(objData.status){
+                Swal.fire("Enviado!",objData.msg,"success");
+                this.strNombre ="";
+                this.strComentario="";
+                this.strApellido= "";
+                this.strCorreo= "";
+                this.intPais= "";
+                this.intDepartamento= "";
+                this.intCiudad= "";
+                this.strTelefono= "";
+                this.strDireccion="";
+                this.intTelefonoCodigo="";
+            }else{
+              Swal.fire("Error",objData.msg,"error");
+            }
+        },
+        setFiltro:async function(tipo){
+            if(tipo == "paises" && this.intPais != ""){
+                this.intTelefonoCodigo = this.intPais;
+                const response = await fetch(base_url+"/clientes/getEstados/estado/"+this.intPais);
+                const objData = await response.json();
+                this.arrDepartamentos = objData;
+                this.intDepartamento ="";
+                this.intCiudad ="";
+                this.arrCiudades = [];
+            }else if(tipo == "departamentos" && this.intDepartamento != ""){
+                const response = await fetch(base_url+"/clientes/getEstados/ciudad/"+this.intDepartamento);
+                const objData = await response.json();
+                this.arrCiudades = objData;
+                this.intCiudad ="";
+            }
         },
     }
 
@@ -27,52 +93,3 @@ const App = {
 const app = Vue.createApp(App);
 app.use(ElementPlus);
 app.mount("#app");
-
-if(document.querySelector("#formContact")){
-    let formContact = document.querySelector("#formContact");
-    formContact.addEventListener("submit",function(e){
-        e.preventDefault();
-        
-        let strName = document.querySelector("#txtContactName").value;
-        let strEmail = document.querySelector("#txtContactEmail").value;
-        let strPhone = document.querySelector("#txtContactPhone").value;
-        let strMessage = document.querySelector("#txtContactMessage").value;
-        let alert = document.querySelector("#alertContact");
-        let btn = document.querySelector("#btnMessage");
-    
-        if( strName =="" || strEmail =="" || strMessage == "" || strPhone == ""){
-            alert.classList.remove("d-none");
-            alert.innerHTML="Por favor, completa los campos.";
-            return false;
-        }
-        if(strPhone.length < 10 || strPhone.lenght > 10){
-            alert.classList.remove("d-none");
-            alert.innerHTML="El número de teléfono debe tener 10 dígitos";
-            return false;
-        }
-        if(!fntEmailValidate(strEmail)){
-            alert.classList.remove("d-none");
-            alert.innerHTML = "El correo electrónico es incorrecto";
-            return false;
-        }
-    
-        btn.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;    
-        btn.setAttribute("disabled","");
-        let formData = new FormData(formContact);
-        request(base_url+"/contacto/setContact",formData,"post").then(function(objData){
-            btn.innerHTML="Enviar mensaje";    
-            btn.removeAttribute("disabled");
-            if(objData.status){
-                alert.classList.remove("d-none");
-                alert.classList.replace("alert-danger","alert-success");
-                alert.innerHTML =objData.msg;
-                formContact.reset();
-            }else{
-                alert.classList.remove("d-none");
-                alert.classList.replace("alert-success","alert-danger");
-                alert.innerHTML =objData.msg;
-            }
-        });
-    
-    });
-}

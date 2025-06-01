@@ -26,6 +26,7 @@
                 "areas"=>$this->getAreas(),
                 "noticias"=>$this->getNoticias(),
                 "equipo"=>$this->getEquipo(),
+                "paises"=>getPaises(),
                 "nosotros"=>$this->getPagina("nosotros"),
             );
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

@@ -46,6 +46,15 @@
             $request = $this->con->update($sql,$arrData);
             return $request;
         }
+        public function insertContacto($strNombre,$strApellido,$intTelefono,$intPaisTelefono,$strCorreo,$strDireccion,$intPais,
+        $intDepartamento,$intCiudad,$strComentario,$strIp,$strDispositivo){
+            $this->con = new Mysql();
+            $sql = "INSERT INTO contact(name,lastname,phone,phone_country,email,address,countryid,stateid,cityid,message,ip,device) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            $arrData = [$strNombre,$strApellido,$intTelefono,$intPaisTelefono,$strCorreo,$strDireccion,$intPais,
+            $intDepartamento,$intCiudad,$strComentario,$strIp,$strDispositivo];
+            $request = $this->con->insert($sql,$arrData);
+            return $request;
+        }
         
     }
     
