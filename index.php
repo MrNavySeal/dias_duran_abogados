@@ -15,7 +15,9 @@
         if(file_exists($controllerFile.$cont.".php")){
             $controller = $cont;
             $method = isset($arrUrl[$i+1]) ? $arrUrl[$i+1] : $cont;
-            $params = $arrUrl[$i+2];
+            if(isset($arrUrl[$i+2])){
+                $params = implode(",",array_slice($arrUrl,$i+2));
+            }
             $controllerFile = $controllerFile.$controller.".php";
             break;
         }else{
