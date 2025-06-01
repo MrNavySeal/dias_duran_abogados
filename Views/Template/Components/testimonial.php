@@ -1,7 +1,7 @@
 <section class="mt-5 mb-5 bg-color-2" v-if="arrTestimonios && arrTestimonios.length > 0">
     <div>
         <div class="testimonial">
-            <img src="<?=media()?>/images/uploads/about_img.jpg" alt="">
+            <img src="" alt="">
             <div class="testimonial-container">
                 <div class="testimonial-content container">
                     <div class="row">
