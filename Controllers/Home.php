@@ -24,6 +24,7 @@
                 "banners"=>$this->getBanners(),
                 "testimonios"=>$this->getTestimonios(),
                 "areas"=>$this->getAreas(),
+                "servicios"=>$this->getServicios(),
                 "noticias"=>$this->getNoticias(),
                 "equipo"=>$this->getEquipo(),
                 "paises"=>getPaises(),

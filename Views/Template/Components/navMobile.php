@@ -14,7 +14,7 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingServices">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseServices" aria-expanded="true" aria-controls="collapseServices">
-                        <strong class="fs-5">Servicios</strong>
+                        <strong class="fs-5">Áreas de asesoría</strong>
                     </button>
                     </h2>
                     <div id="collapseServices" class="accordion-collapse collapse" aria-labelledby="headingServices" data-bs-parent="#accordionServices">

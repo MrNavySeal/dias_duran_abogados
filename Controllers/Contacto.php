@@ -23,6 +23,7 @@
             $arrResponse = array(
                 "areas"=>$this->getAreas(),
                 "paises"=>getPaises(),
+                "servicios"=>$this->getServicios(),
             );
             echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             die();
@@ -35,6 +36,8 @@
                 || empty($_POST['comentario'])){
                     $arrResponse = array("status"=>true,"msg"=>"Todos los campos son obligatorios.");
                 }else{
+                    $arrServicio = json_decode($_POST['servicio'],true);
+                    $intServicio = $arrServicio['id'];
                     $strNombre = ucwords(strClean($_POST['nombre']));
                     $strApellido = ucwords(strClean($_POST['apellido']));
                     $intTelefono = doubleval(strClean($_POST['telefono']));
@@ -45,7 +48,7 @@
                     $intPais = intval($_POST['pais']) != 0 ? intval($_POST['pais']) : 99999;
                     $intDepartamento = isset($_POST['departamento']) && intval($_POST['departamento']) != 0   ? intval($_POST['departamento']) : 99999;
                     $intCiudad = isset($_POST['ciudad']) && intval($_POST['ciudad']) != 0 ? intval($_POST['ciudad']) : 99999;
-                    $strSubject = "Nuevo mensaje";
+                    $strSubject = "Nuevo mensaje - ".$arrServicio['name'];
                     $company = getCompanyInfo();
                     $useragent = $_SERVER['HTTP_USER_AGENT'];
                     $strIp= getIp();
@@ -61,7 +64,7 @@
                         $strDispositivo = "iPad";
                     }
                     $request = $this->insertContacto($strNombre,$strApellido,$intTelefono,$intPaisTelefono,$strCorreo,$strDireccion,$intPais,
-                    $intDepartamento,$intCiudad,$strComentario,$strIp,$strDispositivo);
+                    $intDepartamento,$intCiudad,$strComentario,$strIp,$strDispositivo,$intServicio);
                     
                     if($request > 0){
                         $dataEmail = array('email_remitente' => $company['email'], 

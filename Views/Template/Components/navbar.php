@@ -47,7 +47,7 @@
                 <el-menu-item index="1"><el-link :underline="false" href="<?=base_url()?>" type="primary">Inicio</el-link></el-menu-item>
                 <el-menu-item index="2"><el-link :underline="false" href="<?=base_url()?>/nosotros" type="primary">Quiénes somos</el-link></el-menu-item>
                 <el-sub-menu index="3">
-                    <template #title>Servicios</template>
+                    <template #title>Áreas de asesoría</template>
                     <el-menu-item index="3-2" v-for="(data,index) in arrAreas" :key="index"><el-link :underline="false" :href="data.route" type="primary">{{data.name}}</el-link></el-menu-item>
                     <el-menu-item index="3-1"><el-link :underline="false" href="<?=base_url()?>/servicios/areas" type="primary">Ver todo</el-link></el-menu-item>
                 </el-sub-menu>

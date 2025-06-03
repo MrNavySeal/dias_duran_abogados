@@ -1354,7 +1354,7 @@ footer .logo img {
 }
 
 .contact-form {
-  height: 750px;
+  height: 780px;
 }
 
 .contact-form-img {
@@ -1906,6 +1906,9 @@ footer .logo img {
   }
 }
 @media screen and (max-width: 576px) {
+  .contact-form {
+    height: auto;
+  }
   .blog-img {
     height: 350px !important;
   }

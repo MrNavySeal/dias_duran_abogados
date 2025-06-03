@@ -13,10 +13,12 @@ const App = {
         strDireccion:"",
         strComentario:"",
         intTelefonoCodigo:"",
+        intServicio:"",
         arrAreas:[],
         arrPaises:[],
         arrDepartamentos:[],
         arrCiudades:[],
+        arrServicios:[],
       };
     },mounted(){
         this.getInitialData();
@@ -26,6 +28,7 @@ const App = {
             const objData = await response.json();
             this.arrAreas = objData.areas;
             this.arrPaises = objData.paises;
+            this.arrServicios= objData.servicios;
         },
         setDatos: async function(){
             if(this.strNombre == "" || this.strApellido == "" || this.strTelefono == "" || this.intTelefonoCodigo =="" 
@@ -49,6 +52,7 @@ const App = {
             formData.append("telefono",this.strTelefono);
             formData.append("direccion",this.strDireccion);
             formData.append("comentario",this.strComentario);
+            formData.append("servicio",JSON.stringify(this.arrServicios.filter(function(e){return e.id == vueObject.intServicio})[0]));
             document.querySelector("#btnContacto").innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             document.querySelector("#btnContacto").setAttribute("disabled","");
             const response = await fetch(base_url+"/contacto/setContacto",{method:"POST",body:formData});
@@ -57,6 +61,7 @@ const App = {
             document.querySelector("#btnContacto").removeAttribute("disabled");
             if(objData.status){
                 Swal.fire("Enviado!",objData.msg,"success");
+                this.intServicio ="";
                 this.strNombre ="";
                 this.strComentario="";
                 this.strApellido= "";

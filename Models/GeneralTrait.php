@@ -59,6 +59,11 @@
             }
             return $request;
         }
+        public function getServicios(){
+            $sql = "SELECT * FROM service WHERE status = 1 ORDER BY name ASC";
+            $request = $this->con->select_all($sql);
+            return $request;
+        }
         public function selectArea($strRuta){
             $this->con = new Mysql();
             $sql = "SELECT * FROM category WHERE status = 1 AND (route = '$strRuta' OR id = '$strRuta')";

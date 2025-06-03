@@ -6,8 +6,9 @@ const App = {
         arrAreas:[],
         arrNoticias:[],
         arrEquipo:[],
+        arrServicios:[],
         objNosotros:[],
-
+        objArea:{url:"",name:""},
         strNombre:"",
         strApellido:"",
         strDocumento:"",
@@ -19,6 +20,7 @@ const App = {
         strDireccion:"",
         strComentario:"",
         intTelefonoCodigo:"",
+        intServicio:"",
         arrPaises:[],
         arrDepartamentos:[],
         arrCiudades:[],
@@ -36,14 +38,18 @@ const App = {
         this.arrBanners = objData.banners;
         this.arrTestimonios = objData.testimonios;
         this.arrAreas = objData.areas;
+        this.objArea = objData.areas[0];
         this.arrNoticias = objData.noticias;
         this.arrEquipo = objData.equipo;
         this.arrPaises = objData.paises;
+        this.arrServicios= objData.servicios;
         this.objNosotros = objData.nosotros;
       },
       setDatos: async function(){
+            const vueObject = this;
             if(this.strNombre == "" || this.strApellido == "" || this.strTelefono == "" || this.intTelefonoCodigo =="" 
-                ||this.intPais == "" || this.intDepartamento == "" || this.intCiudad == "" || this.strComentario ==""
+                || this.intPais == "" || this.intDepartamento == "" || this.intCiudad == "" || this.strComentario ==""
+                || this.intServicio == ""
             ){
                 Swal.fire("Error","Todos los campos son obligatorios","error");
                 return false;
@@ -63,6 +69,7 @@ const App = {
             formData.append("telefono",this.strTelefono);
             formData.append("direccion",this.strDireccion);
             formData.append("comentario",this.strComentario);
+            formData.append("servicio",JSON.stringify(this.arrServicios.filter(function(e){return e.id == vueObject.intServicio})[0]));
             document.querySelector("#btnContacto").innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             document.querySelector("#btnContacto").setAttribute("disabled","");
             const response = await fetch(base_url+"/contacto/setContacto",{method:"POST",body:formData});
@@ -71,6 +78,7 @@ const App = {
             document.querySelector("#btnContacto").removeAttribute("disabled");
             if(objData.status){
                 Swal.fire("Enviado!",objData.msg,"success");
+                this.intServicio ="";
                 this.strNombre ="";
                 this.strComentario="";
                 this.strApellido= "";

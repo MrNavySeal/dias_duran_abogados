@@ -11,6 +11,13 @@
                 <h2 class="t-color-4 mb-5 fs-1 fw-bold">Haz una cita</h2>
                 <el-form :model="form" label-width="auto">
                     <div class="row">
+                        <div class="col-md-12">
+                            <el-form-item >
+                                <el-select  placeholder="Seleccione servicio" v-model="intServicio">
+                                    <el-option v-for="(data,index) in arrServicios" :value="data.id" :label="data.name" />
+                                </el-select>
+                            </el-form-item>
+                        </div>
                         <div class="col-md-6">
                             <el-form-item>
                                 <el-input v-model="strNombre" placeholder="Nombre" />
