@@ -1,5 +1,5 @@
 <?php
-    $notification = emailNotification(); 
+    $notification = notificacionMensajes(); 
     $comments = "";
     $reviews ="";
 ?>
@@ -64,7 +64,7 @@
             <?php if($_SESSION['permit'][6]['r']){ $active = $_SESSION['permitsModule']['module'] == "Casos" ? "active" :"";?>
                 <a href="<?=base_url()?>/casos" class="nav-item nav-link <?=$active?>"><i class="fas fa-briefcase"></i>Casos</a>
             <?php } ?>
-            <!-- Administración -->
+            <!-- Secciones -->
              <?php if($_SESSION['permit'][7]['r']){ $active = $_SESSION['permitsModule']['module'] == "Secciones" ? "active" :"";?>
              <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle <?=$active?>" data-bs-toggle="dropdown"><i class="fas fa-puzzle-piece"></i>Secciones</a>
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <?php } ?>
-            
+            <!-- Blog -->
             <?php if($_SESSION['permit'][8]['r']){$active = $_SESSION['permitsModule']['module'] == "Blog" ? "active" :"";?>                
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle <?=$active?>" data-bs-toggle="dropdown"><i class="far fa-newspaper"></i>Blog</a>
@@ -87,24 +87,24 @@
                 </div>
             </div>
             <?php } ?>
-            
-            <?php 
-                if($_SESSION['permit'][5]['r']){
+            <!-- Mensajes -->
+
+            <?php if($_SESSION['permit'][9]['u']){ 
+                $active = $_SESSION['permitsModule']['module'] == "Mensajes" ? "active" :"";
+                $emails = "";
+                if($notification>0){
+                    $emails = '<span class="badge badge-sm bg-danger ms-auto">'.$notification.'</span>';
+                }else{
                     $emails = "";
-                    if($notification>0){
-                        $emails = '<span class="badge badge-sm bg-danger ms-auto">'.$notification.'</span>';
-                    }else{
-                        $emails = "";
-                    }
+                }
             ?>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-cog"></i>Configuración</a>
-                <div class="dropdown-menu bg-transparent border-0">
-                    <a href="<?=base_url()?>/empresa" class="dropdown-item">Parámetros de empresa</a>
-                    <a href="<?=base_url()?>/administracion/correo" class="dropdown-item">Correo <?=$emails?></a>
-                </div>
-            </div>
+                <a href="<?=base_url()?>/mensajes" class="nav-item nav-link <?=$active?>"><i class="fas fa-envelope"></i>Mensajes <?=$emails?></a>
             <?php } ?>
+            <!-- Configuración -->
+            <?php if($_SESSION['permit'][5]['u']){ $active = $_SESSION['permitsModule']['module'] == "Configuracion" ? "active" :"";?>
+                <a href="<?=base_url()?>/empresa" class="nav-item nav-link <?=$active?>"><i class="fas fa-cog"></i>Configuración</a>
+            <?php } ?>
+            
         </div>
     </nav>
 </div>

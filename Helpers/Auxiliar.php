@@ -99,4 +99,10 @@
         }
         return $request;
     }
+    function notificacionMensajes(){
+        $con = new Mysql();
+        $request = $con->select_all("SELECT * FROM contact WHERE status != 1");
+        $total = count($request);
+        return $total;
+    }
 ?>

@@ -1,6 +1,6 @@
 <?php 
     //sessionCookie();
-    $notification = emailNotification();
+    $notification = notificacionMensajes();
     $companyData = getCompanyInfo();
     $comments = "";
     $reviews = "";

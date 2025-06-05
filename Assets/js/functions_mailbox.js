@@ -1,4 +1,17 @@
-'use strict';
+const App = {
+    data() {
+      return {
+        
+      };
+    },mounted(){
+
+    },methods:{
+        
+    }
+  };
+const app = Vue.createApp(App);
+app.mount("#app");
+
 
 if(document.querySelector("#correo")){
     setTinymce("#txtMessage");
@@ -17,7 +30,7 @@ if(document.querySelector("#correo")){
         let formData = new FormData(formEmail);
         btn.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> `;
         btn.setAttribute("disabled","");
-        request(base_url+"/administracion/sendEmail",formData,"post").then(function(objData){
+        request(base_url+"/mensajes/sendEmail",formData,"post").then(function(objData){
             btn.innerHTML=`<i class="fas fa-paper-plane"></i> Responder`;
             btn.removeAttribute("disabled");
             if(objData.status){
@@ -44,7 +57,7 @@ if(document.querySelector("#mensaje") && document.querySelector("#formReply")){
         let formData = new FormData(formReply);
         btn.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> `;
         btn.setAttribute("disabled","");
-        request(base_url+"/administracion/setReply",formData,"post").then(function(objData){
+        request(base_url+"/mensajes/setReply",formData,"post").then(function(objData){
             btn.innerHTML=`<i class="fas fa-paper-plane"></i> Responder`;
             btn.removeAttribute("disabled");
             if(objData.status){
@@ -71,7 +84,7 @@ function delMail(id,option){
             let formData = new FormData();
             formData.append("id",id);
             formData.append("option",option);
-            request(base_url+"/administracion/delMail",formData,"post").then(function(objData){
+            request(base_url+"/mensajes/delMail",formData,"post").then(function(objData){
                 if(objData.status){
                     window.location.reload();
                 }else{
