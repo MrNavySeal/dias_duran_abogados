@@ -9,6 +9,7 @@
             }
             parent::__construct();
             sessionCookie();
+            getPermits(5);
         }
 
         public function empresa(){

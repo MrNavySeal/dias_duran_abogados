@@ -98,7 +98,7 @@
                     $emails = "";
                 }
             ?>
-                <a href="<?=base_url()?>/mensajes" class="nav-item nav-link <?=$active?>"><i class="fas fa-envelope"></i>Mensajes <?=$emails?></a>
+            <a href="<?=base_url()?>/mensajes" class="nav-item nav-link <?=$active?>"><i class="fas fa-envelope"></i>Mensajes <?=$emails?></a>
             <?php } ?>
             <!-- Configuración -->
             <?php if($_SESSION['permit'][5]['u']){ $active = $_SESSION['permitsModule']['module'] == "Configuracion" ? "active" :"";?>
