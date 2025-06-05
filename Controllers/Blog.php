@@ -21,6 +21,7 @@
         }
         public function buscar($params){
             $params = strClean($params);
+            $params = str_replace("-"," ",$params);
             $company=getCompanyInfo();
             $data['company'] = $company;
             $data['page_tag'] = $company['name'];
@@ -90,7 +91,6 @@
                 $intPaginaActual = intval($_POST['pagina']);
                 $strBuscar = clear_cadena(strClean($_POST['buscar']));
                 $strCategoria =  clear_cadena(strClean($_POST['categoria']));
-                $strTipoBusqueda = clear_cadena(strClean($_POST['tipo_busqueda']));
                 $request = $this->getBlogPaginacion($intPorPagina,$intPaginaActual, $strBuscar,$strCategoria);
                 echo json_encode($request,JSON_UNESCAPED_UNICODE);
             }

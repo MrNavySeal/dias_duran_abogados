@@ -5,6 +5,8 @@ const App = {
         arrEquipo:[],
         arrAreas:[],
         objNosotros:[],
+        arrServicios:[],
+        objArea:{url:"",name:""},
       };
     },mounted(){
         const vueObject = this;
@@ -18,8 +20,10 @@ const App = {
             const objData = await response.json();
             this.arrTestimonios = objData.testimonios;
             this.arrEquipo = objData.equipo;
+            this.objArea = objData.areas[0];
             this.objNosotros = objData.nosotros;
             this.arrAreas = objData.areas;
+            this.arrServicios= objData.servicios;
             this.$refs.strDescripcion.innerHTML = this.objNosotros.description;
         },
         setCarousel:function(){

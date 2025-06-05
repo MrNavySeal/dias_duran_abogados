@@ -159,14 +159,14 @@
             FROM blog b 
             INNER JOIN blog_category c ON c.id = b.category_id
             INNER JOIN person p ON p.idperson = b.person_id
-            WHERE (b.name like '$this->strBuscar%' OR c.name like '$this->strBuscar%') AND b.status=1 $this->strCategoria
+            WHERE (b.name like '%$this->strBuscar%' OR c.name like '%$this->strBuscar%') AND b.status=1 $this->strCategoria
             ORDER BY b.id $limit";
 
             $sqlTotal = "SELECT count(*) as total 
             FROM blog b 
             INNER JOIN blog_category c ON c.id = b.category_id
             INNER JOIN person p ON p.idperson = b.person_id
-            WHERE (b.name like '$this->strBuscar%' OR c.name like '$this->strBuscar%') AND b.status=1 $this->strCategoria
+            WHERE (b.name like '%$this->strBuscar%' OR c.name like '%$this->strBuscar%') AND b.status=1 $this->strCategoria
             ORDER BY b.id";
 
             $totalRecords = $this->con->select($sqlTotal)['total'];

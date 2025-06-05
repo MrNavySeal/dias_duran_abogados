@@ -50,7 +50,9 @@ const App = {
         this.arrNoticias = objData.related;
       },
       getBuscar:async function (intPagina=1,strTipo = "",modo=""){
-          if(modo == "buscar"){ window.location.href=base_url+"/blog/buscar/"+this.strBuscar;}
+          if(modo == "buscar"){
+            const buscar = this.strBuscar.replace(" ","-")
+            window.location.href=base_url+"/blog/buscar/"+buscar;}
           this.strBuscar = this.$refs.strBuscar ? this.$refs.strBuscar.value : this.strBuscar;
           this.intPagina = intPagina;
           const formData = new FormData();
