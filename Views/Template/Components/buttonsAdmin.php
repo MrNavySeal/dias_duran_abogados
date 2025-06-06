@@ -1,4 +1,7 @@
 <div class="d-flex justify-content-end mb-3">
+    <?php if($data['botones']['atras']['mostrar']) { ?>
+        <button type="button" class="btn btn-primary mx-1" <?=$data['botones']['atras']['evento']."=".'"'.$data['botones']['atras']['funcion'].'"'?>>Atrás <i class="fas fa-reply"></i></button>
+    <?php }?>
     <?php if($data['botones']['buscar']['mostrar']) { ?>
         <button type="button" class="btn btn-primary mx-1" <?=$data['botones']['buscar']['evento']."=".'"'.$data['botones']['buscar']['funcion'].'"'?>>Buscar <i class="fas fa-search"></i></button>
     <?php }?>
