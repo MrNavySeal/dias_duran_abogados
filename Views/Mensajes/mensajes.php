@@ -73,13 +73,13 @@
                             <td data-title="Ciudad" class="text-center">{{data.ciudad}}</td>
                             <td data-title="Fecha" class="text-center">{{data.date}}</td>
                             <td data-title="Estado" class="text-center">
-                                <span :class="data.reply != '' ? 'bg-success text-white' : data.status == '1' ? 'bg-info text-white' : 'bg-warning text-dark'" class="badge ">
+                                <span :class="data.reply != '' ? 'bg-success text-white' : data.status == '1' ? 'bg-warning text-dark' : 'bg-danger text-white'" class="badge ">
                                     {{ data.reply != '' ? "respondido" : data.status == '1' ? "leído" : "sin leer" }}
                                 </span>
                             </td>
                             <td data-title="Opciones" class="text-center">
                                 <div class="d-flex justify-content-center">
-                                    <button class="btn btn-primary m-1 text-white" type="button" title="Ver mensaje" v-if="data.edit" @click="getDatos(data.id)" ><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-info m-1 text-white" type="button" title="Ver mensaje" v-if="data.edit" @click="getDatos(data.id)" ><i class="fas fa-eye"></i></button>
                                     <button class="btn btn-success m-1"  title="Whatsapp" v-if="data.edit" @click="openBotones('wpp',data.phonecode+data.phone)"><i class="fab fa-whatsapp"></i></button>
                                     <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete" @click="delDatos(data.id,'recibidos')" ><i class="fas fa-trash-alt"></i></button>
                                 </div>
@@ -111,7 +111,7 @@
                             <td data-title="Fecha" class="text-center">{{data.date}}</td>
                             <td data-title="Opciones" class="text-center">
                                 <div class="d-flex justify-content-center">
-                                    <button class="btn btn-primary m-1 text-white" type="button" title="Ver mensaje" v-if="data.edit" @click="getDatos(data.id,2)" ><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-info m-1 text-white" type="button" title="Ver mensaje" v-if="data.edit" @click="getDatos(data.id,2)" ><i class="fas fa-eye"></i></button>
                                     <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete" @click="delDatos(data.id,'enviados')" ><i class="fas fa-trash-alt"></i></button>
                                 </div>
                             </td>
