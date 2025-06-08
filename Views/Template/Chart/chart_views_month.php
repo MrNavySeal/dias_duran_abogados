@@ -7,7 +7,7 @@
             type: 'line'
         },
         title: {
-            text: '<?=$arrVisitas['month']." ".$arrVisitas['year']?>'
+            text: 'Visitas del mes de <?=$arrVisitas['month']." ".$arrVisitas['year']?>'
         },
         subtitle: {
             text: `Visitas: <?=$arrVisitas['total']?>`

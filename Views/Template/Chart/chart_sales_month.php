@@ -5,7 +5,7 @@
             type: 'line'
         },
         title: {
-            text: '<?=$ingresos['month']." ".$ingresos['year']?>'
+            text: 'Ventas del mes de <?=$ingresos['month']." ".$ingresos['year']?>'
         },
         subtitle: {
             text: `Ventas: <?=formatNum($ingresos['total'])?>`

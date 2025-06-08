@@ -11,7 +11,7 @@
             type: 'bar'
         },
         title: {
-            text: 'Año <?=$dataAnual[0]['year']?>'
+            text: 'Ventas del año <?=$dataAnual[0]['year']?>'
         },
         subtitle: {
             text: `Ventas: <?=formatNum($ingresosAnual)?>`

@@ -9,7 +9,7 @@
             type: 'bar'
         },
         title: {
-            text: 'Año <?=$arrData[0]['year']?>'
+            text: 'Visitas del año <?=$arrData[0]['year']?>'
         },
         subtitle: {
             text: `Visitas: <?=$data['total']?>`
