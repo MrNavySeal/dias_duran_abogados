@@ -9,6 +9,7 @@
         }
 
         public function faq(){
+            setVisita(BASE_URL."/faq");
             $company=getCompanyInfo();
             $data['company']=$company;
             $data['page_tag'] = "FAQ | ".$company['name'];
