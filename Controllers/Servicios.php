@@ -8,6 +8,7 @@
             sessionCookie();
         }
         public function areas(){
+            setVisita(BASE_URL."/servicios/areas");
             $company=getCompanyInfo();
             $data['company'] = $company;
             $data['page_tag'] = $company['name'];
@@ -20,6 +21,7 @@
             $params = strClean($params);
             $request = $this->selectArea($params);
             if(!empty($request)){
+                setVisita(BASE_URL."/servicios/area/$params");
                 $company=getCompanyInfo();
                 $data['company'] = $company;
                 $data['page_tag'] = $company['name'];
@@ -39,6 +41,7 @@
             $params = strClean($params);
             $request = $this->selectServicio($params);
             if(!empty($request)){
+                setVisita(BASE_URL."/servicios/servicio/$params");
                 $company=getCompanyInfo();
                 $data['company'] = $company;
                 $data['page_tag'] = $company['name'];

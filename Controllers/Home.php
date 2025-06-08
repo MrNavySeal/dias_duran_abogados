@@ -10,6 +10,7 @@
         }
 
         public function home(){
+            setVisita(BASE_URL."/inicio");
             $company = getCompanyInfo();
             $data['page_tag'] = $company['name'];
             $data['page_title'] = $company['name'];

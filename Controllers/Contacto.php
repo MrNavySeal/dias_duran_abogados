@@ -10,6 +10,7 @@
         }
 
         public function contacto(){
+            setVisita(BASE_URL."/contacto");
             $company=getCompanyInfo();
             $data['company']=$company;
             $data['page_tag'] = "Contacto | ".$company['name'];

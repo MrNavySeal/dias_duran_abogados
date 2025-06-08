@@ -105,4 +105,11 @@
         $total = count($request);
         return $total;
     }
+    function getError($codigo){
+        throw new Exception(ERRORES[$codigo]);
+    }
+    function setVisita($ruta){
+        new IpServiceProvider(new IpProvider,"191.107.176.103","json",[],$ruta);
+    }
+
 ?>

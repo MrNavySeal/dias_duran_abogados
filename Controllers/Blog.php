@@ -11,6 +11,7 @@
 
         /******************************Views************************************/
         public function blog(){
+            setVisita(BASE_URL."/blog");
             $company=getCompanyInfo();
             $data['company'] = $company;
             $data['page_tag'] = $company['name'];
@@ -35,6 +36,7 @@
             $params = strClean($params);
             $request = $this->selectBlogCategoria($params);
             if(!empty($request)){
+                setVisita(BASE_URL."/blog/categoria/$params");
                 $company=getCompanyInfo();
                 $data['company'] = $company;
                 $data['page_tag'] = $company['name'];
@@ -53,6 +55,7 @@
             $params = strClean($params);
             $request = $this->selectBlogNoticia($params);
             if(!empty($request)){
+                setVisita(BASE_URL."/blog/noticia/$params");
                 $company=getCompanyInfo();
                 $data['company'] = $company;
                 $data['page_tag'] = $company['name'];

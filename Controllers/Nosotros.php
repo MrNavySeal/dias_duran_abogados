@@ -8,6 +8,7 @@
             sessionCookie();
         }
         public function nosotros(){
+            setVisita(BASE_URL."/nosotros");
             $company=getCompanyInfo();
             $data['company'] = $company;
             $data['page_tag'] = $company['name'];
