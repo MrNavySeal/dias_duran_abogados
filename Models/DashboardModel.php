@@ -94,12 +94,12 @@
             return $arrData;
         }
         public function selectViewsCountry(){
-            $sql = "SELECT country as name,count(*) as total FROM locations GROUP BY country ORDER BY country ";
+            $sql = "SELECT country as name,count(*) as total FROM locations GROUP BY country ORDER BY country LIMIT 0,10 ";
             $request = $this->select_all($sql);
             return $request;
         }
         public function selectViewsPage(){
-            $sql = "SELECT route as name,count(*) as total FROM locations GROUP BY route ORDER BY total DESC";
+            $sql = "SELECT route as name,count(*) as total FROM locations GROUP BY route ORDER BY total DESC LIMIT 0,10";
             $request = $this->select_all($sql);
             return $request;
         }

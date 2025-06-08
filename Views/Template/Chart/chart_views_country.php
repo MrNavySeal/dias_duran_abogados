@@ -8,7 +8,7 @@
         type: 'pie'
     },
     title: {
-        text: 'Visitas por país'
+        text: 'Paises que más te visitan'
     },
     tooltip: {
         pointFormat: 'Porcentaje:<b> {point.percentage:.1f}%</b>'
