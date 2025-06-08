@@ -108,8 +108,33 @@
     function getError($codigo){
         throw new Exception(ERRORES[$codigo]);
     }
-    function setVisita($ruta){
-        new IpServiceProvider(new IpProvider,"191.107.176.103","json",[],$ruta);
+    function setVisita($route){
+        $con = new Mysql();
+        $location = new IpServiceProvider(new IpProvider,"191.107.176.103");
+        $location = $location->getLocation();
+        if($location['status']=="success"){
+            $ip = $location['query'];
+            $sql = "SELECT * FROM locations WHERE ip = '$ip' AND route = '$route'";
+            $request = $con->select_all($sql);
+            if(empty($request)){
+                $sql = "INSERT INTO locations(route,country,state,city,zip,lat,lon,timezone,isp,org,aso,ip) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+                $arrData = [
+                    $route,
+                    $location['country'],
+                    $location['regionName'],
+                    $location['city'],
+                    $location['zip'],
+                    $location['lat'],
+                    $location['lon'],
+                    $location['timezone'],
+                    $location['isp'],
+                    $location['org'],
+                    $location['as'],
+                    $location['query'],
+                ];
+                $con->insert($sql,$arrData);
+            }
+        }
     }
 
 ?>
