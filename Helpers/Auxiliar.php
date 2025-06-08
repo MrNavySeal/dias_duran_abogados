@@ -110,7 +110,7 @@
     }
     function setVisita($route){
         $con = new Mysql();
-        $location = new IpServiceProvider(new IpProvider,"191.107.176.103");
+        $location = new IpServiceProvider(new IpProvider,getIp());
         $location = $location->getLocation();
         if($location['status']=="success"){
             $ip = $location['query'];
