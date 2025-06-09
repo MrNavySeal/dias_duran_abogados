@@ -146,7 +146,7 @@
                             }
                             if($option == 1){
                                 $data['nombreUsuario'] = $strNombre." ".$strApellido;
-                                $data['asunto']="Credentials";
+                                $data['asunto']="Credenciales";
                                 $data['email_usuario'] = $strCorreo;
                                 $data['email_remitente'] = $company['email'];
                                 $data['password'] = $strTempContrasena;
@@ -158,7 +158,7 @@
                             }else{
                                 if($strContrasena!=""){
                                     $data['nombreUsuario'] = $strNombre." ".$strApellido;
-                                    $data['asunto']="Credentials";
+                                    $data['asunto']="Credenciales";
                                     $data['email_usuario'] = $strCorreo;
                                     $data['email_remitente'] = $company['email'];
                                     $data['password'] = $strTempContrasena;

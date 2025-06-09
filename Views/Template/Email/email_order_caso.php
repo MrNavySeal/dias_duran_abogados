@@ -150,22 +150,9 @@ table, td { color: #7e8f9e; } #u_body a { color: #000000; text-decoration: under
 			<p style="line-height: 150%;"><span style="color: #000000; line-height: 24px;">Hola <?= $arrCliente['firstname']?></span></p>
 			<p style="line-height: 150%;"> </p>
 			<p style="line-height: 150%;">
-				<span style="color: #000000; line-height: 24px;">Por favor da click en el botón de pagar para continuar. En caso de fallar el botón, por favor copia el siguiente enlace:</span>
+				<span style="color: #000000; line-height: 24px;">Por favor da click en el botón de pagar para continuar.</span>
 			<p style="line-height: 150%;"> </p>
-      <p style="line-height: 150%;">
-				<span style="color: #000000; line-height: 24px;"><?=$arrOrden['url']?></span>
-			</p>
 		</div>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<table style="font-family:helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tbody>
-    <tr>
-      <td style="overflow-wrap:break-word;word-break:break-word;padding:50px 10px 10px;font-family:helvetica,sans-serif;" align="left">
-    		<h2 style="margin: 0px; color: #162542; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 20px; font-weight: 700;"><span><span><span><span><span><span><span>Gracias por confiar en nosotros</span></span></span></span></span></span></span></h2>
       </td>
     </tr>
   </tbody>
@@ -188,6 +175,36 @@ table, td { color: #7e8f9e; } #u_body a { color: #000000; text-decoration: under
     </tr>
   </tbody>
 </table>
+
+<table style="font-family:helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+  <tbody>
+    <tr>
+      <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:helvetica,sans-serif;" align="left">
+		<div style="font-size: 16px; line-height: 150%; text-align: left; word-wrap: break-word;">
+			<p style="line-height: 150%;"> </p>
+			<p style="line-height: 150%;">
+				<span style="color: #000000; line-height: 24px;">Si el botón no funciona, copia y pega el siguiente enlace en tu navegador web:</span>
+			<p style="line-height: 150%;"> </p>
+      <p style="line-height: 150%;">
+				<span style="color: #000000; line-height: 24px;"><?=$arrOrden['url']?></span>
+			</p>
+		</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table style="font-family:helvetica,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
+  <tbody>
+    <tr>
+      <td style="overflow-wrap:break-word;word-break:break-word;padding:50px 10px 10px;font-family:helvetica,sans-serif;" align="left">
+    		<h2 style="margin: 0px; color: #162542; line-height: 140%; text-align: center; word-wrap: break-word; font-size: 20px; font-weight: 700;"><span><span><span><span><span><span><span>Gracias por confiar en nosotros</span></span></span></span></span></span></span></h2>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
 
   <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
   </div>

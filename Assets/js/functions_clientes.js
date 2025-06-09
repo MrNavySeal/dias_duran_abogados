@@ -197,36 +197,6 @@ const App = {
             if(tipo == "llamar")window.open('tel:'+dato);
             if(tipo == "wpp")window.open('https://wa.me/'+dato);
         },
-        delDatos:function(intId,strTipo){
-            const objVue = this;
-            Swal.fire({
-              title:"¿Esta seguro de eliminarlo?",
-              text:"Se eliminará para siempre...",
-              icon: 'warning',
-              showCancelButton:true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText:"Sí, eliminar",
-              cancelButtonText:"No, cancelar"
-          }).then(async function(result){
-              if(result.isConfirmed){
-                  objVue.intId = intId;
-                  const formData = new FormData();
-                  formData.append("id",objVue.intId);
-                  formData.append("tipo_busqueda",strTipo);
-                  const response = await fetch(base_url+"/Areas/delDatos",{method:"POST",body:formData});
-                  const objData = await response.json();
-                  if(objData.status){
-                    Swal.fire("Eliminado!",objData.msg,"success");
-                    objVue.getBuscar(1,"areas");
-                  }else{
-                    Swal.fire("Error",objData.msg,"error");
-                  }
-              }else{
-                objVue.getBuscar(1,"areas");
-              }
-          });
-        },
         getBotones:function(){
             this.arrBotones = [];
             for (let i = this.intInicioPagina; i < this.intTotalBotones; i++) {

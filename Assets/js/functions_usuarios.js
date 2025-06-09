@@ -190,7 +190,7 @@ const App = {
                 this.intTipoDocumento=objData.data.typeid;
                 this.intTelefonoCodigo = objData.data.phone_country;
                 this.intEstado= objData.data.status;
-                this.intRol = objData.data.role_id;
+                this.intRol = objData.data.roleid;
                 this.strContrasena="";
                 this.modal = new bootstrap.Modal(document.querySelector("#modalUser"));
                 this.modal.show();
