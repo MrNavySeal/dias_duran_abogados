@@ -5,6 +5,7 @@ const App = {
         arrAreas:[],
         objData:{id:""},
         arrNoticias:[],
+        objArea:{url:"",name:""},
       };
     },mounted(){
         const vueObject = this;
@@ -20,6 +21,7 @@ const App = {
             const response = await fetch(base_url+"/Servicios/getInitialData",{method:"POST",body:formData});
             const objData = await response.json();
             this.arrAreas = objData.areas;
+            this.objArea = objData.areas[0];
             this.arrNoticias = objData.noticias;
             if(objData.data){
                 this.objData = objData.data;
