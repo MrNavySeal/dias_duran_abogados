@@ -91,5 +91,13 @@
             }
             die();
         }
+        public function getEstados($params){
+            $arrParams = explode(",",$params);
+            $strTipo = $arrParams[0];
+            $intId = $arrParams[1];
+            if($strTipo == "estado"){$request = getDepartamentos($intId);}
+            else{$request = getCiudades($intId);}
+            echo json_encode($request,JSON_UNESCAPED_UNICODE);
+        }
     }
 ?>

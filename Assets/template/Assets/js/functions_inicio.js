@@ -96,14 +96,14 @@ const App = {
         setFiltro:async function(tipo){
             if(tipo == "paises" && this.intPais != ""){
                 this.intTelefonoCodigo = this.intPais;
-                const response = await fetch(base_url+"/clientes/getEstados/estado/"+this.intPais);
+                const response = await fetch(base_url+"/contacto/getEstados/estado/"+this.intPais);
                 const objData = await response.json();
                 this.arrDepartamentos = objData;
                 this.intDepartamento ="";
                 this.intCiudad ="";
                 this.arrCiudades = [];
             }else if(tipo == "departamentos" && this.intDepartamento != ""){
-                const response = await fetch(base_url+"/clientes/getEstados/ciudad/"+this.intDepartamento);
+                const response = await fetch(base_url+"/contacto/getEstados/ciudad/"+this.intDepartamento);
                 const objData = await response.json();
                 this.arrCiudades = objData;
                 this.intCiudad ="";
