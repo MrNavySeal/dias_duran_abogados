@@ -71,7 +71,7 @@
                     <el-menu-item index="8-2" onclick="logout()">Cerrar sesión</el-menu-item>
                 </el-sub-menu>
                 <?php }else {?>
-                    <el-menu-item index="9">
+                    <el-menu-item index="9" id="loginBtnNav">
                         <div class="d-flex align-items-center justify-content-center new-header-item-login">
                             <el-button onclick="openLoginModal();" class="btn btn-bg-1" type="primary">Iniciar sesión</el-button>
                         </div>

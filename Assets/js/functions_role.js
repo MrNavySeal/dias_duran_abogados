@@ -19,14 +19,6 @@ let table = new DataTable("#tableData",{
         { data: 'options' },
     ],
     responsive: true,
-    buttons: [
-        {
-            "extend": "excelHtml5",
-            "text": "<i class='fas fa-file-excel'></i> Excel",
-            "titleAttr":"Exportar a Excel",
-            "className": "btn btn-success mt-2"
-        }
-    ],
     order: [[1, 'asc']],
     pagingType: 'full',
     scrollY:'400px',

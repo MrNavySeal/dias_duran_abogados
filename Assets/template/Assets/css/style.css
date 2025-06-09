@@ -1819,6 +1819,15 @@ footer .logo img {
   }
 }
 @media screen and (max-width: 992px) {
+  #loginBtnNav {
+    display: none;
+  }
+  .el-menu-item {
+    border: 0px solid transparent;
+    font-size: 1em;
+    color: #fff !important;
+    background-color: #fff !important;
+  }
   .new-header {
     background-color: #fff !important;
   }
