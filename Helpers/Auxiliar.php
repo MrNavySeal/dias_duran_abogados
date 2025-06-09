@@ -120,17 +120,17 @@
                 $sql = "INSERT INTO locations(route,country,state,city,zip,lat,lon,timezone,isp,org,aso,ip) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
                 $arrData = [
                     $route,
-                    $location['country'],
-                    $location['regionName'],
-                    $location['city'],
-                    $location['zip'],
-                    $location['lat'],
-                    $location['lon'],
-                    $location['timezone'],
-                    $location['isp'],
-                    $location['org'],
-                    $location['as'],
-                    $location['query'],
+                    $location['country'] ?? "",
+                    $location['regionName'] ?? "",
+                    $location['city'] ?? "",
+                    $location['zip'] ?? "",
+                    $location['lat'] ?? "",
+                    $location['lon'] ?? "",
+                    $location['timezone'] ?? "",
+                    $location['isp'] ?? "",
+                    $location['org'] ?? "",
+                    $location['as'] ?? "",
+                    $location['query'] ?? "",
                 ];
                 $con->insert($sql,$arrData);
             }
