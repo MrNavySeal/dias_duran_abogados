@@ -289,7 +289,7 @@
                     $strImagen = "";
                     $strImagenNombre="";
 
-                    $request = $this->model->selectUser($intId);
+                    $request = $this->model->selectUsuario($intId);
                     if($_FILES['imagen']['name'] == ""){
                         $strImagenNombre = $request['image'] != "" ? $request['image'] :"user.jpg";
                     }else{
