@@ -98,7 +98,7 @@
                                 $arrResponse = array('status' => true, 'msg' => 'Datos guardados');	
                                 $company = getCompanyInfo();
                                 $arrCaso = $this->model->selectCaso($request);
-                                $arrCaso['url'] =base_url()."/pago/pago/".openssl_encrypt($arrCaso['idorder'],METHOD,KEY);
+                                $arrCaso['url'] =base_url()."/pago/pago/".setEncriptar($arrCaso['idorder']);
                                 $arrCaso['total'] = $arrCaso['value_target'];
                                 $arrEmailOrden = array(
                                     'asunto' => "Continua con el pago!",
