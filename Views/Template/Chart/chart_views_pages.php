@@ -35,7 +35,7 @@
                 foreach ($data as $det) {
                     $name = $det['name'];
                     $total = $det['total'];
-                    echo "{name:'$total visitas de $name',y:$total},";
+                    echo "{name:'$total visitas, $name',y:$total},";
                 }
             ?>
         ]
