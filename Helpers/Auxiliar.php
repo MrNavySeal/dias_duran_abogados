@@ -109,14 +109,14 @@
         throw new Exception(ERRORES[$codigo]);
     }
     function setVisita($route){
+        $ip = getIp();
         $con = new Mysql();
-        $location = new IpServiceProvider(new IpProvider,getIp());
-        $location = $location->getLocation();
-        if($location['status']=="success"){
-            $ip = $location['query'];
-            $sql = "SELECT * FROM locations WHERE ip = '$ip' AND route = '$route'";
-            $request = $con->select_all($sql);
-            if(empty($request)){
+        $sql = "SELECT * FROM locations WHERE ip = '$ip' AND route = '$route'";
+        $request = $con->select_all($sql);
+        if(empty($request)){
+            $location = new IpServiceProvider(new IpGeolocationProvider,$ip);
+            $location = $location->getLocation();
+            if($location['status']=="success"){
                 $sql = "INSERT INTO locations(route,country,state,city,zip,lat,lon,timezone,isp,org,aso,ip) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
                 $arrData = [
                     $route,
