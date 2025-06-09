@@ -1,67 +1,86 @@
 <?php headerAdmin($data)?>
-<div id="modalItem"></div>
-<form id="formProfile" name="formProfile">
-    <input type="hidden" id="idUser" name="idUser" value="<?=$_SESSION['idUser']?>">
+<form id="formItem" name="formItem" class="mb-4">
     <div class="mb-3 uploadImg">
-        <img src="<?=media()?>/images/uploads/<?=$_SESSION['userData']['image']?>">
-        <label for="txtImg"><a class="btn btn-info text-white"><i class="fas fa-camera"></i></a></label>
-        <input class="d-none" type="file" id="txtImg" name="txtImg" accept="image/*"> 
+        <img :src="strImgUrl">
+        <label for="strImagen"><a class="btn btn-info text-white"><i class="fas fa-camera"></i></a></label>
+        <input class="d-none" type="file" id="strImagen" @change="uploadImagen"  accept="image/*"> 
     </div>
     <div class="row">
         <div class="col-md-6">
             <div class="mb-3">
-                <label for="txtFirstName" class="form-label">Nombres <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="txtFirstName" name="txtFirstName" value="<?=$_SESSION['userData']['firstname']?>" required>
+                <label for="strNombre" class="form-label">Nombres <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" v-model="strNombre" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="mb-3">
                 <label for="txtLastName" class="form-label">Apellidos <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="txtLastName" name="txtLastName" value="<?=$_SESSION['userData']['lastname']?>" required>
+                <input type="text" class="form-control" v-model="strApellido" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="mb-3">
-                <label for="txtDocument" class="form-label">CC/NIT: <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="txtDocument" name="txtDocument" value="<?=$_SESSION['userData']['identification']?>" required>
+                <label for="strDocumento" class="form-label">No. documento <span class="text-danger">*</span></label>
+                <div class="d-flex">
+                    <select class="form-control" v-model="intTipoDocumento" required>
+                        <option value="">Seleccione</option>
+                        <option v-for="(data,index) in arrTiposDocumento" :value="data.id">{{data.name}}</option>
+                    </select>
+                    <input type="text" class="form-control" v-model="strDocumento">
+                </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="mb-3">
-                <label for="txtEmail" class="form-label">Email <span class="text-danger">*</span></label>
-                <input type="email" class="form-control" id="txtEmail" name="txtEmail" value="<?=$_SESSION['userData']['email']?>" required>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="mb-3">
-                <label for="txtPhone" class="form-label">Teléfono <span class="text-danger">*</span></label>
-                <input type="number" class="form-control" id="txtPhone" name="txtPhone" value="<?=$_SESSION['userData']['phone']?>" required>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="mb-3">
-                <label for="txtAddress" class="form-label">Dirección <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="txtAddress" name="txtAddress" value="<?=$_SESSION['userData']['address']?>" required>
+                <label for="strCorreo" class="form-label">Correo <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" v-model="strCorreo">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
             <div class="mb-3">
-                <label for="countryList" class="form-label">País <span class="text-danger">*</span></label>
-                <select class="form-control" aria-label="Default select example" id="countryList" name="countryList" required></select>
+                <label for="listCountry" class="form-label">País <span class="text-danger">*</span></label>
+                <select class="form-control" aria-label="Default select example" v-model="intPais" @change="setFiltro('paises')">
+                    <option value="">Seleccione</option>
+                    <option v-for="(data,index) in arrPaises" :value="data.id" >{{data.name}}</option>
+                </select>
             </div>
         </div>
         <div class="col-md-4">
             <div class="mb-3">
-                <label for="stateList" class="form-label">Estado/departamento <span class="text-danger">*</span></label>
-                <select class="form-control" aria-label="Default select example" id="stateList" name="stateList" required></select>
+                <label for="listState" class="form-label">Estado/departamento <span class="text-danger">*</span></label>
+                <select class="form-control" aria-label="Default select example" v-model="intDepartamento" @change="setFiltro('departamentos')">
+                    <option value="">Seleccione</option>
+                    <option v-for="(data,index) in arrDepartamentos" :value="data.id">{{data.name}}</option>
+                </select>
             </div>
         </div>
         <div class="col-md-4">
             <div class="mb-3">
-                <label for="cityList" class="form-label">Ciudad <span class="text-danger">*</span></label>
-                <select class="form-control" aria-label="Default select example" id="cityList" name="cityList" required></select>
+                <label for="listCity" class="form-label">Ciudad <span class="text-danger">*</span></label>
+                <select class="form-control" aria-label="Default select example" v-model="intCiudad">
+                    <option value="">Seleccione</option>
+                    <option v-for="(data,index) in arrCiudades" :value="data.id">{{data.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="strTelefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
+            <div class="d-flex">
+                <select class="form-control" aria-label="Default select example" v-model="intTelefonoCodigo">
+                    <option value="">Seleccione</option>
+                    <option v-for="(data,index) in arrPaises" :value="data.id">{{"(+"+data.phonecode+") "+data.name}}</option>
+                </select>
+                <input type="phone" class="form-control" v-model="strTelefono">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="strDireccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" v-model="strDireccion">
             </div>
         </div>
     </div>
@@ -71,18 +90,18 @@
         <div class="col-md-6">
             <div class="mb-3">
                 <label for="txtPassword" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="txtPassword" name="txtPassword">
+                <input type="password" v-model="strContrasena" class="form-control" id="txtPassword" name="txtPassword">
             </div>
         </div>
         <div class="col-md-6">
             <div class="mb-3">
                 <label for="txtConfirmPassword" class="form-label">Confirmar contraseña</label>
-                <input type="password" class="form-control" id="txtConfirmPassword" name="txtConfirmPassword">
+                <input type="password" v-model="strContrasenaConfirmada" class="form-control" id="txtConfirmPassword" name="txtConfirmPassword">
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" id="btnAdd"> Actualizar</button>
+        <button type="button" class="btn btn-primary" @click="setDatos()" ref="btnAdd"><i class="fas fa-save"></i> Guardar</button>
     </div>
 </form>
 <?php footerAdmin($data)?> 

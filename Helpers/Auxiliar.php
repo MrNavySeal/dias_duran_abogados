@@ -136,5 +136,16 @@
             }
         }
     }
+    function resetUserData(){
+        $id = $_SESSION['idUser'];
+        $con = new Mysql();
+        $sql = "SELECT  *,r.name as role_name 
+        FROM person p 
+        INNER JOIN role r
+        ON r.idrole = p.roleid
+        WHERE idperson = $id";
+        $request = $con->select($sql);
+        $_SESSION['userData'] = $request;
+    }
 
 ?>

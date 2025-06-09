@@ -1,107 +1,139 @@
 <?php 
     class UsuariosModel extends Mysql{
-        private $intIdUser;
-		private $strName;
-        private $strLastName;
-		private $strPicture;
-		private $intPhone;
-		private $strAddress;
-		private $strEmail;
-        private $intCountryId;
-		private $intStateId;
-		private $intCityId;
-		private $intTypeId;
-		private $strIdentification;
-		private $strPassword;
-		private $strToken;
-		private $intRolId;
-		private $intStatus;
+        private $intId;
+        private $strNombre; 
+        private $strApellido;
+        private $intTelefono;
+        private $intPaisTelefono;
+        private $strCorreo; 
+        private $strDireccion; 
+        private $intPais;
+        private $intDepartamento;
+        private $intCiudad;
+        private $strContrasena;
+        private $intEstado;
+        private $intTipoDocumento;
+        private $strDocumento;
+        private $intRolId;
+        private $strImagenNombre;
+        private $intPorPagina;
+        private $intPaginaActual;
+        private $intPaginaInicio;
+        private $strBuscar;
 
         public function __construct(){
             parent::__construct();
         }
-        public function insertUser(string $strName,string $strLastName, string $strPicture, string $intPhone, string $strEmail, string $strPassword,int $intStatus,int $intRolId){
-
-			$this->strName = $strName;
-			$this->strLastName = $strLastName;
-			$this->intPhone = $intPhone;
-			$this->strEmail = $strEmail;
-			$this->strPassword = $strPassword;
-			$this->intRolId = $intRolId;
-            $this->strPicture = $strPicture;
-            $this->intCountryId = 99999;
-            $this->intStateId = 99999;
-            $this->intCityId = 99999;
-			$this->intStatus = $intStatus;
+        public function insertUsuario(string $strNombre, string $strApellido,string $intTelefono, string $intPaisTelefono, string $strCorreo, string $strDireccion, 
+        int $intPais, int $intDepartamento, int $intCiudad,string $strContrasena,int $intEstado,$intTipoDocumento,string $strDocumento,int $intRolId,string $strImagenNombre){
+            $this->strImagenNombre = $strImagenNombre;
+			$this->strNombre = $strNombre;
+			$this->strApellido = $strApellido;
+            $this->strDocumento = $strDocumento;
+            $this->intTipoDocumento = $intTipoDocumento;
+            $this->strCorreo = $strCorreo;
+			$this->intTelefono = $intTelefono;
+            $this->intPaisTelefono = $intPaisTelefono;
+            $this->strDireccion = $strDireccion;
+            $this->intPais = $intPais;
+            $this->intDepartamento = $intDepartamento;
+            $this->intCiudad = $intCiudad;
+            $this->strContrasena = $strContrasena;
+            $this->intEstado = $intEstado;
+            $this->intRolId = $intRolId;
+            
 			$return = 0;
-
-			$sql = "SELECT * FROM person WHERE 
-					email = '{$this->strEmail}' OR phone = '{$this->intPhone}'";
+            $sql= "SELECT * FROM person WHERE email = '{$this->strCorreo}' OR phone = '{$this->intTelefono}' OR identification = '{$this->strDocumento}'";
 			$request = $this->select_all($sql);
-
-			if(empty($request))
-			{ 
-				$query_insert  = "INSERT INTO person(image,firstname,lastname,email,phone,countryid,stateid,cityid,password,status,roleid) 
-								  VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+			if(empty($request)){ 
+				$sql  = "INSERT INTO person(image,firstname,lastname,email,phone,address,countryid,stateid,cityid,identification,password,status,roleid,typeid,phone_country) 
+								  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	        	$arrData = array(
-                    $this->strPicture,
-                    $this->strName,
-                    $this->strLastName,
-                    $this->strEmail,
-                    $this->intPhone,
-                    $this->intCountryId,
-                    $this->intStateId,
-                    $this->intCityId,
-                    $this->strPassword,
-                    $this->intStatus,
-                    $this->intRolId
+                    $this->strImagenNombre,
+                    $this->strNombre,
+                    $this->strApellido,
+                    $this->strCorreo,
+                    $this->intTelefono,
+                    $this->strDireccion,
+                    $this->intPais,
+                    $this->intDepartamento,
+                    $this->intCiudad,
+                    $this->strDocumento,
+                    $this->strContrasena,
+                    $this->intEstado,
+                    $this->intRolId,
+                    $this->intTipoDocumento,
+                    $this->intPaisTelefono,
         		);
-	        	$request_insert = $this->insert($query_insert,$arrData);
-	        	$return = $request_insert;
+	        	$return = $this->insert($sql,$arrData);
 			}else{
 				$return = "exist";
 			}
 	        return $return;
 		}
-        public function updateUser(int $idUser, string $strName,string $strLastName, string $strPicture, string $intPhone, string $strEmail, string $strPassword,int $intStatus,int $intRolId){
-            $this->intIdUser = $idUser;
-			$this->strName = $strName;
-			$this->strLastName = $strLastName;
-			$this->intPhone = $intPhone;
-			$this->strEmail = $strEmail;
-			$this->strPassword = $strPassword;
-			$this->intRolId = $intRolId;
-            $this->strPicture = $strPicture;
-            $this->intStatus = $intStatus;
+        public function updateUsuario(int $intId,string $strNombre, string $strApellido,string $intTelefono, string $intPaisTelefono, string $strCorreo, string $strDireccion, 
+        int $intPais, int $intDepartamento, int $intCiudad,string $strContrasena,int $intEstado,$intTipoDocumento,string $strDocumento,int $intRolId, $strImagenNombre){
+            $this->intId = $intId;
+            $this->strImagenNombre = $strImagenNombre;
+			$this->strNombre = $strNombre;
+			$this->strApellido = $strApellido;
+            $this->strDocumento = $strDocumento;
+            $this->intTipoDocumento = $intTipoDocumento;
+            $this->strCorreo = $strCorreo;
+			$this->intTelefono = $intTelefono;
+            $this->intPaisTelefono = $intPaisTelefono;
+            $this->strDireccion = $strDireccion;
+            $this->intPais = $intPais;
+            $this->intDepartamento = $intDepartamento;
+            $this->intCiudad = $intCiudad;
+            $this->strContrasena = $strContrasena;
+            $this->intEstado = $intEstado;
+            $this->intRolId = $intRolId;
 
-			$sql = "SELECT * FROM person WHERE email = '{$this->strEmail}' AND phone = '{$this->intPhone}' AND idperson != $this->intIdUser";
-			$request = $this->select_all($sql);
-
+            $sql= "SELECT * FROM person WHERE (identification = '{$this->strDocumento}' OR phone = '{$this->intTelefono}' OR email = '{$this->strCorreo}') AND  idperson != $this->intId";
+            $request = $this->select_all($sql);
+            
 			if(empty($request)){
-				if($this->strPassword  != ""){
-					$sql = "UPDATE person SET image=?, firstname=?, lastname=?,email=?, phone=?, password=?, status=?,roleid=? 
-							WHERE idperson = $this->intIdUser";
+				if($this->strContrasena  != ""){
+					$sql = "UPDATE person SET image=?, firstname=?, lastname=?,email=?, phone=?,address=?,countryid=?,stateid=?,cityid=?,identification=?, 
+                    password=?, status=?,roleid=?,typeid=?,phone_country=? 
+                    WHERE idperson = $this->intId";
 					$arrData = array(
-                        $this->strPicture,
-                        $this->strName,
-                        $this->strLastName,
-                        $this->strEmail,
-                        $this->intPhone,
-                        $this->strPassword,
-                        $this->intStatus,
-                        $this->intRolId
+                        $this->strImagenNombre,
+                        $this->strNombre,
+                        $this->strApellido,
+                        $this->strCorreo,
+                        $this->intTelefono,
+                        $this->strDireccion,
+                        $this->intPais,
+                        $this->intDepartamento,
+                        $this->intCiudad,
+                        $this->strDocumento,
+                        $this->strContrasena,
+                        $this->intEstado,
+                        $this->intRolId,
+                        $this->intTipoDocumento,
+                        $this->intPaisTelefono,
                     );
 				}else{
-					$sql = "UPDATE person SET image=?, firstname=?, lastname=?,email=?, phone=?, status=?,roleid=? 
-							WHERE idperson = $this->intIdUser";
+					$sql = "UPDATE person SET image=?, firstname=?, lastname=?,email=?, phone=?,address=?,countryid=?,stateid=?,cityid=?,identification=?,status=?,roleid=? 
+							,typeid=?,phone_country=? 
+                            WHERE idperson = $this->intId";
 					$arrData = array(
-                        $this->strPicture,
-                        $this->strName,
-                        $this->strLastName,
-                        $this->strEmail,
-                        $this->intPhone,
-                        $this->intStatus,
-                        $this->intRolId
+                        $this->strImagenNombre,
+                        $this->strNombre,
+                        $this->strApellido,
+                        $this->strCorreo,
+                        $this->intTelefono,
+                        $this->strDireccion,
+                        $this->intPais,
+                        $this->intDepartamento,
+                        $this->intCiudad,
+                        $this->strDocumento,
+                        $this->intEstado,
+                        $this->intRolId,
+                        $this->intTipoDocumento,
+                        $this->intPaisTelefono,
                     );
 				}
 				$request = $this->update($sql,$arrData);
@@ -111,193 +143,149 @@
 			return $request;
 		
 		}
-        public function deleteUser($id){
-            $this->intIdUser = $id;
-            $sql = "DELETE FROM person WHERE idperson = $this->intIdUser";
-            $request = $this->delete($sql);
-            return $request;
-        }
-        public function selectUsers(){
-            $sql = "SELECT 
-                    p.idperson,
-                    p.image,
-                    p.firstname,
-                    p.lastname,
-                    p.email,
-                    p.phone,
-                    p.roleid,
-                    DATE_FORMAT(p.date, '%d/%m/%Y') as date,
-                    p.status,
-                    p.identification,
-                    r.idrole,
-                    r.name as role
-                    FROM person p
-                    INNER JOIN role r
-                    ON r.idrole = p.roleid 
-                    WHERE idperson != 1 AND p.roleid !=2 ORDER BY p.idperson DESC";
-            $request = $this->select_all($sql);
-            if(count($request)>0){
-                for ($i=0; $i < count($request) ; $i++) { 
-                    $request[$i]['image'] = media()."/images/uploads/".$request[$i]['image'];
-                }
+        public function selectUsuarios($intPorPagina,$intPaginaActual, $strBuscar){
+            $this->intPorPagina = $intPorPagina;
+            $this->intPaginaActual = $intPaginaActual;
+            $this->strBuscar = $strBuscar;
+            $limit ="";
+            $this->intPaginaInicio = ($this->intPaginaActual-1)*$this->intPorPagina;
+            if($this->intPorPagina != 0){
+                $limit = " LIMIT $this->intPaginaInicio,$this->intPorPagina";
             }
-            return $request;
+            $sql = "SELECT p.*,p.idperson as id,
+            DATE_FORMAT(p.date, '%d/%m/%Y') as date,
+            co.name as pais,
+            st.name as departamento,
+            ci.name as ciudad,
+            cp.phonecode,
+            r.name as role,
+            ty.name as tipo_documento,
+            CONCAT('+',cp.phonecode,' ',p.phone) as telefono
+            FROM person p
+            LEFT JOIN countries co ON p.countryid = co.id
+            LEFT JOIN states st ON p.stateid = st.id
+            LEFT JOIN cities ci ON p.cityid = ci.id
+            LEFT JOIN countries cp ON p.phone_country = cp.id
+            LEFT JOIN document_type ty ON p.typeid = ty.id
+            LEFT JOIN role r ON r.idrole = p.roleid 
+            WHERE p.roleid != 2 AND p.idperson != 1 AND (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
+            OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
+            OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%') 
+            ORDER BY p.idperson DESC $limit";  
+
+            $sqlTotal = "SELECT count(*) as total FROM person p
+            LEFT JOIN countries co ON p.countryid = co.id
+            LEFT JOIN states st ON p.stateid = st.id
+            LEFT JOIN cities ci ON p.cityid = ci.id
+            LEFT JOIN countries cp ON p.phone_country = cp.id
+            LEFT JOIN document_type ty ON p.typeid = ty.id
+            LEFT JOIN role r ON r.idrole = p.roleid 
+            WHERE p.roleid != 2 AND p.idperson != 1 AND (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
+            OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
+            OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%') 
+            ORDER BY p.idperson";
+
+            $totalRecords = $this->select($sqlTotal)['total'];
+            $totalPages = intval($totalRecords > 0 ? ceil($totalRecords/$this->intPorPagina) : 0);
+            $totalPages = $totalPages == 0 ? 1 : $totalPages;
+            $request = $this->select_all($sql);
+
+            $startPage = max(1, $this->intPaginaActual - floor(BUTTONS / 2));
+            if ($startPage + BUTTONS - 1 > $totalPages) {
+                $startPage = max(1, $totalPages - BUTTONS + 1);
+            }
+            $limitPages = min($startPage + BUTTONS, $totalPages+1);
+            $arrData = array(
+                "data"=>$request,
+                "start_page"=>$startPage,
+                "limit_page"=>$limitPages,
+                "total_pages"=>$totalPages,
+                "total_records"=>$totalRecords,
+            );
+            return $arrData;
         }
-        public function selectUser($id){
-            $this->intIdUser = $id;
-            $sql = "SELECT 
-                    p.idperson,
-                    p.image,
-                    p.firstname,
-                    p.lastname,
-                    p.email,
-                    p.phone,
-                    p.roleid,
-                    p.countryid,
-                    p.stateid,
-                    p.cityid,
-                    p.typeid,
-                    p.identification,
-                    DATE_FORMAT(p.date, '%d/%m/%Y') as date,
-                    p.status,
-                    r.idrole,
-                    r.name as role,
-                    c.id,
-                    s.id,
-                    t.id,
-                    c.name as country,
-                    s.name as state,
-                    t.name as city
-                    FROM person p
-                    INNER JOIN role r, countries c, states s,cities t 
-                    WHERE c.id = p.countryid AND p.stateid = s.id AND t.id = p.cityid AND r.idrole = p.roleid AND p.idperson = $this->intIdUser";
+        public function selectUsuario(int $intId){
+            $this->intId = $intId;
+            $sql = "SELECT * FROM person WHERE idperson = $this->intId";
             $request = $this->select($sql);
             return $request;
         }
+        public function deleteUsuario($id){
+            $this->intId = $id;
+            $sql = "DELETE FROM person WHERE idperson = $this->intId";
+            $request = $this->delete($sql);
+            return $request;
+        }
         public function selectRoles(){
-            $sql = "SELECT * FROM role ORDER BY idrole ASC";
+            $sql = "SELECT * FROM role ORDER BY name";
             $request = $this->select_all($sql);
-            return $request;
-        }
-        public function search($search){
-            $sql = "SELECT 
-            p.idperson,
-            p.image,
-            p.firstname,
-            p.lastname,
-            p.email,
-            p.phone,
-            p.roleid,
-            DATE_FORMAT(p.date, '%d/%m/%Y') as date,
-            p.status,
-            r.idrole,
-            r.name as role
-            FROM person p
-            INNER JOIN role r
-            ON r.idrole = p.roleid 
-            WHERE r.name LIKE '%$search%' || p.firstname LIKE '%$search%' 
-            ||  p.lastname LIKE '%$search%' ||  p.email LIKE '%$search%' 
-            ||  p.phone LIKE '%$search%'
-            ORDER BY idperson DESC";
-
-            $request = $this->select_all($sql);
-            if(count($request)>0){
-                for ($i=0; $i < count($request) ; $i++) { 
-                    $request[$i]['image'] = media()."/images/uploads/".$request[$i]['image'];
-                }
-            }
-            return $request;
-        }
-        public function sort($sort){
-            $option="DESC";
-            if($sort == 2){
-                $option = " ASC"; 
-            }
-            $sql = "SELECT 
-                    p.idperson,
-                    p.image,
-                    p.firstname,
-                    p.lastname,
-                    p.email,
-                    p.phone,
-                    p.roleid,
-                    DATE_FORMAT(p.date, '%d/%m/%Y') as date,
-                    p.status,
-                    r.idrole,
-                    r.name as role
-                    FROM person p
-                    INNER JOIN role r
-                    ON r.idrole = p.roleid 
-                    ORDER BY idperson $option";
-            $request = $this->select_all($sql);
-            if(count($request)>0){
-                for ($i=0; $i < count($request) ; $i++) { 
-                    $request[$i]['image'] = media()."/images/uploads/".$request[$i]['image'];
-                }
-            }
             return $request;
         }
         /*************************Profile methods*******************************/
-        public function updateProfile(int $idUser, string $strName,string $strLastName, string $strPicture, string $intPhone,string $strAddress, 
-            int $intCountry, int $intState,int $intCity,string $strIdentification, string $strEmail, string $strPassword){
+        public function updateProfile(int $intId,string $strNombre, string $strApellido,string $intTelefono, string $intPaisTelefono, string $strCorreo, string $strDireccion, 
+        int $intPais, int $intDepartamento, int $intCiudad,string $strContrasena,$intTipoDocumento,string $strDocumento, $strImagenNombre){
+            $this->intId = $intId;
+            $this->strImagenNombre = $strImagenNombre;
+			$this->strNombre = $strNombre;
+			$this->strApellido = $strApellido;
+            $this->strDocumento = $strDocumento;
+            $this->intTipoDocumento = $intTipoDocumento;
+            $this->strCorreo = $strCorreo;
+			$this->intTelefono = $intTelefono;
+            $this->intPaisTelefono = $intPaisTelefono;
+            $this->strDireccion = $strDireccion;
+            $this->intPais = $intPais;
+            $this->intDepartamento = $intDepartamento;
+            $this->intCiudad = $intCiudad;
+            $this->strContrasena = $strContrasena;
+
+            $sql= "SELECT * FROM person WHERE (identification = '{$this->strDocumento}' OR phone = '{$this->intTelefono}' OR email = '{$this->strCorreo}') AND  idperson != $this->intId";
+            $request = $this->select_all($sql);
             
-            $this->intIdUser = $idUser;
-			$this->strName = $strName;
-			$this->strLastName = $strLastName;
-			$this->intPhone = $intPhone;
-			$this->strEmail = $strEmail;
-			$this->strPassword = $strPassword;
-            $this->strPicture = $strPicture;
-            $this->strAddress = $strAddress;
-            $this->intCountryId = $intCountry;
-            $this->intStateId = $intState;
-            $this->intCityId = $intCity;
-            $this->strIdentification = $strIdentification;
-
-			$sql = "SELECT * FROM person WHERE (email = '{$this->strEmail}' OR identification = '{$this->strIdentification}' OR phone = '{$this->intPhone}') AND idperson != $this->intIdUser";
-			$request = $this->select_all($sql);
-
 			if(empty($request)){
-				if($this->strPassword  != ""){
-					$sql = "UPDATE person SET image=?, firstname=?, lastname=?,email=?, phone=?, address=?, countryid=?, stateid=?, cityid=?,identification=?, password=? 
-							WHERE idperson = $this->intIdUser";
+				if($this->strContrasena  != ""){
+					$sql = "UPDATE person SET image=?, firstname=?, lastname=?,email=?, phone=?,address=?,countryid=?,stateid=?,cityid=?,identification=?, 
+                    password=?,typeid=?,phone_country=? 
+                    WHERE idperson = $this->intId";
 					$arrData = array(
-                        $this->strPicture,
-                        $this->strName,
-                        $this->strLastName,
-                        $this->strEmail,
-                        $this->intPhone,
-                        $this->strAddress,
-                        $this->intCountryId,
-                        $this->intStateId,
-                        $this->intCityId,
-                        $this->strIdentification,
-                        $this->strPassword
+                        $this->strImagenNombre,
+                        $this->strNombre,
+                        $this->strApellido,
+                        $this->strCorreo,
+                        $this->intTelefono,
+                        $this->strDireccion,
+                        $this->intPais,
+                        $this->intDepartamento,
+                        $this->intCiudad,
+                        $this->strDocumento,
+                        $this->strContrasena,
+                        $this->intTipoDocumento,
+                        $this->intPaisTelefono,
                     );
 				}else{
-					$sql = "UPDATE person SET image=?, firstname=?, lastname=?,email=?, phone=?, address=?, countryid=?, stateid=?, cityid=?,identification=?
-							WHERE idperson = $this->intIdUser";
+					$sql = "UPDATE person SET image=?, firstname=?, lastname=?,email=?, phone=?,address=?,countryid=?,stateid=?,cityid=?,
+                    identification=?,typeid=?,phone_country=? 
+                    WHERE idperson = $this->intId";
 					$arrData = array(
-                        $this->strPicture,
-                        $this->strName,
-                        $this->strLastName,
-                        $this->strEmail,
-                        $this->intPhone,
-                        $this->strAddress,
-                        $this->intCountryId,
-                        $this->intStateId,
-                        $this->intCityId,
-                        $this->strIdentification
+                        $this->strImagenNombre,
+                        $this->strNombre,
+                        $this->strApellido,
+                        $this->strCorreo,
+                        $this->intTelefono,
+                        $this->strDireccion,
+                        $this->intPais,
+                        $this->intDepartamento,
+                        $this->intCiudad,
+                        $this->strDocumento,
+                        $this->intTipoDocumento,
+                        $this->intPaisTelefono,
                     );
 				}
 				$request = $this->update($sql,$arrData);
-                $_SESSION['userData'] = sessionUser($this->intIdUser);
-
 			}else{
 				$request = "exist";
 			}
 			return $request;
-		
 		}
         public function selectCountries(){
             $sql = "SELECT * FROM countries WHERE id = 47";
