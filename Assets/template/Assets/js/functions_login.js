@@ -1,3 +1,53 @@
+const App = {
+    data() {
+      return {
+        arrBanners: [],
+        arrTestimonios:[],
+        arrAreas:[],
+        arrNoticias:[],
+        arrEquipo:[],
+        arrServicios:[],
+        objNosotros:[],
+        objArea:{url:"",name:""},
+        strNombre:"",
+        strApellido:"",
+        strDocumento:"",
+        strCorreo:"",
+        intPais:"",
+        intDepartamento:"",
+        intCiudad:"",
+        strTelefono:"",
+        strDireccion:"",
+        strComentario:"",
+        intTelefonoCodigo:"",
+        intServicio:"",
+        arrPaises:[],
+        arrDepartamentos:[],
+        arrCiudades:[],
+      };
+    },mounted(){
+      this.getInitialData();
+
+    },methods:{
+      getInitialData: async function(){
+        const response = await fetch(base_url+"/Home/getInitialData");
+        const objData = await response.json();
+        this.arrBanners = objData.banners;
+        this.arrTestimonios = objData.testimonios;
+        this.arrAreas = objData.areas;
+        this.objArea = objData.areas[0];
+        this.arrNoticias = objData.noticias;
+        this.arrEquipo = objData.equipo;
+        this.arrPaises = objData.paises;
+        this.arrServicios= objData.servicios;
+        this.objNosotros = objData.nosotros;
+      },
+    }
+
+};
+const app = Vue.createApp(App);
+app.use(ElementPlus);
+app.mount("#app");
 if(document.querySelector("#formRecovery")){
     let formReset = document.querySelector("#formRecovery");
     formReset.addEventListener("submit",function(e){
