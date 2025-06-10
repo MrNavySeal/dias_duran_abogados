@@ -189,32 +189,20 @@
                 $intValorBase = doubleval($_POST['valor_base']);
                 $intValorObjetivo = doubleval($_POST['valor_objetivo']);
                 $intValorConversionObjetivo = 0;
-                $reqUrl = "https://v6.exchangerate-api.com/v6/f21b35a9dce0dc9441694e46/pair/$intMonedaBase/$intMonedaObjetivo";
                 $request = $this->model->selectConversion($intMonedaBase,$intMonedaObjetivo);
+                $objConversion = new CurrencyConversionServiceProvider(new ExChangeProvider,$intMonedaBase,$intMonedaObjetivo,$intValorObjetivo);
                 if(!empty($request)){
                     $strFechaConversion = new DateTime($request['date']);
                     $strFechaActual = new DateTime();
                     $intDias = $strFechaActual->diff($strFechaConversion)->days;
-                    
                     $intValorConversionObjetivo = $request['target'];
                     if($intDias >=15){
                         $strFechaActual = date_format($strFechaActual,"Y-m-d");
-                        $responseJson = file_get_contents($reqUrl);
-                        if(false !== $responseJson) {
-                            try {
-                                $response = json_decode($responseJson);
-                                if('success' === $response->result) {
-                                    $intValorConversionObjetivo = $response->conversion_rate;
-                                    $this->model->updateConversion($request['id'],$intValorConversionObjetivo,$strFechaActual);
-                                    $intValorObjetivo = round(($intValorBase * $intValorConversionObjetivo));
-                                    $arrResponse = array("status"=>true,"data"=>$intValorObjetivo);
-                                }
-                            }
-                            catch(Exception $e) {
-                                $arrResponse = array("status"=>false,"msg"=>$e);
-                            }
-        
-                        }
+                        $arrData = $objConversion->getConversion();
+                        $intValorConversionObjetivo = $arrData['rate'];
+                        $this->model->updateConversion($request['id'],$intValorConversionObjetivo,$strFechaActual);
+                        $intValorObjetivo = round(($intValorBase * $intValorConversionObjetivo));
+                        $arrResponse = array("status"=>true,"data"=>$intValorObjetivo);
                     }
                     if(!$intModo){
                         $intValorObjetivo =  round(($intValorBase*$intValorConversionObjetivo));
@@ -223,22 +211,11 @@
                     }
                     $arrResponse = array("status"=>true,"data"=>$intValorObjetivo);
                 }else{
-                    $responseJson = file_get_contents($reqUrl);
-                    if(false !== $responseJson) {
-                        try {
-                            $response = json_decode($responseJson);
-                            if('success' === $response->result) {
-                                $intValorConversionObjetivo = $response->conversion_rate;
-                                $this->model->insertConversion($intMonedaBase,$intMonedaObjetivo,$intValorConversionObjetivo);
-                                $intValorObjetivo = round(($intValorBase * $intValorConversionObjetivo));
-                                $arrResponse = array("status"=>true,"data"=>$intValorObjetivo);
-                            }
-                        }
-                        catch(Exception $e) {
-                            $arrResponse = array("status"=>false,"msg"=>$e);
-                        }
-    
-                    }
+                    $arrData = $objConversion->getConversion();
+                    $intValorConversionObjetivo = $arrData['rate'];
+                    $this->model->insertConversion($intMonedaBase,$intMonedaObjetivo,$intValorConversionObjetivo);
+                    $intValorObjetivo = round(($intValorBase * $intValorConversionObjetivo));
+                    $arrResponse = array("status"=>true,"data"=>$intValorObjetivo);
                 }
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             }
