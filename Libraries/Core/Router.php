@@ -33,22 +33,17 @@
                 $route = $arrUrl['name'];
                 $arrControllerFile = explode(".php",$controllerFile);
                 $controllerFile = count($arrControllerFile) > 1 ? $controllerFile : $controllerFile.".php";
-                //dep($this->arrRoutes);exit;
-                if(file_exists($controllerFile)){//Validar si el directorio existe
-                    require_once $controllerFile;
-                    $controller = str_replace(".php","",$controller);
-                    $controller = new $controller(); //Creo la instancia del controlador
-                    $controller->load($controllerFile);
-                    if(method_exists($controller, $method)){//Valido si existe el método
-                        $controller->{$method}($params);//Utilizo el método
-                    }else{
-                        getError(3);
-                    }
+                require_once $controllerFile;
+                $controller = str_replace(".php","",$controller);
+                $controller = new $controller(); //Creo la instancia del controlador
+                $controller->load($controllerFile);
+                if(method_exists($controller, $method)){//Valido si existe el método
+                    $controller->{$method}($params);//Utilizo el método
                 }else{
-                    getError(2);
+                    getError(3);
                 }
             }else{
-                getError(4);
+                getError(404);
             }
         }
         private function loadRoutes(){

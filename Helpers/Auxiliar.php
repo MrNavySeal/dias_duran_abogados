@@ -105,8 +105,18 @@
         $total = count($request);
         return $total;
     }
-    function getError($codigo){
-        throw new Exception(ERRORES[$codigo]);
+    function getError($code){
+        $company = getCompanyInfo();
+        session_start();
+        sessionCookie();
+        $data['company'] = $company;
+        $data['error']['msg'] = ERRORES[$code];
+        $data['error']['code'] = $code;
+        $data['app'] = "functions_faq.js";
+        $data['page_tag'] = $company['name'];
+        $data['page_title'] = $company['name'];
+        $data['page_name'] = "Error $code";
+        require_once "Views/Template/Error/error.php";
     }
     function setVisita($route){
         $ip = getIp();
