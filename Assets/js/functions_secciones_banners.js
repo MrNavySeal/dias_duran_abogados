@@ -57,8 +57,12 @@ const App = {
             formData.append("boton",this.strBoton);
             formData.append("enlace",this.strEnlace);
             formData.append("estado",this.intEstado);
+            this.$refs.btnAdd.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
+            this.$refs.btnAdd.disabled = true;
             const response = await fetch(base_url+"/Secciones/setBanner",{method:"POST",body:formData});
             const objData = await response.json();
+            this.$refs.btnAdd.innerHTML = `Guardar <i class="fas fa-save"></i>`;
+            this.$refs.btnAdd.disabled = false;
             if(objData.status){
                 Swal.fire("Guardado!",objData.msg,"success");
                 if(this.intId == 0){
