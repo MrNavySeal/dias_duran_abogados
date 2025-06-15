@@ -32,8 +32,8 @@
                     <tr class="text-center">
                         <th>ID</th>
                         <th>Portada</th>
+                        <th>Servicio</th>
                         <th>Área</th>
-                        <th>Título</th>
                         <th>Descripción corta</th>
                         <th>Estado</th>Asdasda
                         <th>Opciones</th>
@@ -45,8 +45,8 @@
                         <td data-title="Portada">
                             <img :src="data.url" :alt="data.name" class="img-thumbnail" style="width: 50px; height: 50px;">
                         </td>
+                        <td data-title="Servicio">{{data.name}}</td>
                         <td data-title="Área">{{data.category}}</td>
-                        <td data-title="Nombre">{{data.name}}</td>
                         <td data-title="Descripción">{{data.short_description}}</td>
                         <td data-title="Estado" class="text-center">
                             <span :class="data.status == '1' ? 'bg-success' : 'bg-danger'" class="badge text-white">
