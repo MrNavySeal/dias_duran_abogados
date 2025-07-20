@@ -107,7 +107,7 @@
                             if($_SESSION['permitsModule']['u']){
     
                                 $option = 2;
-                                $request = doubleval($this->model->selectCliente($intId));
+                                $request = $this->model->selectCliente($intId);
     
                                 if($_FILES['imagen']['name'] == ""){
                                     $strImagenNombre = $request['image'] != "" ? $request['image'] :"user.jpg";
