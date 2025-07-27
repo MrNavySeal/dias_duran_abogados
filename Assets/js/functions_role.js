@@ -5,7 +5,6 @@
 let modal = document.querySelector("#modalElement") ? new bootstrap.Modal(document.querySelector("#modalElement")) :"";
 let form = document.querySelector("#formItem");
 let table = new DataTable("#tableData",{
-    "dom": 'lfBrtip',
     "language": {
         "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
     },
@@ -19,7 +18,7 @@ let table = new DataTable("#tableData",{
         { data: 'options' },
     ],
     responsive: true,
-    order: [[1, 'asc']],
+    order: [[0, 'desc']],
     pagingType: 'full',
     scrollY:'400px',
     //scrollX: true,

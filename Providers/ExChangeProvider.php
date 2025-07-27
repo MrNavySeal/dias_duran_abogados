@@ -3,7 +3,7 @@
 
         public function getConversion(string $base, string $target, $valueBase){
 
-            $url = "https://v6.exchangerate-api.com/v6/f21b35a9dce0dc9441694e46/pair/$base/$target";
+            $url = "https://v6.exchangerate-api.com/v6/30b568ac6f23a849d3c00aac/pair/$base/$target";
             $responseJson = file_get_contents($url);
             $arrData = [];
             if(false !== $responseJson) {
