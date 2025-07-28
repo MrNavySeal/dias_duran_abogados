@@ -10,7 +10,7 @@
     <div class="navbar-nav align-items-center ms-auto">
         <a href="<?=base_url()?>" class="nav-link">
             <i class="fas fa-eye"></i>
-            <span class="d-none d-lg-inline-flex">Ver tienda</span>
+            <span class="d-none d-lg-inline-flex">Ver sitio web</span>
         </a>
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
