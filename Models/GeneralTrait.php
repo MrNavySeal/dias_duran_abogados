@@ -23,6 +23,7 @@
             $this->con=new Mysql();
             $sql = "SELECT b.*,c.name as categoria,
             CONCAT(p.firstname,' ',p.lastname) as user_name,
+            b.date_created as date,
             p.image as picture_user
             FROM blog b 
             INNER JOIN blog_category c ON c.id = b.category_id
@@ -32,6 +33,9 @@
             $total = count($request);
             for ($i=0; $i < $total; $i++) { 
                 $strUrl = media()."/images/uploads/".$request[$i]['picture'];
+                if(!file_exists($strUrl)){
+                    $strUrl="";
+                }
                 $strUrlPicture = media()."/images/uploads/".$request[$i]['picture_user'];
                 $strFecha = new DateTime($request[$i]['date']);
                 $request[$i]['route'] = base_url()."/blog/noticia/".$request[$i]['route'];
@@ -176,6 +180,9 @@
 
             foreach ($request as &$data) {
                 $strUrl = media()."/images/uploads/".$data['picture'];
+                if(!file_exists($strUrl)){
+                    $strUrl="";
+                }
                 $strUrlPicture = media()."/images/uploads/".$data['picture_user'];
                 $strFecha = new DateTime($data['date']);
                 $data['route'] = base_url()."/blog/noticia/".$data['route'];
@@ -227,6 +234,9 @@
             $request = $this->con->select_all($sql);
             foreach ($request as &$data) {
                 $strUrl = media()."/images/uploads/".$data['picture'];
+                if(!file_exists($strUrl)){
+                    $strUrl="";
+                }
                 $strUrlPicture = media()."/images/uploads/".$data['picture_user'];
                 $strFecha = new DateTime($data['date']);
                 $data['route'] = base_url()."/blog/noticia/".$data['route'];
@@ -251,6 +261,9 @@
             WHERE b.route = '$strRuta' OR b.id = '$strRuta'";
             $request = $this->con->select($sql);
             $strUrl = media()."/images/uploads/".$request['picture'];
+            if(!file_exists($strUrl)){
+                $strUrl="";
+            }
             $strUrlPicture = media()."/images/uploads/".$request['picture_user'];
             $strFecha = new DateTime($request['date']);
             $request['route'] = base_url()."/blog/noticia/".$request['route'];
@@ -284,6 +297,9 @@
             $total = count($arrRelated);
             for ($i=0; $i < $total; $i++) { 
                 $strUrl = media()."/images/uploads/".$arrRelated[$i]['picture'];
+                if(!file_exists($strUrl)){
+                    $strUrl="";
+                }
                 $strUrlPicture = media()."/images/uploads/".$arrRelated[$i]['picture_user'];
                 $strFecha = new DateTime($arrRelated[$i]['date']);
                 $arrRelated[$i]['route'] = base_url()."/blog/noticia/".$arrRelated[$i]['route'];

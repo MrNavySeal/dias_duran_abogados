@@ -4,7 +4,7 @@
         <h2 class="t-color-2 mb-5 fs-11 fw-bold "><?=$data['section_title']?></h2>
         <div class="carousel-blog owl-carousel owl-theme mb-5" data-bs-ride="carousel">
             <div class="blog-card px-2" v-for="(data,index) in arrNoticias" :key="index">
-                <div class="blog-img my-2">
+                <div class="blog-img my-2" v-if="data.url != ''">
                     <el-link :underline="false" :href="data.route" type="primary"><img :src="data.url" :alt="data.name"></el-link>
                 </div>
                 <div class="blog-info">

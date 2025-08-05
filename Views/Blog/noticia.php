@@ -15,7 +15,7 @@
             <div class="col-lg-8 col-md-12 col-sm-12 mb-2">
                 <div class="blog">
                     <h1 class="t-color-2 fs-1 mt-0">{{objData.name}}</h1>
-                    <div class="blog-img">
+                    <div class="blog-img" v-if="objData.url != ''">
                         <img :src="objData.url" :alt="objData.name">
                     </div>
                     <ul class="blog-detail fs-5 mt-3">

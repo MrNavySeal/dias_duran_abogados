@@ -10,7 +10,7 @@
                 <p class="t-color-2 fw-bold text-center" v-if="arrData.length == 0">No se han encontrado resultados :(</p>
                 <div class="blog">
                     <div class="blog-card mb-4" v-for="(data,index) in arrData" :key="index">
-                        <div class="blog-img">
+                        <div class="blog-img" v-if="data.url !=''">
                             <el-link :underline="false" :href="data.route" type="primary"><img :src="data.url" :alt="data.name"></el-link>
                         </div>
                         <div class="blog-info">
