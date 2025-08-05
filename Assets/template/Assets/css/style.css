@@ -1369,6 +1369,7 @@ footer .logo img {
   margin-bottom: 30px;
   margin-left: 10px;
   margin-right: 10px;
+  font-size: 14px;
 }
 .team-card:hover h4 {
   color: #b68c5a !important;
@@ -1385,7 +1386,6 @@ footer .logo img {
 
 .team-info {
   position: relative;
-  width: 80%;
   background-color: #fff;
   bottom: 30px;
   display: flex;
@@ -1439,32 +1439,6 @@ footer .logo img {
 
 .carousel-testimonial {
   border: 30px solid rgba(49, 67, 102, 0.2745098039);
-}
-
-.team-card {
-  position: relative;
-  margin-bottom: 30px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-.team-card:hover h4 {
-  color: #b68c5a !important;
-  transition: all 0.3s ease;
-}
-
-.team-img {
-  height: 330px;
-  overflow: hidden;
-}
-.team-img img {
-  width: 100%;
-}
-
-.team-info {
-  position: relative;
-  width: 80%;
-  background-color: #fff;
-  bottom: 30px;
 }
 
 .blog-aside .el-input__wrapper {

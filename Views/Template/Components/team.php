@@ -7,7 +7,7 @@
                 <div class="team-img">
                     <img :src="data.url" :alt="data.name">
                 </div>
-                <div class="team-info shadow-sm p-3">
+                <div class="team-info shadow-sm p-2 py-4">
                     <el-link :underline="false" href="#" type="primary"><h4 class="t-color-2 fw-bold">{{data.name}}</h4></el-link>
                     <span class="t-color-1 fw-bold">{{data.profession}}</span>
                 </div>
