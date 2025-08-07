@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-6 mb-3 section-about-content">
                         <h5 class="t-color-1 fw-bold fs-3 mb-4">{{objNosotros.subtitle}}</h5>
-                        <h2 class="t-color-2 mb-5 fs-11 fw-bold">{{objNosotros.title}}</h2>
+                        <h2 class="t-color-2 mb-5 fs-1 fw-bold">{{objNosotros.title}}</h2>
                         <p>{{objNosotros.short_description}}</p>
                         <el-link class="btn btn-bg-2 py-2 fs-5 px-3 mt-4" :underline="false" href="<?=base_url()."/nosotros"?>" type="primary">Leer más</el-link>
                     </div>
@@ -61,7 +61,7 @@
         <?php getComponent("testimonial")?>
         <!-- Blog -->
         <?php 
-            $data['section_title'] = "Noticias más recientes"; 
+            $data['section_title'] = "Notas jurídicas"; 
             $data['section_subtitle'] = "Nuestro blog"; 
             getComponent("blogSection",$data);
         ?>

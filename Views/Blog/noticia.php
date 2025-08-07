@@ -14,14 +14,11 @@
             </div>
             <div class="col-lg-8 col-md-12 col-sm-12 mb-2">
                 <div class="blog">
-                    <h1 class="t-color-2 fs-1 mt-0">{{objData.name}}</h1>
+                    <h1 class="t-color-2 fs-2 mt-0">{{objData.name}}</h1>
                     <div class="blog-img" v-if="objData.url != ''">
                         <img :src="objData.url" :alt="objData.name">
                     </div>
                     <ul class="blog-detail fs-5 mt-3">
-                        <li><img :src="objData.url_picture" :alt="objData.user_name"></li>
-                        <li class="me-2 ms-2 t-color-2"><h4 class="mb-0">{{objData.user_name}}</h4></li>
-                        <li class="me-2 ms-2 t-color-3">|</li>
                         <li class="t-color-1">{{objData.category}}</li>
                         <li class="me-2 ms-2 t-color-3">|</li>
                         <li class="t-color-2">{{objData.date_format}}</li>
@@ -48,10 +45,10 @@
                     </div>
                     <ul class="blog-next">
                         <li v-if="objData.previous && objData.previous.route != ''">
-                            <el-link :underline="false" :href="objData.previous.url" type="primary"> <i class="fas fa-arrow-left"></i> Noticia anterior</el-link>
+                            <el-link :underline="false" :href="objData.previous.url" type="primary"> <i class="fas fa-arrow-left"></i> Nota anterior</el-link>
                         </li>
                         <li v-if="objData.next && objData.next.route != ''">
-                            <el-link :underline="false" :href="objData.next.url" type="primary"> Siguiente noticia <i class="fas fa-arrow-right"></i></el-link>
+                            <el-link :underline="false" :href="objData.next.url" type="primary"> Siguiente nota <i class="fas fa-arrow-right"></i></el-link>
                         </li>
                     </ul>
                 </div>
@@ -59,7 +56,7 @@
         </div>
         <!-- Blog -->
         <?php 
-            $data['section_title'] = "Noticias relacionadas"; 
+            $data['section_title'] = "Notas jurídicas relacionadas"; 
             $data['section_subtitle'] = ""; 
             getComponent("blogSection",$data);
         ?>

@@ -209,7 +209,9 @@
             $this->con = new Mysql();
             $sql = "SELECT * FROM blog_category WHERE status = 1 ORDER BY name DESC";
             $request = $this->con->select_all($sql);
-            foreach ($request as &$data) { $data['route'] = base_url()."/blog/categoria/".$data['route']; }
+            foreach ($request as &$data) { 
+                $data['route'] = base_url()."/blog/categoria/".$data['route'];
+             }
             return $request;
         }
         public function selectBlogCategoria($strRuta){
