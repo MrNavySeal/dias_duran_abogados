@@ -111,6 +111,9 @@
             $total = count($request);
             for ($i=0; $i < $total; $i++) { 
                 $strUrl = media()."/images/uploads/".$request[$i]['picture'];
+                if(!file_exists($strUrl)){
+                    $strUrl="";
+                }
                 $request[$i]['url'] = $strUrl;
             }
             return $request;

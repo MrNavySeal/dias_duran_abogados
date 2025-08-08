@@ -14,7 +14,7 @@
                         <div class="col-md-6">
                             <div class="carousel-testimonial owl-carousel owl-theme" data-bs-ride="carousel">
                                 <div class="testimonial-info" v-for="(data,index) in arrTestimonios" :key="index">
-                                    <div class="testimonial-img">
+                                    <div class="testimonial-img" v-if="data.url != ''">
                                         <img :src="data.url" :alt="data.name">
                                     </div>
                                     <div class="testimonial-description">
