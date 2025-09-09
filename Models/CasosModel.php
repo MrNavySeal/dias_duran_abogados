@@ -112,7 +112,9 @@
             );
             return $arrData;
         }
-        public function selectCasos($intPorPagina,$intPaginaActual, $strBuscar){
+        public function selectCasos($intPorPagina,$intPaginaActual, $strBuscar,$idPersona){
+            $whre="";
+            if($idPersona!="")$whre=" AND personid=$idPersona";
             $this->intPorPagina = $intPorPagina;
             $this->intPaginaActual = $intPaginaActual;
             $this->strBuscar = $strBuscar;
@@ -151,7 +153,7 @@
             LEFT JOIN currency cu ON cp.shortname = cu.iso
             WHERE (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
-            OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%' OR serv.name like '$this->strBuscar%' OR c.name like '$this->strBuscar%') 
+            OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%' OR serv.name like '$this->strBuscar%' OR c.name like '$this->strBuscar%') $whre
             ORDER BY ord.idorder DESC $limit";  
 
             $sqlTotal = "SELECT count(*) as total FROM orderdata ord

@@ -156,7 +156,11 @@
                     $strBuscar = clear_cadena(strClean($_POST['buscar']));
                     $strTipoBusqueda = clear_cadena(strClean($_POST['tipo_busqueda']));
                     if($strTipoBusqueda == "casos"){
-                        $request = $this->model->selectCasos($intPorPagina,$intPaginaActual, $strBuscar);
+                        $idPersona = "";
+                        if($_SESSION['userData']['roleid'] == 2){
+                            $idPersona = $_SESSION['idUser'];
+                        }
+                        $request = $this->model->selectCasos($intPorPagina,$intPaginaActual, $strBuscar,$idPersona);
                     }else if($strTipoBusqueda == "servicios"){
                         $request = $this->model->selectServicios($intPorPagina,$intPaginaActual, $strBuscar);
                     }else if($strTipoBusqueda == "clientes"){
