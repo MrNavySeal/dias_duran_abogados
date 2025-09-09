@@ -167,14 +167,14 @@
             INNER JOIN blog_category c ON c.id = b.category_id
             INNER JOIN person p ON p.idperson = b.person_id
             WHERE (b.name like '%$this->strBuscar%' OR c.name like '%$this->strBuscar%') AND b.status=1 $this->strCategoria
-            ORDER BY b.id $limit";
+            ORDER BY b.id DESC $limit";
 
             $sqlTotal = "SELECT count(*) as total 
             FROM blog b 
             INNER JOIN blog_category c ON c.id = b.category_id
             INNER JOIN person p ON p.idperson = b.person_id
             WHERE (b.name like '%$this->strBuscar%' OR c.name like '%$this->strBuscar%') AND b.status=1 $this->strCategoria
-            ORDER BY b.id";
+            ORDER BY b.id DESC";
 
             $totalRecords = $this->con->select($sqlTotal)['total'];
             $totalPages = intval($totalRecords > 0 ? ceil($totalRecords/$this->intPorPagina) : 0);
